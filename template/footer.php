@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="../css/footer.css">
 
 
 		<footer class="footer-distributed">
@@ -6,7 +6,7 @@
 			<div class="footer-right">
 
 				<a href="#"><i class="fa fa-facebook">
-                <img class="fb" src="images/fb.png" alt="fb test"></i></a>
+                <img class="fb" src="../images/fb.png" alt="fb test"></i></a>
 				<a href="#"><i class="fa fa-twitter"></i></a>
 				<a href="#"><i class="fa fa-linkedin"></i></a>
 				<a href="#"><i class="fa fa-github"></i></a>

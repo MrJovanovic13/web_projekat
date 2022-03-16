@@ -1,8 +1,6 @@
 <?php
-
-   
 if ($_SERVER['REQUEST_METHOD']=="GET"){
-    header("Location: ./home/");
+    include("../view/home.php");
     
 } else {
     header("Location: index.php"); 

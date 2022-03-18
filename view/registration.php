@@ -1,32 +1,53 @@
 <?php
 require_once "../template/navbar.php";
+$nameErr = $surnameErr = $dobErr = $usernameErr = $passwordErr = $retypePasswordErr = "";
+$name = $surname = $gender = $dob = $username = $password = $retypePassword = "";
+$username = $_SESSION['username'];
+$password = $_SESSION['password'];
+
 ?>
-<link rel="stylesheet" href="../css/registration.css">
 
-<form action="action_page.php">
-  <div class="container">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
+<!DOCTYPE html>
+<html lang="en">
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/registration.css">
+    <title>Register</title>
+</head>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+<body>
+    <div class="container" id="container">
+        <form action="#" method="post">
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-    <hr>
 
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-    <button type="submit" class="registerbtn">Register</button>
-  </div>
+            <p>
+                Username:
+                <input type="text" name="username" value="<?php if (isset($username)) echo $username; ?>">
+                <span class="error">* <?php echo $usernameErr; ?></span>
+            </p>
+            <p>
+                Password:
+                <input type="password" name="password" value="<?php if (isset($password)) echo $password; ?>">
+                <span class="error">* <?php echo $passwordErr; ?></span>
+            </p>
+            <p>
+                Retype password:
+                <input type="password" name="retypePassword">
+                <span class="error">* <?php echo $retypePasswordErr; ?></span>
+            </p>
+            <p>
+                <input type="submit" value="Submit">
+            </p>
+        </form>
+    </div>
 
-  <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
-  </div>
-</form>
-        <?php
+
+</body>
+<?php
 require_once "../template/footer.php";
 ?>
+
+</html>

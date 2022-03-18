@@ -1,5 +1,4 @@
 <?php
-session_start();
 ?>
 
 <!DOCTYPE html>
@@ -14,21 +13,20 @@ session_start();
 </head>
 
 <body>
-        <ul class="header">
+    <ul class="header">
         <div class="left-navbar">
 
             <li><a href="#">
-                <img class ="logo" src="images/logo.png" alt="logo test"></i></a>
-            </a></li>            </div>
-            <div class="right-navbar">
+                    <img class="logo" src="images/logo.png" alt="logo test"></i></a>
+                </a></li>
+        </div>
+        <div class="right-navbar">
             <li><a href="#">Home</a></li>
             <li><a href="#">Products</a></li>
             <li><a href="#">Cart</a></li>
             <li><a href="#">My account</a></li>
             <li><a href="#">Log Out</a></li>
-            </div>
+        </div>
 
 
-        </ul>
-        
-
+    </ul>

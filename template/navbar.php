@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-
 ?>
 
 <!DOCTYPE html>
@@ -16,20 +14,19 @@ session_start();
 </head>
 
 <body>
-        <ul class="header">
+    <ul class="header">
         <div class="left-navbar">
 
             <li><a href="../home/">
-                <img class ="logo" src="../images/logo.png" alt="logo test"></i></a>
-            </a></li>            </div>
-            <div class="right-navbar">
+                    <img class="logo" src="../images/logo.png" alt="logo test"></i></a>
+                </a></li>
+        </div>
+        <div class="right-navbar">
             <li><a href="../home/">Home </a></li>
             <li><a href="../products/">Products</a></li>
             <li><a href="../cart/">Cart</a></li>
             <li><a href="../my account/">My account</a></li>
-            </div>
+        </div>
 
 
-        </ul>
-        
-
+    </ul>

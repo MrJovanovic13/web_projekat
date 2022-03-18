@@ -1,28 +1,28 @@
 <link rel="stylesheet" href="../css/footer.css">
 
 
-		<footer class="footer-distributed">
+<footer class="footer-distributed">
 
-			<div class="footer-right">
+	<div class="footer-right">
 
-				<a href="#"><i class="fa fa-facebook">
-                <img class="fb" src="../images/fb.png" alt="fb test"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-linkedin"></i></a>
-				<a href="#"><i class="fa fa-github"></i></a>
+		<a href="#"><i class="fa fa-facebook">
+				<img class="fb" src="../images/fb.png" alt="fb test"></i></a>
+		<a href="#"><i class="fa fa-twitter"></i></a>
+		<a href="#"><i class="fa fa-linkedin"></i></a>
+		<a href="#"><i class="fa fa-github"></i></a>
 
-			</div>
+	</div>
 
-			<div class="footer-left">
+	<div class="footer-left">
 
-				<p class="footer-links">
-					<a class="link-1" href="#">Home</a>
+		<p class="footer-links">
+			<a class="link-1" href="#">Home</a>
 
-					<a href="#">Products</a>
+			<a href="#">Products</a>
 
-					<a href="#">About us</a>
-				</p>
+			<a href="#">About us</a>
+		</p>
 
-			</div>
+	</div>
 
-		</footer>
+</footer>

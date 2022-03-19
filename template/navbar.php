@@ -25,7 +25,7 @@ session_start();
             <li><a href="../home/">Home </a></li>
             <li><a href="../products/">Products</a></li>
             <li><a href="../cart/">Cart</a></li>
-            <li><a href="../my account/">My account</a></li>
+            <li><a href="../my-account/">My account</a></li>
         </div>
 
 

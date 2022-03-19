@@ -1,17 +1,19 @@
 <?php
 require_once "../template/navbar.php";
-
+if(isset($msg)){
+  echo $msg;
+}
 ?>
 <link rel="stylesheet" href="../css/login.css">
 
 <div class="container" id="container">
   <!-- sign in page -->
   <div class="form-container sign-in-container">
-    <form method="POST" action="#" class="form" id="login">
+    <form method="POST" action="../login/" class="form" id="login">
       <h1 class="form__title">Login</h1>
       <div class="form__input-group">
-        <label for="username">Username: </label>
-        <input type="text" class="form__input" name="username" id="username" maxlength="20" required>
+        <label for="email">Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </label> <!-- Input box size is somehow connected to the length of this label -->
+        <input type="text" class="form__input" name="email" id="email" maxlength="50" required>
       </div>
       <div class="form__input-group">
         <label for="password">Password: </label>

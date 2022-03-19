@@ -30,7 +30,7 @@ $retypePassword = isset($_POST['retypePassword'])?$_POST['retypePassword']:"";
 
 <body>
     <div class="container" id="container">
-        <form action="../my account/" method="post">
+        <form action="../registration/" method="post">
 
             <p>
                 Name:

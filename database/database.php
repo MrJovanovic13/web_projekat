@@ -9,7 +9,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `users`(
     `username` varchar(50) NOT NULL,
     `password` varchar(255) NOT NULL,
     `phone_number` varchar(12) NOT NULL,
-    `adress` varchar(25) NOT NULL,
+    `address` varchar(25) NOT NULL,
     `location` varchar(25) NOT NULL,
     `user_level` int(11) NOT NULL,
     `postcode` varchar(14) NOT NULL,

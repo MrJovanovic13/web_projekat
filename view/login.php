@@ -14,8 +14,8 @@ require_once "../template/navbar.php";
         <input type="text" class="form__input" name="username" id="username" maxlength="20" required>
       </div>
       <div class="form__input-group">
-        <label for="pass">Password: </label>
-        <input type="password" class="form__input" name="pass" id="pass" maxlength="20" required>
+        <label for="password">Password: </label>
+        <input type="password" class="form__input" name="password" id="password" maxlength="20" required>
       </div>
       <div class="form__input-group">
         <button type="submit" class="form__button">Submit</button>
@@ -25,15 +25,15 @@ require_once "../template/navbar.php";
 
   <!--  create account page -->
   <div class="form-container sign-up-container">
-    <form method="POST" action="../registration/index.php" class="form" id="register">
+    <form method="POST" action="../registration/" class="form" id="register">
       <h1 class="form__title">Register</h1>
       <div class="form__input-group">
         <label for="username"> Username: </label>
         <input type="text" class="form__input" name="username" id="username" maxlength="20" required>
       </div>
       <div class="form__input-group">
-        <label for="pass">Password: </label>
-        <input type="password" class="form__input" name="pass" id="pass" maxlength="20" required>
+        <label for="password">Password: </label>
+        <input type="password" class="form__input" name="password" id="password" maxlength="20" required>
       </div>
       <button class="form__button" type="submit">Sign Up</button>
     </form>

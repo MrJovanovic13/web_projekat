@@ -26,6 +26,11 @@ session_start();
             <li><a href="../products/">Products</a></li>
             <li><a href="../cart/">Cart</a></li>
             <li><a href="../my-account/">My account</a></li>
+            <?php if(isset($_SESSION['userObj'])) : ?>
+                <li><a href="../logout/">Logout</a></li>
+            <?php endif; ?>
+
+
         </div>
 
 

@@ -4,7 +4,6 @@ html {
   }
   body {
     /* Margin bottom by footer height */
-    margin-bottom: 50px;
   }
   .fb {
     width: 35px;
@@ -20,7 +19,7 @@ html {
     padding: 45px 50px;
 
     position: absolute;
-    bottom: -300px;
+    bottom: -50%;
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 30px;

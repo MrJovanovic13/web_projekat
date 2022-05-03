@@ -1,8 +1,6 @@
 <?php
 require_once "../template/navbar.php";
-if(isset($msg)){
-  echo $msg;
-}
+
 ?>
 <link rel="stylesheet" href="../css/login.css">
 

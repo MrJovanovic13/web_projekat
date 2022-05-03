@@ -1,7 +1,14 @@
 <?php
 require_once "../connection/connection.php";
+$action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
+
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
+        if ($action == "logOut") {
+            session_unset();
+            session_destroy();
+            header("Location: ../login/");
+        }
     include("../view/login.php");
 } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (!empty($_POST['email']) && !empty($_POST['password'])) {
@@ -20,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 include_once("../view/login.php");
             } else {
                 require_once '../controller/user.php';
-
+                session_start();
                 $_SESSION['loggedIn'] = $email;
 
                 $userObj = new LoggedUser($row['id'], $row['name'], $row['surname'], $row['email'], $row['username'], $row['password'],$row['phone_number'], $row['address'], $row['location'], $row['user_level'], $row['postcode'], $row['dob']);

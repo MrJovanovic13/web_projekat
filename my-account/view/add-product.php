@@ -30,7 +30,7 @@ $category = isset($_POST['category']) ? $_POST['category'] : "";
             <span class="error"> <?php if (isset($priceErr)) echo "<span style='color:red;'>" . $priceErr . "</span>";  ?></span>
         </p>
         <p>
-            Image url:
+            Image filename: (assumes that image is in the images folder)
             <input type="text" name="imgUrl" value="<?php if (isset($imgUrl)) echo $imgUrl; ?>">
             <span class="error"> <?php if (isset($imgUrlErr)) echo "<span style='color:red;'>" . $imgUrlErr . "</span>"; ?></span>
         </p>

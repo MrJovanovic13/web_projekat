@@ -24,12 +24,23 @@ $retypePassword = isset($_POST['retypePassword'])?$_POST['retypePassword']:"";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/registration.css">
+    <!-- <link rel="stylesheet" href="../../css/registration.css"> -->
+    <link rel="stylesheet" href="../../css/dashboard.css">
     <title>Register</title>
 </head>
 
 <body>
-
+<div class="buttons-div">
+<form action="../add-product/">
+    <input type="submit" value="Add product" />
+</form>
+<form action="../add-category/">
+    <input type="submit" value="Add category" />
+</form>
+<form action="../add-user/">
+    <input type="submit" value="Add user" />
+</form>
+</div>
     <div class="container" id="container">
         <form action="../registration/" method="post">
 

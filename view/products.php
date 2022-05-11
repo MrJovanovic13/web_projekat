@@ -15,14 +15,13 @@ if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
     echo "
     <div class='card'>
-  <img class ='image_size' src='../images/" . $row["imgUrl"] . "'alt='" . $row["name"] . "'>
+  <img class ='image_size' src='../images/" . $row["imgUrl"] . "'alt=" . $row["imgUrl"] . "'" . $row["name"] . "'>
   <h1>" . $row["name"] . "</h1>
   <p class='price'>" . $row["price"] . "$</p>
   <p class='description'>" . $row["description"] . "</p>
-  <p><button>Add to Cart</button></p>
-</div>
-    
-    ";
+  <a  href='../controller/cart.php?action=addToCart&id=" . $row['id'] . "&quantity=1'>
+  <p><button >Add to Cart</button></p> </a>
+</div>";
   }
 }
 ?>

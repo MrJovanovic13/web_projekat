@@ -1,126 +1,97 @@
 <?php
+require_once "../controller/cartL.php";
 require_once "../template/navbar.php";
+require_once "../connection/connection.php";
+
 ?>
 <link rel="stylesheet" href="../css/cart.css">
-<script src="../js/cart.js"></script>
 
 <body>
 
   <div class="container">
 
-      <div class="table">
+    <div class="table">
 
-        <div class="layout-inline row th">
-          <div class="col col-pro">Product</div>
-          <div class="col col-price align-center ">
-            Price
-          </div>
-          <div class="col col-qty align-center">QTY</div>
-          <div class="col">VAT</div>
-          <div class="col">Total</div>
+      <div class="layout-inline row th">
+        <div class="col col-pro">Product</div>
+        <div class="col col-price align-center ">
+          Price
         </div>
-
-        <div class="layout-inline row">
-
-          <div class="col col-pro layout-inline">
-            <img src="../images/5700xt.jpg" alt="kitten" />
-            <p>rx 5700xt</p>
-          </div>
-
-          <div class="col col-price col-numeric align-center ">
-            <p>£59.99</p>
-          </div>
-
-          <div class="col col-qty layout-inline">
-            <input type="number" name="quantity-1" class="quantity" min="0" max="100" value="1">
-          </div>
-
-          <div class="col col-vat col-numeric">
-            <p>£2.95</p>
-          </div>
-          <div class="col col-total col-numeric">
-            <p> £182.95</p>
-          </div>
-        </div>
-
-        <div class="layout-inline row row-bg2">
-
-          <div class="col col-pro layout-inline">
-            <img src="http://lovemeow.com/wp-content/uploads/2012/05/kitten81.jpg" alt="kitten" />
-            <p>Scared Little Kittie</p>
-          </div>
-
-          <div class="col col-price col-numeric align-center ">
-            <p>£23.99</p>
-          </div>
-
-          <div class="col col-qty  layout-inline">
-            <a href="#" class="qty qty-minus ">-</a>
-            <input type="numeric" value="1" />
-            <a href="#" class="qty qty-plus">+</a>
-          </div>
-
-          <div class="col col-vat col-numeric">
-            <p>£1.95</p>
-          </div>
-          <div class="col col-total col-numeric">
-            <p>£25.94</p>
-          </div>
-
-        </div>
-
-        <div class="layout-inline row">
-
-          <div class="col col-pro layout-inline">
-            <img src="http://cdn.cutestpaw.com/wp-content/uploads/2012/04/l-my-first-kitten.jpg" alt="kitten" />
-            <p>Curious Little Begger</p>
-          </div>
-
-          <div class="col col-price col-numeric align-center ">
-            <p>£59.99</p>
-          </div>
-
-          <div class="col col-qty layout-inline">
-            <a href="#" class="qty qty-minus">-</a>
-            <input type="numeric" value="3" />
-            <a href="#" class="qty qty-plus">+</a>
-          </div>
-
-          <div class="col col-vat col-numeric">
-            <p>£2.95</p>
-          </div>
-          <div class="col col-total col-numeric">
-            <p>£182.95</p>
-          </div>
-        </div>
-
-        <div class="tf">
-          <div class="row layout-inline">
-            <div class="col">
-              <p>VAT</p>
-            </div>
-            <div class="col"></div>
-          </div>
-          <div class="row layout-inline">
-            <div class="col">
-              <p>Shipping</p>
-            </div>
-            <div class="col"></div>
-          </div>
-          <div class="row layout-inline">
-            <div class="col">
-              <p>Total</p>
-            </div>
-            <div class="col"></div>
-          </div>
-        </div>
+        <div class="col col-qty align-center">QTY</div>
+        <div class="col">Total</div>
       </div>
 
-      <a href="#" class="btn btn-update">Update cart</a>
+      <?php
 
+
+      $cart_total = 0;
+      
+      for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+        if (isset($_SESSION['cart'][$i])) {
+          $cart_item_id = $_SESSION['cart'][$i]->id;
+          $q = "SELECT `id`, `name`, `description`, `price`, `imgUrl`
+                FROM `products`
+                WHERE `id`=$cart_item_id";
+          $result = $conn->query($q);
+          $row = $result->fetch_assoc();
+
+          $cart_total += $row['price'];
+
+          // <img src='../images/'" . $row['imgUrl'] adds a whitespace between so I had to do a little workaround.
+          $image_path = "../images/" . $row["imgUrl"];
+      echo "
+            
+            <div class='layout-inline row'>
+        <!-- slika -->
+        <div class='col col-pro layout-inline'>
+          <img src=$image_path alt=" . $row['imgUrl'] .  ">
+          <p>" . $row['name'] . "</p>
+        </div>
+        <!-- cena -->
+        <div class='col col-price col-numeric align-center '>
+          <p>" . $row['price'] . "$</p>
+        </div>
+        <!-- kolicina -->
+        <div class='col col-qty layout-inline'>
+          <input type='number' name='quantity-1' min='0' max='100' value='1'>
+        </div>
+        <!-- ukupno -->
+        <div class='col col-total col-numeric'>
+          <p> £182.95</p>
+        </div>
+        <div class='remove button'>
+        <a  href='../controller/cart.php?action=remove&id=" . $row['id'] . "'>
+            <p><button >Remove</button></p> </a>
+        </div>
+        </div>
+            ";
+        }
+      }
+      ?>
+      <div class="tf">
+        <div class="row layout-inline">
+          <div class="col">
+            <p>VAT</p>
+          </div>
+          <div class="col"><?php echo $cart_total ?>$</div>
+        </div>
+        <div class="row layout-inline">
+          <div class="col">
+            <p>Shipping</p>
+          </div>
+          <div class="col">10$</div>
+        </div>
+        <div class="row layout-inline">
+          <div class="col">
+            <p>Total</p>
+          </div>
+          <div class="col"><?php echo $cart_total+10 ?>$</div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <?php
-include_once "../template/footer.php";
-?>
+  <?php
+  include_once "../template/footer.php";
+  ?>
 </body>

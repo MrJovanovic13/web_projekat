@@ -25,7 +25,7 @@ require_once "../connection/connection.php";
 
 
       $cart_total = 0;
-      
+
       for ($i = 0; $i < count($_SESSION['cart']); $i++) {
         if (isset($_SESSION['cart'][$i])) {
           $cart_item_id = $_SESSION['cart'][$i]->id;
@@ -39,7 +39,7 @@ require_once "../connection/connection.php";
 
           // <img src='../images/'" . $row['imgUrl'] adds a whitespace between so I had to do a little workaround.
           $image_path = "../images/" . $row["imgUrl"];
-      echo "
+          echo "
             
             <div class='layout-inline row'>
         <!-- slika -->
@@ -85,10 +85,13 @@ require_once "../connection/connection.php";
           <div class="col">
             <p>Total</p>
           </div>
-          <div class="col"><?php echo $cart_total+10 ?>$</div>
+          <div class="col"><?php echo $cart_total + 10 ?>$</div>
         </div>
       </div>
     </div>
+    <a href='../checkout/'>
+      <p><button>Checkout</button></p>
+    </a>
   </div>
 
   <?php

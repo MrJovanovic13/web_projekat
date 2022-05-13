@@ -62,15 +62,15 @@ $sql .="CREATE TABLE IF NOT EXISTS `items` (
     `product_id` int(11) NOT NULL,
     `amount` int(11) NOT NULL,
     `additional info` int(11) DEFAULT NULL,
-    PRIMARY KEY(order_id,product_id),
-    FOREIGN KEY(order_id) REFERENCES order(id),
+    PRIMARY KEY(order_id, product_id),
+    FOREIGN KEY(order_id) REFERENCES orders(id),
     FOREIGN KEY(product_id) REFERENCES products(id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
 $sql .="CREATE TABLE IF NOT EXISTS `wishlist` (
     `user_id` int(11) NOT NULL,
     `product_id` int(11) NOT NULL,
-    PRIMARY KEY(`user_id`,product_id),
+    PRIMARY KEY(`user_id`, product_id),
     FOREIGN KEY(`user_id`) REFERENCES users(id),
     FOREIGN KEY(`product_id`) REFERENCES products(id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";

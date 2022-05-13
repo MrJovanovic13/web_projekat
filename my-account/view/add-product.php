@@ -21,6 +21,9 @@ $category = isset($_POST['category']) ? $_POST['category'] : "";
 <form action="../add-user/">
     <input type="submit" value="Add user" />
 </form>
+<form action="../orders/">
+    <input type="submit" value="Orders" />
+</form>
 </div>
 
 <div class="container" id="container">

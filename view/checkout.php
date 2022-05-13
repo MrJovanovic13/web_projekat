@@ -59,7 +59,7 @@ require_once "../connection/connection.php";
     Shipping: 10$
     <br>
     Total: <?php echo $cart_total+10; ?>
-    <a href='../my-account/'>
+    <a href='../my-account/?action=checkout'>
       <p><button>Checkout</button></p>
     </a>
 </div>

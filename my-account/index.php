@@ -32,8 +32,14 @@ if ($action == 'checkout') {
                 VALUES ('$order_id', '$product_id', '$quantity')";
             $result = $conn->query($q);
         }
+
+        $time = date('H:i:s', time());
+        $q = "INSERT INTO `order_status`(`date`,`time`,`order_id`,`status_id`) 
+        VALUES ('$date', '$time','$order_id',1)";
+        $result = $conn->query($q);
+
         unset($_SESSION['cart']);
-        
+    
         header("Location: orders/");
     } else {
         header("Location: ../login/");

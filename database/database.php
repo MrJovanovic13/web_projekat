@@ -57,6 +57,16 @@ INSERT INTO `status` (`id`, `name`) VALUES
 (4, 'Sent'),
 (5, 'Cancelled');
 */
+$sql .= "CREATE TABLE IF NOT EXISTS `order_status` (
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `status_id` int (1) NOT NULL,
+  PRIMARY KEY(`time`, order_id),
+  FOREIGN KEY(order_id) REFERENCES orders(id),
+  FOREIGN KEY(status_id) REFERENCES status(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+
 $sql .="CREATE TABLE IF NOT EXISTS `items` (
     `order_id` int(11) NOT NULL,
     `product_id` int(11) NOT NULL,

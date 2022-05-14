@@ -1,6 +1,11 @@
 <?php
 require_once "../../connection/connection.php";
 require_once "../template/navbarLogged.php";
+if (!isset($_SESSION['userObj']))
+{
+    header("Location: ../../login"); 
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,21 +55,24 @@ require_once "../template/navbarLogged.php";
 
                 $q1 = "SELECT `product_id`, `amount`
                 FROM `items`
-                WHERE `order_id`=".$row['id'];
+                WHERE `order_id`=" . $row['id'];
                 $result1 = $conn->query($q1);
-                while ($row1 = $result1->fetch_assoc()){
+                while ($row1 = $result1->fetch_assoc()) {
                     $q2 = "SELECT `price` 
                     FROM `products`
-                    WHERE `products`.`id`=".$row1['product_id'];
+                    WHERE `products`.`id`=" . $row1['product_id'];
                     $result2 = $conn->query($q2);
-                    while ($row2 = $result2->fetch_assoc()){
+                    while ($row2 = $result2->fetch_assoc()) {
                         $order_total += $row2['price'] * $row1['amount'];
                     }
                 }
                 echo "<td>" . $order_total . "$</td>";
                 $order_total = 0;
                 echo "<td>" . "test" . "</td>";
-                echo "<td>" . "test" . "</td>";
+                echo "<td>" .
+                    "<a href='../orders?action=removeOrder&itemId=".$row['id']."'><p><button>Remove</button></p> </a>
+                <a href='../my-account/edit-order'><p><button>Edit</button></p> </a>"
+                    . "</td>";
                 echo "</tr>";
             }
             echo "</tr>";

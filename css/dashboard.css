@@ -35,10 +35,11 @@ input[type="password"]:focus {
 /* Add a blue text color to links */
 a {
   color: dodgerblue;
+  display:inline-block;
 }
 
 button {
-  margin-left: 30%;
+  margin-left: 0%;
   display: block;
 }
 

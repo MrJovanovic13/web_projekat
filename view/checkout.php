@@ -40,12 +40,12 @@ require_once "../connection/connection.php";
                 $result = $conn->query($q);
                 $row = $result->fetch_assoc();
 
-                $cart_total += $row['price'];
+                $cart_total += $row['price'] * $_SESSION['cart'][$i]->quantity;
 
-                echo "<th>" . $row['id'] . "</th>";
-                echo "<th>" . $row['name'] . "</th>";
-                echo "<th>" . $row['price'] . "$</th>";
-                echo "<th>" . $_SESSION['cart'][$i]->quantity . "</th>";
+                echo "<td>" . $row['id'] . "</td>";
+                echo "<td>" . $row['name'] . "</td>";
+                echo "<td>" . $row['price'] . "$</td>";
+                echo "<td>" . $_SESSION['cart'][$i]->quantity . "</td>";
             }
             echo "</tr>";
         }
@@ -58,7 +58,7 @@ require_once "../connection/connection.php";
     <br>
     Shipping: 10$
     <br>
-    Total: <?php echo $cart_total+10; ?>
+    Total: <?php echo $cart_total+10 . "$"; ?>
     <a href='../my-account/?action=checkout'>
       <p><button>Checkout</button></p>
     </a>

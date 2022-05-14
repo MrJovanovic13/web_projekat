@@ -6,11 +6,11 @@ require_once "../connection/connection.php";
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 session_start();
 
-if (isset($_SESSION['userObj'])) {
-    if ($action == 'checkout') {
+if ($action == 'checkout') {
+    if (isset($_SESSION['userObj'])) {
 
         $date_info = getdate();
-        $year = $date_info['yday'];
+        $year = $date_info['year'];
         $month = $date_info['mon'];
         $day = $date_info['wday'];
 
@@ -31,12 +31,17 @@ if (isset($_SESSION['userObj'])) {
             $q = "INSERT INTO `items`(`order_id`,`product_id`,`amount`) 
                 VALUES ('$order_id', '$product_id', '$quantity')";
             $result = $conn->query($q);
-
-            unset($_SESSION['cart'][$i]);
         }
+        unset($_SESSION['cart']);
+        
+        header("Location: orders/");
+    } else {
+        header("Location: ../login/");
     }
-
-    header("Location: orders/");
 } else {
-    header("Location: ../login/");
+    if (isset($_SESSION['userObj'])){
+        header("Location: dashboard/");
+    } else {
+        header("Location: ../login/");
+    }
 }

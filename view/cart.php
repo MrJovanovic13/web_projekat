@@ -35,7 +35,7 @@ require_once "../connection/connection.php";
           $result = $conn->query($q);
           $row = $result->fetch_assoc();
 
-          $cart_total += $row['price'];
+          $cart_total += $row['price'] * $_SESSION['cart'][$i]->quantity;
 
           // <img src='../images/'" . $row['imgUrl'] adds a whitespace between so I had to do a little workaround.
           $image_path = "../images/" . $row["imgUrl"];
@@ -53,11 +53,11 @@ require_once "../connection/connection.php";
         </div>
         <!-- kolicina -->
         <div class='col col-qty layout-inline'>
-          <input type='number' name='quantity-1' min='0' max='100' value='1'>
+          <input type='number' name='quantity-1' min='0' max='100' value=".$_SESSION['cart'][$i]->quantity . ">
         </div>
         <!-- ukupno -->
         <div class='col col-total col-numeric'>
-          <p> £182.95</p>
+          <p>". $row['price'] * $_SESSION['cart'][$i]->quantity ."$</p>
         </div>
         <div class='remove button'>
         <a  href='../controller/cart.php?action=remove&id=" . $row['id'] . "'>

@@ -1,4 +1,5 @@
 <?php
+require_once "../../connection/connection.php";
 require_once "../template/navbarLogged.php";
 ?>
 <!DOCTYPE html>
@@ -28,6 +29,48 @@ require_once "../template/navbarLogged.php";
         </form>
     </div>
     <div class="container" id="container">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <?php
+            $q = "SELECT `id`, `date`
+            FROM `orders`";
+
+            $result = $conn->query($q);
+            $order_total = 0;
+            echo "<tr>";
+            while ($row = $result->fetch_assoc()) {
+                echo "<td>" . $row['id'] . "</td>";
+                echo "<td>" . $row['date'] . "</td>";
+
+                $q1 = "SELECT `product_id`, `amount`
+                FROM `items`
+                WHERE `order_id`=".$row['id'];
+                $result1 = $conn->query($q1);
+                while ($row1 = $result1->fetch_assoc()){
+                    $q2 = "SELECT `price` 
+                    FROM `products`
+                    WHERE `products`.`id`=".$row1['product_id'];
+                    $result2 = $conn->query($q2);
+                    while ($row2 = $result2->fetch_assoc()){
+                        $order_total += $row2['price'] * $row1['amount'];
+                    }
+                }
+                echo "<td>" . $order_total . "$</td>";
+                $order_total = 0;
+                echo "<td>" . "test" . "</td>";
+                echo "<td>" . "test" . "</td>";
+                echo "</tr>";
+            }
+            echo "</tr>";
+            ?>
+        </table>
+
     </div>
 </body>
 

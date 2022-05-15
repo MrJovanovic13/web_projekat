@@ -1,8 +1,5 @@
 <?php
 require_once "../template/navbarLogged.php";
-
-
-
 ?>
 
 <link rel="stylesheet" href="../../css/dashboard.css">
@@ -19,6 +16,7 @@ require_once "../template/navbarLogged.php";
 <form action="../orders/">
     <input type="submit" value="Orders" />
 </form>
+
 </div>
 
 

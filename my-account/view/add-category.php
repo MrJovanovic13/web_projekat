@@ -3,7 +3,6 @@ require_once "../template/navbarLogged.php";
 
 $name = isset($_POST['name'])?$_POST['name']:"";
 
-
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
 
@@ -20,6 +19,7 @@ $name = isset($_POST['name'])?$_POST['name']:"";
 <form action="../orders/">
     <input type="submit" value="Orders" />
 </form>
+
 </div>
 
 <div class="container" id="container">

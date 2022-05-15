@@ -1,9 +1,8 @@
 <?php
 require_once "../../connection/connection.php";
 require_once "../template/navbarLogged.php";
-if (!isset($_SESSION['userObj']))
-{
-    header("Location: ../../login"); 
+if (!isset($_SESSION['userObj'])) {
+    header("Location: ../../login");
     die();
 }
 ?>
@@ -32,6 +31,7 @@ if (!isset($_SESSION['userObj']))
         <form action="../orders/">
             <input type="submit" value="Orders" />
         </form>
+
     </div>
     <div class="container" id="container">
         <table>
@@ -43,7 +43,7 @@ if (!isset($_SESSION['userObj']))
                 <th>Action</th>
             </tr>
             <?php
-            $q = "SELECT `id`, `date`
+            $q = "SELECT `id`, `date`, `user_id`
             FROM `orders`";
 
             $result = $conn->query($q);
@@ -66,12 +66,21 @@ if (!isset($_SESSION['userObj']))
                         $order_total += $row2['price'] * $row1['amount'];
                     }
                 }
+                
+
+                $q3 = "SELECT `status`.`name` FROM `order_status` 
+                INNER JOIN `status` ON `order_status`.`status_id` = `status`.`id`
+                WHERE `order_status`.`order_id`=" . $row['id'];
+                $result3 = $conn->query($q3);
+                $row3 = $result3->fetch_assoc();
+
                 echo "<td>" . $order_total . "$</td>";
                 $order_total = 0;
-                echo "<td>" . "test" . "</td>";
+                echo "<td>" . $row3['name'] . "</td>";
+
                 echo "<td>" .
-                    "<a href='../orders?action=removeOrder&itemId=".$row['id']."'><p><button>Remove</button></p> </a>
-                <a href='../my-account/edit-order'><p><button>Edit</button></p> </a>"
+                    "<a href='../orders?action=removeOrder&itemId=" . $row['id'] . "'><p><button>Remove</button></p> </a>
+                     <a href='../edit-order?action=editOrder&userId=" . $row['user_id'] . "&orderId=" . $row['id'] . "'><p><button>Edit</button></p> </a>"
                     . "</td>";
                 echo "</tr>";
             }

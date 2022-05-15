@@ -12,7 +12,7 @@ if ($action == 'checkout') {
         $date_info = getdate();
         $year = $date_info['year'];
         $month = $date_info['mon'];
-        $day = $date_info['wday'];
+        $day = $date_info['mday'];
 
         $date = $year . "-" . $month . "-" . $day;
         $user = unserialize($_SESSION['userObj']);

@@ -67,10 +67,11 @@ if (!isset($_SESSION['userObj'])) {
                     }
                 }
                 
-
-                $q3 = "SELECT `status`.`name` FROM `order_status` 
+                $q3 = "SELECT `date`,`time`, `status`.`name` FROM `order_status` 
                 INNER JOIN `status` ON `order_status`.`status_id` = `status`.`id`
-                WHERE `order_status`.`order_id`=" . $row['id'];
+                WHERE `order_status`.`order_id`=" . $row['id'] ."
+                ORDER BY `date` DESC, `time` DESC";
+
                 $result3 = $conn->query($q3);
                 $row3 = $result3->fetch_assoc();
 

@@ -64,21 +64,46 @@ require_once "../template/navbarLogged.php";
             }
         }
         echo "</table>";
-        echo "Order:".$cart_total . "$";
+        echo "Order:" . $cart_total . "$";
         echo "<hr>";
         echo "Shipping:10$";
         echo "<hr>";
-        echo "Order total:".$cart_total+10 . "$";
+        echo "Order total:" . $cart_total + 10 . "$";
         echo "<hr>";
         echo "Order status:";
-        $q3 = "SELECT `status`.`name` FROM `order_status` 
+        $q3 = "SELECT `status`.`id`,`date`,`time`, `status`.`name` FROM `order_status` 
                 INNER JOIN `status` ON `order_status`.`status_id` = `status`.`id`
-                WHERE `order_status`.`order_id`=" . $order_id;
-                $result3 = $conn->query($q3);
-                $row3 = $result3->fetch_assoc();
+                WHERE `order_status`.`order_id`=" . $order_id . "
+                ORDER BY `date` DESC, `time` DESC";
+        $result3 = $conn->query($q3);
+        $row3 = $result3->fetch_assoc();
         echo $row3['name'];
-
         ?>
+
+        <form action="../edit-order/controller.php" method="POST">
+            <select id="orderStatus" name="orderStatus">
+
+                <?php
+                $q = "SELECT `id`, `name` 
+                FROM `status`";
+
+                $result = $conn->query($q);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        if ($row["id"] == $row3["id"]) {
+                            echo "<option selected value=" . $row["id"] . ">" . $row["name"] . "</option>";
+                            continue;
+                        }
+                        echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
+                    }
+                }
+                ?>
+            </select>
+            <input type="hidden" name="orderId" value="<?= $order_id ?>">
+            <button type="submit">Edit</button>
+        </form>
+
     </div>
 
     <?php

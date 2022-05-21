@@ -131,13 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $dob = test_input($_POST["dob"]);
     }
 
-    /*$terms = false;
-        if (isset($_POST["terms"]) && $_POST["terms"] == "Yes") {
-            $terms = true;
-        } else {
-            $termsErr = "You must accept TOS";
-        }*/
-
     if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($passwordErr) || isset($retypePasswordErr) || isset($telephoneErr) || isset($usernameErr)|| isset($addressErr)|| isset($postcodeErr)|| isset($dobErr)) {
         include_once('../view/add-user.php');
     } else {

@@ -13,7 +13,7 @@ $sql = "CREATE TABLE IF NOT EXISTS `users`(
     `location` varchar(25) NOT NULL,
     `user_level` int(11) NOT NULL,
     `postcode` varchar(14) NOT NULL,
-    `dob` DATE,
+    `dob` DATE NOT NULL,
     PRIMARY KEY (id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 

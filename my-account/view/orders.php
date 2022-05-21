@@ -31,6 +31,9 @@ if (!isset($_SESSION['userObj'])) {
         <form action="../orders/">
             <input type="submit" value="Orders" />
         </form>
+        <form action="../users/">
+            <input type="submit" value="Users" />
+        </form>
 
     </div>
     <div class="container" id="container">

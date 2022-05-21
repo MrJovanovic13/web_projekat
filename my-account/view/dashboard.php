@@ -16,6 +16,9 @@ require_once "../template/navbarLogged.php";
 <form action="../orders/">
     <input type="submit" value="Orders" />
 </form>
+<form action="../users/">
+    <input type="submit" value="Users" />
+</form>
 
 </div>
 

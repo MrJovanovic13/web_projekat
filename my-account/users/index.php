@@ -1,5 +1,7 @@
 <?php
 require_once "../../connection/connection.php";
+require_once "../../controller/user.php";
+$user = unserialize($_SESSION['userObj']);
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -16,6 +18,10 @@ if (!isset($_SESSION['userObj']))
         $q = "DELETE FROM `users` WHERE `id`=".$id;
         $result = $conn->query($q);
     }
-    include("../view/users.php");
+    if ($user->user_level==0){
+        header("Location: ../account-info/");
+    } else {
+        include("../view/users.php");
+    }
 }
 ?>

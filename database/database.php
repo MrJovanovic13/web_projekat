@@ -2,9 +2,9 @@
 require_once "../connection/connection.php";
 
 // user_levels:
-// 0 = admin; 
+// 0 = user; 
 // 1 = manager;
-// 2 = user
+// 2 = admin;
 $sql = "CREATE TABLE IF NOT EXISTS `users`(
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `name` varchar(25) NOT NULL,

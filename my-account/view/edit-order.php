@@ -5,9 +5,9 @@ require_once "../template/navbarLogged.php";
 
 <body>
     <div class="buttons-div">
-    <?php
-require_once "../template/accountMenu.php";
-?>
+        <?php
+        require_once "../template/accountMenu.php";
+        ?>
 
     </div>
     <div class="container" id="container">
@@ -70,30 +70,37 @@ require_once "../template/accountMenu.php";
         $row3 = $result3->fetch_assoc();
         echo $row3['name'];
         ?>
+        <?php
+        if ($user->user_level != 0) {
+            echo '
+            <form action="../edit-order/controller.php" method="POST">
+                <select id="orderStatus" name="orderStatus">
 
-        <form action="../edit-order/controller.php" method="POST">
-            <select id="orderStatus" name="orderStatus">
-
-                <?php
-                $q = "SELECT `id`, `name` 
+                    <?php
+                    $q = "SELECT `id`, `name` 
                 FROM `status`";
 
-                $result = $conn->query($q);
+                    $result = $conn->query($q);
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        if ($row["id"] == $row3["id"]) {
-                            echo "<option selected value=" . $row["id"] . ">" . $row["name"] . "</option>";
-                            continue;
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            if ($row["id"] == $row3["id"]) {
+                                echo "<option selected value=" . $row["id"] . ">" . $row["name"] . "</option>";
+                                continue;
+                            }
+                            echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
                         }
-                        echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
                     }
-                }
-                ?>
-            </select>
-            <input type="hidden" name="orderId" value="<?= $order_id ?>">
-            <button type="submit">Edit</button>
-        </form>
+                    ?>
+                </select>
+                <input type="hidden" name="orderId" value="<?= $order_id ?>">
+
+
+                <button type="submit">Edit</button>
+            </form>';
+        }
+        ?>
+
 
     </div>
 

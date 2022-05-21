@@ -31,25 +31,13 @@ $retypePassword = isset($_POST['retypePassword'])?$_POST['retypePassword']:"";
 
 <body>
 <div class="buttons-div">
-<form action="../add-product/">
-    <input type="submit" value="Add product" />
-</form>
-<form action="../add-category/">
-    <input type="submit" value="Add category" />
-</form>
-<form action="../add-user/">
-    <input type="submit" value="Add user" />
-</form>
-<form action="../orders/">
-    <input type="submit" value="Orders" />
-</form>
-<form action="../users/">
-    <input type="submit" value="Users" />
-</form>
+<?php
+require_once "../template/accountMenu.php";
+?>
 
 </div>
     <div class="container" id="container">
-        <form action="../../registration/" method="post">
+        <form action="../add-user/" method="post">
 
             <p>
                 Name:
@@ -94,7 +82,7 @@ $retypePassword = isset($_POST['retypePassword'])?$_POST['retypePassword']:"";
             <p>
                 Data of birth:
                 <input type="date" name="dob" value="<?php if (isset($dob)) echo $dob; ?>">
-                <span class="error"><?php if(isset($dobErr)) echo "<i class='fas fa-exclamation-circle mr-1'></i>".$dobErr; ?></span>
+                <span class="error"><?php if(isset($dobErr)) echo $dobErr; ?></span>
             </p>
             <p>
                 Password:

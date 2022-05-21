@@ -75,7 +75,7 @@ $retypePassword = isset($_POST['retypePassword'])?$_POST['retypePassword']:"";
             <p>
                 Data of birth:
                 <input type="date" name="dob" value="<?php if (isset($dob)) echo $dob; ?>">
-                <span class="error"><?php if(isset($dobErr)) echo "<i class='fas fa-exclamation-circle mr-1'></i>".$dobErr; ?></span>
+                <span class="error"><?php if(isset($dobErr)) echo $dobErr; ?></span>
             </p>
             <p>
                 Password:

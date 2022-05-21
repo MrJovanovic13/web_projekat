@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $q = "INSERT INTO `users`(`name`,`surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`) 
                         VALUES ('$name', '$surname', '$email', '$username', '$password', '$telephone', '$address', '$location', '0', '$postcode', '$dob')";
         $conn->query($q);
-        header("Location: ../my account");
+        header("Location: ../../my-account");
     }
 } else {
     header("Location: 404.php");

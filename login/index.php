@@ -1,5 +1,6 @@
 <?php
 require_once "../connection/connection.php";
+require_once '../controller/logging.php';
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
 
@@ -36,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $_SESSION['role'] = $row['user_level'];
                 $_SESSION['userId'] = $row['id'];
 
+                $logs = __DIR__ . "/../logs/";
+                $file=fopen($logs.date("Y-m-d").'-'.$_SESSION['userId'].'.log', 'a');
+                fwrite($file,'UserID: '.$row['id'].'| name: '.$row['name']. '| Logged in |'.date("h:i:sa")."\n");
                 header("Location: ../my-account/");
             }
         } else {

@@ -7,7 +7,7 @@ $name = isset($_POST['name'])?$_POST['name']:"";
 <link rel="stylesheet" href="../../css/dashboard.css">
 
 <div class="buttons-div">
-<?
+<?php
 require_once "../template/accountMenu.php";
 ?>
 

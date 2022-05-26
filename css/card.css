@@ -1,6 +1,9 @@
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
+  max-width: 250px;
+  min-width: 250px;
+  max-height: 400px;
+  min-height: 400px;
   margin-left: 3%;
   margin-top: 3%;
   text-align: center;
@@ -30,8 +33,10 @@
 }
 
 .image_size {
-  width: 200px;
-  height: 300px;
+  max-width: 250px;
+  min-width: 250px;
+  max-height: 200px;
+  min-height: 200px;
   object-fit: contain;
 }
 

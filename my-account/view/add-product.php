@@ -2,12 +2,6 @@
 require_once "../template/navbarLogged.php";
 require_once "../../connection/connection.php";
 
-$name = isset($_POST['name']) ? $_POST['name'] : "";
-$description = isset($_POST['description']) ? $_POST['description'] : "";
-$price = isset($_POST['price']) ? $_POST['price'] : "";
-$imgUrl = isset($_POST['imgUrl']) ? $_POST['imgUrl'] : "";
-$category = isset($_POST['category']) ? $_POST['category'] : "";
-
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
 
@@ -46,10 +40,10 @@ require_once "../template/accountMenu.php";
             Product in stock?
         </p>
         <p>
-            <input type="radio" id="yes" name="stock" value="1">
+            <input type="radio" id="yes" name="stock" value="1" <?php if(isset($stock)&&$stock) echo "checked='checked'"; ?>>
               <label for="yes">Yes</label>
              
-            <input type="radio" id="no" name="stock" value="0">
+            <input type="radio" id="no" name="stock" value="0" <?php if(isset($stock)&&!$stock) echo "checked='checked'"; ?>>
               <label for="no">No</label>
             <?php if (isset($stockErr)) echo "<span style='color:red;'>" . $stockErr . "</span>"; ?>
         </p>
@@ -64,6 +58,10 @@ require_once "../template/accountMenu.php";
             $result = $conn->query($q);
 
             if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc(); // called once to skip the first default category from showing
+                if($switchUpdate != 'Edit product'){
+                    echo "<option selected disabled hidden style='display: none' value=''></option>"; // makes default category blank IF we are not editing product
+                }
                 while ($row = $result->fetch_assoc()) {
                     echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
                 }
@@ -76,8 +74,9 @@ require_once "../template/accountMenu.php";
         <?php if (isset($categoryErr)) echo "<span style='color:red;'>" . $categoryErr . "</span>"; ?>
 
         <p>
-            <input id="button-helper" type="submit" value="Add product">
-
+            <input id="button-helper" type="submit" value="<?php echo $switchUpdate; ?>">
+            <input type="hidden" name="updateType" value="<?php echo $switchUpdate; ?>">
+            <input type="hidden" id="productId" name="productId" value="<?php if(isset($id)){echo $id;} ?>">
         </p>
 
     </form>

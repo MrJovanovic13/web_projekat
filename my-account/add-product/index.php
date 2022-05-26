@@ -4,6 +4,7 @@ require_once "../../connection/connection.php";
 session_start();
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
+        $switchUpdate = 'Add product';
         include("../view/add-product.php");
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
         function test_input($data)
@@ -45,7 +46,7 @@ if (isset($_SESSION['userObj'])) {
         //Category validation
         if (empty($_POST["category"])) {
             $categoryErr = "You must input this field!";
-        } else {
+        } elseif($_POST["category"]==1) {
             $category = test_input($_POST["category"]);
         }
 
@@ -62,12 +63,25 @@ if (isset($_SESSION['userObj'])) {
         }
 
         if (isset($nameErr) || isset($descriptionErr) || isset($priceErr) || isset($imgUrlErr) || isset($categoryErr)){
+            $name = isset($_POST['name']) ? $_POST['name'] : "";
+            $description = isset($_POST['description']) ? $_POST['description'] : "";
+            $price = isset($_POST['price']) ? $_POST['price'] : "";
+            $imgUrl = isset($_POST['imgUrl']) ? $_POST['imgUrl'] : "";
+            $category = isset($_POST['category']) ? $_POST['category'] : "";
+            $switchUpdate = 'Add product';
             include_once('../view/add-product.php');
         } else {
-            $q = "INSERT INTO `products`(`name`,`description`, `price`, `imgUrl`, `in_stock`, `category_id`) 
-                            VALUES ('$name', '$description', '$price', '$imgUrl', '$in_stock', '$category')";
-            $conn->query($q);
-            header("Location: ../add-product/");
+            if($_POST['updateType']=='Add product'){
+                $q = "INSERT INTO `products`(`name`,`description`, `price`, `imgUrl`, `in_stock`, `category_id`) 
+                VALUES ('$name', '$description', '$price', '$imgUrl', '$in_stock', '$category')";
+                $conn->query($q);
+                header("Location: ../products/");
+            } else {
+                $q = "UPDATE `products` SET `name` = '$name', `description` = '$description', `price` = '$price', `imgUrl` = '$imgUrl', `in_stock` = '$in_stock', `category_id` = '$category'
+                WHERE `id` =". $_POST['productId'];
+                $conn->query($q);
+                header("Location: ../products/");
+            }
         }
     }
 } else {

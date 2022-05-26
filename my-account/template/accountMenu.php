@@ -7,12 +7,6 @@ $user = unserialize($_SESSION['userObj']);
 
 if ($user->user_level==2){
 echo '
-<form class="menuForm" action="../add-product/">
-    <input class="menuButton" type="submit" value="Add product" />
-</form>
-<form class="menuForm" action="../add-category/">
-    <input class="menuButton" type="submit" value="Add category" />
-</form>
 <form class="menuForm" action="../orders/">
     <input class="menuButton" type="submit" value="Orders" />
 </form>
@@ -21,6 +15,9 @@ echo '
 </form>
 <form class="menuForm" action="../reports/">
     <input class="menuButton" type="submit" value="Reports" />
+</form>
+<form class="menuForm" action="../products/">
+    <input class="menuButton" type="submit" value="Products" />
 </form>
 ';
 }

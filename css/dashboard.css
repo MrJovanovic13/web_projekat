@@ -57,6 +57,9 @@ a {
   margin-left: 30%;
   display: flex;
 }
+.buttons-div-second {
+  display: flex;
+}
 
 th,
 td {

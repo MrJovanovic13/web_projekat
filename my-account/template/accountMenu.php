@@ -2,7 +2,6 @@
 require_once "../../controller/user.php";
 $user = unserialize($_SESSION['userObj']);
 
-
 if ($user->user_level==2){
 echo '
 <form action="../add-product/">
@@ -19,7 +18,11 @@ echo '
 </form>
 <form action="../users/">
     <input type="submit" value="Users" />
-</form>';
+</form>
+<form action="../reports/">
+    <input type="submit" value="Reports" />
+</form>
+';
 }
 
 if ($user->user_level==1){

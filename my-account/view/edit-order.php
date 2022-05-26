@@ -75,25 +75,25 @@ require_once "../template/navbarLogged.php";
             echo '
             <form action="../edit-order/controller.php" method="POST">
                 <select id="orderStatus" name="orderStatus">
-
-                    <?php
-                    $q = "SELECT `id`, `name` 
+                ';
+            $q = "SELECT `id`, `name` 
                 FROM `status`";
 
-                    $result = $conn->query($q);
+            $result = $conn->query($q);
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            if ($row["id"] == $row3["id"]) {
-                                echo "<option selected value=" . $row["id"] . ">" . $row["name"] . "</option>";
-                                continue;
-                            }
-                            echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
-                        }
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    if ($row["id"] == $row3["id"]) {
+                        echo "<option selected value=" . $row["id"] . ">" . $row["name"] . "</option>";
+                        continue;
                     }
-                    ?>
+                    echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
+                }
+            }
+            echo '
                 </select>
-                <input type="hidden" name="orderId" value="<?= $order_id ?>">
+                <input type="hidden" name="orderId" value="'.$order_id;
+                echo '">
 
 
                 <button type="submit">Edit</button>

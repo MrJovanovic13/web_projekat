@@ -1,5 +1,6 @@
 {
     "require": {
-        "fpdf/fpdf": "^1.84"
+        "fpdf/fpdf": "^1.84",
+        "phpoffice/phpspreadsheet": "^1.23"
     }
 }

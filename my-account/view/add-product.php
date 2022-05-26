@@ -10,7 +10,7 @@ require_once "../../connection/connection.php";
 require_once "../template/accountMenu.php";
 ?>
 
-</div>
+</div><br>
 
 <div class="container" id="container">
     <form action="../add-product/" method="post">
@@ -72,7 +72,8 @@ require_once "../template/accountMenu.php";
 
         </select>
         <?php if (isset($categoryErr)) echo "<span style='color:red;'>" . $categoryErr . "</span>"; ?>
-
+        <br>
+        <br> <!--First br does nothing for some reason, so i put another one. -->
         <p>
             <input id="button-helper" type="submit" value="<?php echo $switchUpdate; ?>">
             <input type="hidden" name="updateType" value="<?php echo $switchUpdate; ?>">

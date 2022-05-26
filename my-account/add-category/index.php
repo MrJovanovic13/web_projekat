@@ -16,7 +16,7 @@ if (isset($_SESSION['userObj'])) {
 
         //Name validation
         if (empty($_POST["name"])) {
-            $nameErr = "You must input this field";
+            $nameErr = "You must input this field!";
         } else {
             $name = test_input($_POST["name"]);
 

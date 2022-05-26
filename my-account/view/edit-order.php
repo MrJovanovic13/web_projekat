@@ -9,7 +9,7 @@ require_once "../template/navbarLogged.php";
         require_once "../template/accountMenu.php";
         ?>
 
-    </div>
+    </div><br>
     <div class="container" id="container">
         Delivery information:
         <?php
@@ -95,7 +95,7 @@ require_once "../template/navbarLogged.php";
                 <input type="hidden" name="orderId" value="'.$order_id;
                 echo '">
 
-
+                <br>
                 <button type="submit">Edit</button>
             </form>';
         }

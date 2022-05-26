@@ -9,7 +9,7 @@ require_once "../template/accountMenu.php";
 ?>
 
 </div>
-
+<br>
 
 <div class="container" id="container">
     <form action="../dashboard/" method="post">

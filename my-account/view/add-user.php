@@ -35,7 +35,7 @@ $retypePassword = isset($_POST['retypePassword'])?$_POST['retypePassword']:"";
 require_once "../template/accountMenu.php";
 ?>
 
-</div>
+</div><br>
     <div class="container" id="container">
         <form action="../add-user/" method="post">
 
@@ -94,6 +94,7 @@ require_once "../template/accountMenu.php";
                 <input type="password" name="retypePassword">
                 <span class="error"> <?php echo $retypePasswordErr; ?></span>
             </p>
+            <br>
             <p>
                 <input id="button-helper" type="submit" value="Add user">
             </p>

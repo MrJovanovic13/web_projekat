@@ -10,17 +10,17 @@ require_once "../../connection/connection.php";
     require_once "../template/accountMenu.php";
     ?>
 </div>
-
+<br>
 <div class="container" id="container">
     <div class="buttons-div-second">
-    <form class="menuForm" action="../add-product/">
-        <input class="menuButton" type="submit" value="Add product" />
-    </form>
-    <form class="menuForm" action="../add-category/">
-        <input class="menuButton" type="submit" value="Add category" />
-    </form>
-</div>
-
+        <form class="menuForm" action="../add-product/">
+            <input class="menuButton" type="submit" value="Add product" />
+        </form>
+        <form class="menuForm" action="../add-category/">
+            <input class="menuButton" type="submit" value="Add category" />
+        </form>
+    </div>
+    <br>
 
     <table>
         <tr>
@@ -34,9 +34,10 @@ require_once "../../connection/connection.php";
         <?php
 
         $q = "SELECT `id`, `name`, `category_id`, `price`, `in_stock`
-FROM `products`";
+                FROM `products`";
 
-
+        $counter = 0;
+        echo "<tr>";
         $result = $conn->query($q);
         while ($row = $result->fetch_assoc()) {
             $stock;
@@ -46,7 +47,15 @@ FROM `products`";
                 $stock = 'no';
             }
 
-            echo "<tr>";
+            if ($counter != 0 && $counter % 2 == 1) {
+                echo '</tr>';
+                echo '<tr class="highlighted">';
+            } else {
+                echo '</tr>';
+                echo '<tr>';
+            }
+            $counter++;
+
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['name'] . "</td>";
 
@@ -57,14 +66,18 @@ FROM `products`";
             echo "<td>" . $row['price'] . "</td>";
             echo "<td>" . $stock . "</td>";
             echo "<td>" .
-                "<a href='../products?action=deleteProduct&productId=" . $row['id'] . "'><p><button>Remove</button></p> </a>
-                <a href='../edit-product?action=editProduct&productId=" . $row['id'] . "'><p><button>Edit</button></p> </a>"
+                "<a href='../products?action=deleteProduct&productId=" . $row['id'] . "'><p><button class='iconButton'>
+                <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
+                </button></p> </a>
+                <a href='../edit-product?action=editProduct&productId=" . $row['id'] . "'><p><button class='iconButton'>
+                <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
+                </button></p> </a>"
                 . "</td>";
-            echo "</tr>";
         }
+        echo "</tr>";
         ?>
+    </table>
 </div>
-</table>
 
 <?php
 require_once "../template/footer.php";

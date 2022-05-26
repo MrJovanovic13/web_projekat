@@ -24,7 +24,7 @@ input[type="password"] {
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: gainsboro;
 }
 
 input[type="text"]:focus,
@@ -53,6 +53,7 @@ a {
   display: block;
 }
 
+
 .buttons-div {
   margin-left: 30%;
   display: flex;
@@ -65,5 +66,40 @@ th,
 td {
   padding: 10px;
   width: 5%;
-  border: solid 2px lightgrey;
+  border: solid 1px lightgray;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.highlighted {
+  background-color:gainsboro;
+}
+
+.deleteIcon{
+  max-width: 20px;
+  max-height: 20px;
+}
+.editIcon{
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.iconButton{
+  border: solid 1px;
+  border-radius: 100%;
+  min-width: 40px;
+  min-height: 40px;
+  background: none;
+}
+
+.iconButton:hover,#button-helper:hover{
+  border-color: #0067ff;
+  background: #0067ff;
+  color: #fff;
+  text-decoration:none;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  transition: all 0.2s ease-in-out;
 }

@@ -5,7 +5,7 @@ require_once "../template/navbarLogged.php";
 <div class="buttons-div">
 <?php require_once "../template/accountMenu.php";?>
 </div>
-
+<br>
 <div class="container" id="container">
     <form action="../reports/" method="post">
         <p>
@@ -30,7 +30,7 @@ require_once "../template/navbarLogged.php";
             <option value="2">Excel</option>
         </select>
         </p>
-
+        <br>
         <p>
             <input id="button-helper" type="submit" value="Download">
         </p>

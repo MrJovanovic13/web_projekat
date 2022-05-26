@@ -23,7 +23,6 @@ require_once "../connection/connection.php";
 
       <?php
 
-
       $cart_total = 0;
       if(isset($_SESSION['cart'])&&count($_SESSION['cart'])!=0)
       {
@@ -57,12 +56,16 @@ require_once "../connection/connection.php";
             <input type='number' name='quantity-1' min='0' max='100' value=".$_SESSION['cart'][$i]->quantity . ">
           </div>
           <!-- total -->
-          <div class='col col-total col-numeric'>
+          <div class='col col-total col-numeric align-center'>
             <p>". $row['price'] * $_SESSION['cart'][$i]->quantity ."$</p>
           </div>
+          <div class='col align-center'>
           <div class='remove button'>
-          <a  href='../controller/cart.php?action=remove&id=" . $row['id'] . "'>
-              <p><button >Remove</button></p> </a>
+              <p><button class='iconButton' >
+              <img class='deleteIcon' src='../images/deleteIcon.png' alt='deleteIcon'>
+              <a  href='../controller/cart.php?action=remove&id=" . $row['id'] . "'>
+              </button></p> </a>
+          </div>
           </div>
           </div>
               ";
@@ -72,9 +75,9 @@ require_once "../connection/connection.php";
         <div class="tf">
         <div class="row layout-inline">
           <div class="col">
-            <p>VAT</p>
+            <p>PRICE</p>
           </div>
-          <div class="col"><?php echo $cart_total ?>$</div>
+          <div class="col">'.$cart_total .'$</div>
         </div>
         <div class="row layout-inline">
           <div class="col">
@@ -86,14 +89,17 @@ require_once "../connection/connection.php";
           <div class="col">
             <p>Total</p>
           </div>
-          <div class="col"><?php echo $cart_total + 10 ?>$</div>
+          <div class="col">' . $cart_total + 10 .'$</div>
         </div>
       </div>';
       echo "
       </div>
       <a href='../checkout/'>
-        <p><button>Checkout</button></p>
+        <p><button id='button-helper'>Checkout</button></p>
       </a>
+      <br>
+      <br>
+      <br>
     </div>";
       }
 

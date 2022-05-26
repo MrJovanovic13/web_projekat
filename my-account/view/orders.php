@@ -23,9 +23,10 @@ if (!isset($_SESSION['userObj'])) {
 require_once "../template/accountMenu.php";
 ?>
 
-    </div>
+    </div><br>
     <div class="container" id="container">
         <table>
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Date</th>
@@ -33,14 +34,28 @@ require_once "../template/accountMenu.php";
                 <th>Status</th>
                 <th>Action</th>
             </tr>
+            </thead>
+            <tbody>
             <?php
             $q = "SELECT `id`, `date`, `user_id`
             FROM `orders`";
 
             $result = $conn->query($q);
             $order_total = 0;
+            $counter = 0;
             echo "<tr>";
+            
             while ($row = $result->fetch_assoc()) {
+
+                    if($counter != 0&&$counter%2==1){
+                      echo '</tr>';
+                      echo '<tr class="highlighted">';
+                    } else {
+                        echo '</tr>';
+                        echo '<tr>';
+                    }
+                $counter++;
+
                 echo "<td>" . $row['id'] . "</td>";
                 echo "<td>" . $row['date'] . "</td>";
 
@@ -71,13 +86,17 @@ require_once "../template/accountMenu.php";
                 echo "<td>" . $row3['name'] . "</td>";
 
                 echo "<td>" .
-                    "<a href='../orders?action=removeOrder&itemId=" . $row['id'] . "'><p><button>Remove</button></p> </a>
-                     <a href='../edit-order?action=editOrder&userId=" . $row['user_id'] . "&orderId=" . $row['id'] . "'><p><button>Edit</button></p> </a>"
+                    "<a href='../orders?action=removeOrder&itemId=" . $row['id'] . "'><p><button class='iconButton'>
+                    <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
+                    </button></p> </a>
+                     <a href='../edit-order?action=editOrder&userId=" . $row['user_id'] . "&orderId=" . $row['id'] . "'><p><button class='iconButton'>
+                     <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
+                     </button></p> </a>"
                     . "</td>";
-                echo "</tr>";
             }
             echo "</tr>";
             ?>
+            </tbody>
         </table>
 
     </div>

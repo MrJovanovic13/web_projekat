@@ -23,7 +23,7 @@ if (!isset($_SESSION['userObj'])) {
 require_once "../template/accountMenu.php";
 ?>
 
-    </div>
+    </div><br>
     <div class="container" id="container">
         <table>
             <tr>

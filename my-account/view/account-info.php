@@ -26,7 +26,7 @@ $userLevel = $user->user_level;
 require_once "../template/accountMenu.php";
 ?>
 
-</div>
+</div><br>
 
 <div class="container" id="container">
         <form action="../account-info/" method="post">
@@ -86,6 +86,7 @@ require_once "../template/accountMenu.php";
                 <input type="password" name="retypePassword">
                 <span class="error"> <?php echo $retypePasswordErr; ?></span>
             </p>
+            <br>
             <p>
                 <input id="button-helper" type="submit" value="Edit user">
                 <input type="hidden" id="userId" name="userId" value="<?php echo $id ?>">

@@ -1,5 +1,6 @@
 <?php
 require_once "../template/navbarLogged.php";
+require_once "../../connection/connection.php";
 
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
@@ -13,6 +14,9 @@ require_once "../template/accountMenu.php";
 
 <div class="container" id="container">
     <table>
+    <form class="menuForm" action="../add-user/">
+    <input class="menuButton" type="submit" value="Add user" />
+</form>
         <tr>
             <th>ID</th>
             <th>Name</th>

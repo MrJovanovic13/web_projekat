@@ -9,7 +9,7 @@ $imgUrl = isset($_POST['imgUrl']) ? $_POST['imgUrl'] : "";
 $category = isset($_POST['category']) ? $_POST['category'] : "";
 
 ?>
-<link rel="stylesheet" href="../../css/add-product.css">
+<link rel="stylesheet" href="../../css/dashboard.css">
 
 <div class="buttons-div">
 <?php

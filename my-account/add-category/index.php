@@ -41,5 +41,5 @@ if (isset($_SESSION['userObj'])) {
         }
     }
 } else {
-    header("Location: ../login/");
+    header("Location: ../../login/");
 }

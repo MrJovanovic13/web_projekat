@@ -1,11 +1,12 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once "../../connection/connection.php";
 require_once "../../controller/user.php";
 $user = unserialize($_SESSION['userObj']);
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $id = isset($_GET['userId']) ? $_GET['userId'] : "";
 

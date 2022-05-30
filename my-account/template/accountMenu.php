@@ -3,9 +3,9 @@
 <?php 
 require_once "../../controller/user.php";
 $user = unserialize($_SESSION['userObj']);
+$userLevel = $user->user_level;    
 
-
-if ($user->user_level==2){
+if ($userLevel==2){
 echo '
 <form class="menuForm" action="../orders/">
     <input class="menuButton" type="submit" value="Orders" />
@@ -22,7 +22,7 @@ echo '
 ';
 }
 
-if ($user->user_level==1){
+if ($userLevel==1){
     echo '
     <form class="menuForm" action="../orders/">
         <input class="menuButton" type="submit" value="Orders" />
@@ -32,7 +32,7 @@ if ($user->user_level==1){
     </form>';
 }
 
-if ($user->user_level==0){
+if ($userLevel==0){
 echo '
 <form class="menuForm" action="../orders/">
     <input class="menuButton" type="submit" value="Orders" />

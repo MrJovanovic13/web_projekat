@@ -22,6 +22,16 @@ if (!isset($_SESSION['userObj']))
     if ($user->user_level==0){
         header("Location: ../account-info/");
     } else {
+        $users = array();
+        $highlightCounter = 0;
+        $q = "SELECT `id`, `name`, `email`
+        FROM `users`";
+
+        $result = $conn->query($q);
+        while ($row = $result->fetch_assoc()) {
+            $userObj = new LightUser($row['id'], $row['name'], $row['email']);
+            $users[] = $userObj;
+        }
         include("../view/users.php");
     }
 }

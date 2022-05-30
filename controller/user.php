@@ -1,10 +1,18 @@
 <?php
-	class LoggedUser{
-		
+	class LightUser {
 		var $id;
 		var $name;
+		var $email;
+
+		function __construct($id,$name,$email){
+			$this->id = $id;
+			$this->name = $name;
+			$this->email= $email;
+	}
+}
+	class LoggedUser extends LightUser{
+		
 		var $surname;
-        var $email;
         var $username;
         var $password;
         var $telephone;
@@ -15,10 +23,9 @@
 		var $dob;
 
 		function __construct($id,$name, $surname,$email,$username,$password,$telephone,$address,$location,$user_level,$postcode,$dob){
-			$this->id = $id;
-			$this->name = $name;
+            parent::__construct($id,$name,$email);
+
 			$this->surname = $surname;
-            $this->email= $email;
 			$this->username = $username;
 			$this->password = $password;
             $this->telephone = $telephone;

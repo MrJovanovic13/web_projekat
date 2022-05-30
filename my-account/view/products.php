@@ -1,6 +1,5 @@
 <?php
 require_once "../template/navbarLogged.php";
-require_once "../../connection/connection.php";
 
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
@@ -31,51 +30,27 @@ require_once "../../connection/connection.php";
             <th>In stock</th>
             <th>Action</th>
         </tr>
-        <?php
-
-        $q = "SELECT `id`, `name`, `category_id`, `price`, `in_stock`
-                FROM `products`";
-
-        $counter = 0;
-        echo "<tr>";
-        $result = $conn->query($q);
-        while ($row = $result->fetch_assoc()) {
-            $stock;
-            if ($row['in_stock']) {
-                $stock = 'yes';
-            } else {
-                $stock = 'no';
-            }
-
-            if ($counter != 0 && $counter % 2 == 1) {
-                echo '</tr>';
-                echo '<tr class="highlighted">';
-            } else {
-                echo '</tr>';
-                echo '<tr>';
-            }
-            $counter++;
-
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['name'] . "</td>";
-
-            $q1 = "SELECT `name` FROM `category` WHERE `id`=" . $row['category_id'];
-            $result1 = $conn->query($q1);
-            $row1 = $result1->fetch_assoc();
-            echo "<td>" . $row1['name'] . "</td>";
-            echo "<td>" . $row['price'] . "</td>";
-            echo "<td>" . $stock . "</td>";
-            echo "<td>" .
-                "<a href='../products?action=deleteProduct&productId=" . $row['id'] . "'><p><button class='iconButton'>
-                <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
-                </button></p> </a>
-                <a href='../edit-product?action=editProduct&productId=" . $row['id'] . "'><p><button class='iconButton'>
-                <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
-                </button></p> </a>"
-                . "</td>";
-        }
-        echo "</tr>";
-        ?>
+        <?php foreach ($products as $product) : ?>
+            <?php if ($highlightCounter++ % 2 == 0) : ?>
+                <tr class="highlighted">
+                <?php else : ?>
+                <tr>
+                <?php endif; ?>
+                <td><?= $product->id ?></td>
+                <td><?= $product->name ?></td>
+                <td><?= $product->category ?></td>
+                <td><?= $product->price ?></td>
+                <td><?= $product->inStock ?></td>
+                <td>
+                    <a href='../products?action=deleteProduct&productId=<?= $product->id ?>'><button class=iconButton>
+                        <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
+                        </button> </a>
+                    <a href='../edit-product?action=editProduct&productId=<?= $product->id ?>'><button class=iconButton>
+                        <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
+                        </button> </a>
+                </td>
+                </tr>
+            <?php endforeach; ?>
     </table>
 </div>
 

@@ -62,8 +62,8 @@ require_once "../connection/connection.php";
           <div class='col align-center'>
           <div class='remove button'>
               <p><button class='iconButton' >
-              <img class='deleteIcon' src='../images/deleteIcon.png' alt='deleteIcon'>
               <a  href='../controller/cart.php?action=remove&id=" . $row['id'] . "'>
+              <img class='deleteIcon' src='../images/deleteIcon.png' alt='deleteIcon'>
               </button></p> </a>
           </div>
           </div>

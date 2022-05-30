@@ -67,6 +67,7 @@ if(isset($_POST["category"])&&$_POST["category"]!=1){ // 1 is the default catego
   if ($result->num_rows > 0) {
     echo '<div class="row">';
     while ($row = $result->fetch_assoc()) {
+      if($row['in_stock']==0){ continue; }
       if($counter%4 == 0){
           if($counter != 0){
             echo '</div>';

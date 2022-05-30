@@ -86,7 +86,7 @@ require_once "../template/accountMenu.php";
                 echo "<td>" . $row3['name'] . "</td>";
 
                 echo "<td>" .
-                    "<a href='../orders?action=removeOrder&itemId=" . $row['id'] . "'><p><button class='iconButton'>
+                    "<a href='../orders?action=removeOrder&orderId=" . $row['id'] . "'><p><button class='iconButton'>
                     <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
                     </button></p> </a>
                      <a href='../edit-order?action=editOrder&userId=" . $row['user_id'] . "&orderId=" . $row['id'] . "'><p><button class='iconButton'>

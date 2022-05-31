@@ -13,11 +13,11 @@ $result = $conn->query($q);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         if (isset($_POST["category"]) && $_POST["category"] == $row["id"]) {
-            $categoryObj = new Category($row['id'], $row['name'], 1);
+            $categoryObj = new CategoryProduct($row['id'], $row['name'], 1);
             $categories[] = $categoryObj;
             continue;
         }
-        $categoryObj = new Category($row['id'], $row['name'], 0);
+        $categoryObj = new CategoryProduct($row['id'], $row['name'], 0);
         $categories[] = $categoryObj;
     }
 } else {

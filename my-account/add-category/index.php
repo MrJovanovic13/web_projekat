@@ -1,9 +1,13 @@
 <?php
 require_once "../../connection/connection.php";
+$action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
+
 
 session_start();
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
+
+
         include("../view/add-category.php");
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
         function test_input($data)
@@ -37,7 +41,7 @@ if (isset($_SESSION['userObj'])) {
             $q = "INSERT INTO `category`(`name`) 
                             VALUES ('$name')";
             $conn->query($q);
-            header("Location: ../add-category/");
+            header("Location: ../categories/");
         }
     }
 } else {

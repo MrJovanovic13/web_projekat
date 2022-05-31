@@ -11,20 +11,17 @@ require_once "../template/navbarLogged.php";
 </div><br>
 
 <div class="container" id="container">
-    <div class="buttons-div-second">
-        <form class="menuForm" action="../categories/">
-            <input class="menuButton" type="submit" value="Categories" />
-        </form>
-    </div>
-    <br>
-    <form action="../add-category/" method="post">
+    <form action="../edit-category/" method="post">
         <p>
             Name:
             <input type="text" name="name" value="<?php if (isset($name)) echo $name; ?>">
             <span class="error"> <?php if (isset($nameErr)) echo "<span style='color:red;'>" . $nameErr . "</span>"; ?></span>
         </p>
+        <p>
+            <input type="hidden" name="categoryId" value="<?php echo $categoryId; ?>">
+        </p>
         <br>
-        <input id="button-helper" type="submit" value="Add category">
+        <input id="button-helper" type="submit" value="Edit product">
         </p>
     </form>
 </div>

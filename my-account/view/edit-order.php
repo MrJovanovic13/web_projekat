@@ -13,7 +13,6 @@ require_once "../template/navbarLogged.php";
     <div class="container" id="container">
         Delivery information:
 
-
         <br>
         <?= $orderUser->name ?> <br>
         <?= $orderUser->surname ?> <br>
@@ -45,35 +44,28 @@ require_once "../template/navbarLogged.php";
         <hr>
         Order total:<?= $cartTotal + 10 ?>$
         <hr>
-        Order status:<?= $status ?>
+        Order status:<?= $orderStatus ?>
         <?php
 
         ?>
         <?php if ($userLevel != 0) : ?>
             <form action="../edit-order/controller.php" method="POST">
                 <select id="orderStatus" name="orderStatus">
-                <?php endif; ?>
-                <?php
-                $q = "SELECT `id`, `name` 
-                FROM `status`";
+                <?php foreach ($orderStatusList as $status) : ?>
 
-                $result = $conn->query($q);
+                    <?php if ($status->name == $orderStatus) : ?>
+                        <option selected value=<?= $status->id ?>><?= $status->name ?></option>
+                    <?php else : ?>
+                        <option value=<?= $status->id ?>><?= $status->name ?></option>
+                    <?php endif; ?>
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        if ($row["id"] == $row3["id"]) {
-                            echo "<option selected value=" . $row["id"] . ">" . $row["name"] . "</option>";
-                            continue;
-                        }
-                        echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
-                    }
-                }
-                ?>
+                <?php endforeach; ?>
                 </select>
                 <input type="hidden" name="orderId" value="<?= $orderId ?>">
                 <br>
                 <button type="submit">Edit</button>
-            </form>'
+            </form>
+        <?php endif; ?>
     </div>
 </body>
 <?php

@@ -3,6 +3,7 @@ require_once "../../connection/connection.php";
 require_once "../../controller/user.php";
 require_once "../../controller/product.php";
 require_once "../../controller/cartL.php";
+require_once "../../controller/orderStatus.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -31,34 +32,45 @@ if (!isset($_SESSION['userObj'])) {
     $orderCart = array();
     $i = 0;
     while ($row = $result->fetch_assoc()) {
-        $orderCart[$i] = new CartL($row['product_id'], $row['amount']);
+        $orderCart[] = new CartL($row['product_id'], $row['amount']);
         $i++;
     }
 
     $cartTotal = 0;
     $cartProducts = array();
-    $status;
+    $orderStatus;
+    $orderStatusList = array();
 
     for ($i = 0; $i < count($orderCart); $i++) {
-        if (isset($_SESSION['orderCart'][$i])) {
-            $cart_item_id = $orderCart[$i]->id;
-            $q = "SELECT `id`, `name`, `price`
+        $cartItemId = $orderCart[$i]->id;
+        $q = "SELECT `id`, `name`, `price`
                 FROM `products`
-                WHERE `id`=$cart_item_id";
-            $result = $conn->query($q);
-            $row = $result->fetch_assoc();
+                WHERE `id`=$cartItemId";
+        $result = $conn->query($q);
+        $row = $result->fetch_assoc();
 
-            $productObj = new OrderProduct($row['id'],$row['name'],$row['price'],$orderCart[$i]->quantity);
-            $cartProducts[] = $productObj;
-            $cartTotal += $row['price'] * $orderCart[$i]->quantity;
-        }
+        $productObj = new OrderProduct($row['id'], $row['name'], $row['price'], $orderCart[$i]->quantity);
+        $cartProducts[] = $productObj;
+        
+        $cartTotal += $row['price'] * $orderCart[$i]->quantity;
         $q3 = "SELECT `status`.`id`,`date`,`time`, `status`.`name` FROM `order_status` 
                 INNER JOIN `status` ON `order_status`.`status_id` = `status`.`id`
                 WHERE `order_status`.`order_id`=" . $orderId . "
                 ORDER BY `date` DESC, `time` DESC";
         $result3 = $conn->query($q3);
         $row3 = $result3->fetch_assoc();
-        $status = $row3['name'];
+        $orderStatus = $row3['name'];
+    }
+
+    $q = "SELECT `id`, `name` 
+    FROM `status`";
+
+    $result = $conn->query($q);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $orderStatusList[] = new OrderStatus($row['id'], $row['name']);
+        }
     }
     include("../view/edit-order.php");
 }

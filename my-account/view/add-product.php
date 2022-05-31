@@ -63,6 +63,9 @@ require_once "../template/accountMenu.php";
                     echo "<option selected disabled hidden style='display: none' value=''></option>"; // makes default category blank IF we are not editing product
                 }
                 while ($row = $result->fetch_assoc()) {
+                    if($row["name"]==$category){
+                        echo "<option selected value=" . $row["id"] . ">" . $row["name"] . "</option>";
+                    }
                     echo "<option value=" . $row["id"] . ">" . $row["name"] . "</option>";
                 }
             } else {

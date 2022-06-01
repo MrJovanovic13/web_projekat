@@ -9,8 +9,6 @@ body {
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: -20px 0 50px;
 }
 
 h1 {
@@ -181,3 +179,7 @@ input {
 .container.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
+
+.shell {
+	min-height: 66.5vh;
+  }

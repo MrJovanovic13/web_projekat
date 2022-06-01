@@ -36,7 +36,6 @@ if ($result->num_rows > 0) {
       $result = $conn->query($q);
 
       if ($result->num_rows > 0) {
-        echo '<div class="row">';
         while ($row = $result->fetch_assoc()) {
           if ($row['in_stock'] == 0) {
             continue;

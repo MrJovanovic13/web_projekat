@@ -1,9 +1,12 @@
 <?php
 require_once "../connection/connection.php";
+require_once "../controller/user.php";
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
+
+    
     include("../view/registration.php");
 } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
     function test_input($data)
@@ -130,13 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     } else {
         $dob = test_input($_POST["dob"]);
     }
-
-    /*$terms = false;
-        if (isset($_POST["terms"]) && $_POST["terms"] == "Yes") {
-            $terms = true;
-        } else {
-            $termsErr = "You must accept TOS";
-        }*/
 
     if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($passwordErr) || isset($retypePasswordErr) || isset($telephoneErr) || isset($usernameErr)|| isset($addressErr)|| isset($postcodeErr)|| isset($dobErr)) {
         include_once('../view/registration.php');

@@ -81,6 +81,7 @@ require_once "../template/navbar.php";
     <?php endif; ?>
     </div>
   </div>
+        </div>
   <?php
   include_once "../template/footer.php";
   ?>

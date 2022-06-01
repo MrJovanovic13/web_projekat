@@ -67,7 +67,7 @@ require_once "../template/navbar.php";
 
       </div>
     </div>
-
+          </div>
 </body>
 <?php
 require_once "../template/footer.php";

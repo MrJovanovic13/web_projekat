@@ -29,7 +29,7 @@ if (!isset($_SESSION['userObj'])) {
                 </a></li>
         </div>
         <div class="right-navbar">
-            <li><a href="../../home/">Home </a></li>
+            <li><a href="../../products/">Home </a></li>
             <li><a href="../../products/">Products</a></li>
             <li><a href="../../cart/">Cart</a></li>
             <li><a href="../../my-account/">My account</a></li>

@@ -1,12 +1,12 @@
 <?php
 require_once "../../connection/connection.php";
-
+require_once "../../controller/user.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
-$id = isset($_GET['userId']) ? $_GET['userId'] : "";
+$id = isset($_GET['userId']) ? $_GET['userId'] : $_POST['userId'];
 
 if (!isset($_SESSION['userObj'])) {
     header("Location: ../../login");
@@ -19,6 +19,8 @@ if (!isset($_SESSION['userObj'])) {
             WHERE `id`=" . $id;
             $result = $conn->query($q);
             $row = $result->fetch_assoc();
+
+            $addUser = new LoggedUser($row['id'], $row['name'], $row['surname'], $row['email'], $row['username'], "", $row['phone_number'], $row['address'], $row['location'], $row['user_level'], $row['postcode'], $row['dob']);
             include("../view/edit-user.php");
         }
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -121,17 +123,41 @@ if (!isset($_SESSION['userObj'])) {
             $dob = test_input($_POST["dob"]);
         }
 
+        //userLevel validation
+        if (!isset($_POST["userLevelUser"])) {
+            $userLevelUserErr = "You must input this field!";
+        } elseif ($_POST['userLevelUser'] != 0 && $_POST['userLevelUser'] != 1 && $_POST['userLevelUser'] != 2) {
+            $userLevelUserErr = "Invalid user level!";
+        } else {
+            $userLevelUser = test_input($_POST["userLevelUser"]);
+        }
+
         if (empty($_POST["userLevel"])) {
             $userLevelErr = "You must input this field";
         } else {
             $userLevel = test_input($_POST["userLevel"]);
         }
 
-        if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($telephoneErr) || isset($usernameErr)|| isset($addressErr)|| isset($postcodeErr)|| isset($dobErr)) {
+        if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($telephoneErr) || isset($usernameErr) || isset($addressErr) || isset($postcodeErr) || isset($dobErr) || isset($userLevelUserErr)) {
+
+            $name = isset($_POST['name']) ? $_POST['name'] : "";
+            $surname = isset($_POST['surname']) ? $_POST['surname'] : "";
+            $email = isset($_POST['email']) ? $_POST['email'] : "";
+            $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
+            $username = isset($_POST['username']) ? $_POST['username'] : "";
+            $address = isset($_POST['address']) ? $_POST['address'] : "";
+            $location = isset($_POST['location']) ? $_POST['location'] : "";
+            $postcode = isset($_POST['postcode']) ? $_POST['postcode'] : "";
+            $dob = isset($_POST['dob']) ? $_POST['dob'] : "";
+            $userLevelUser = isset($_POST['userLevelUser']) ? $_POST['userLevelUser'] : "";
+            $password = isset($_POST['password']) ? $_POST['password'] : "";
+            $retypePassword = isset($_POST['retypePassword']) ? $_POST['retypePassword'] : "";
+    
+            $addUser = new LoggedUser(0, $name, $surname, $email, $username, $password,$telephone, $address, $location, $userLevelUser, $postcode, $dob);
             include_once('../view/edit-user.php');
         } else {
             $password = sha1($password);
-            
+
             $q = "UPDATE `users` SET `name` = '$name', `surname` = '$surname', `email` = '$email', `username` = '$username', `phone_number` = '$telephone', `address` = '$address', `location` = '$location', `user_level` = '$userLevel', `postcode` = '$postcode', `dob` = '$dob'
             WHERE `id` = $userId";
             $conn->query($q);

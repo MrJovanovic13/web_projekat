@@ -18,11 +18,11 @@
         var $telephone;
         var $address;
         var $location;
-		var $user_level;
+		var $userLevel;
 		var $postcode;
 		var $dob;
 
-		function __construct($id,$name, $surname,$email,$username,$password,$telephone,$address,$location,$user_level,$postcode,$dob){
+		function __construct($id,$name, $surname,$email,$username,$password,$telephone,$address,$location,$userLevel,$postcode,$dob){
             parent::__construct($id,$name,$email);
 
 			$this->surname = $surname;
@@ -31,7 +31,7 @@
             $this->telephone = $telephone;
 			$this->address = $address;
             $this->location = $location;
-			$this->user_level = $user_level;
+			$this->userLevel = $userLevel;
 			$this->postcode = $postcode;
 			$this->dob = $dob;
 		}

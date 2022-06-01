@@ -1,8 +1,5 @@
 <?php
 require_once "../template/navbarLogged.php";
-
-$nameErr = $locationErr = $postcodeErr = $addressErr = $emailErr = $telephoneErr = $surnameErr  = $usernameErr = $userLevelErr = $passwordErr = $retypePasswordErr = "";
-
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
 <div class="shell">
@@ -19,63 +16,63 @@ $nameErr = $locationErr = $postcodeErr = $addressErr = $emailErr = $telephoneErr
 
             <p>
                 Name:
-                <input type="text" name="name" value="<?php echo $row['name']; ?>">
-                <span class="error"> <?php echo $nameErr; ?></span>
+                <input type="text" name="name" value="<?= $addUser->name ?>">
+                <span class="error"> <?php if (isset($nameErr)) : ?><span><?= $nameErr ?> <?php endif ?></span>
             </p>
             <p>
                 Surname:
-                <input type="text" name="surname" value="<?php echo $row['surname']; ?>">
-                <span class="error"> <?php echo $surnameErr; ?></span>
+                <input type="text" name="surname" value="<?= $addUser->surname ?>">
+                <span class="error"> <?php if (isset($surnameErr)) : ?><span><?= $surnameErr ?> <?php endif ?></span>
             </p>
             <p>
                 Email:
-                <input type="text" name="email" value="<?php echo $row['email'] ?>">
-                <span class="error"> <?php echo $emailErr; ?></span>
+                <input type="text" name="email" value="<?= $addUser->email ?>">
+                <span class="error"> <?php if (isset($emailErr)) : ?><span><?= $emailErr ?> <?php endif ?></span>
             </p>
             <p>
                 Telephone number:
-                <input type="text" name="telephone" value="<?php echo $row['phone_number']; ?>">
-                <span class="error"> <?php echo $telephoneErr; ?></span>
+                <input type="text" name="telephone" value="<?= $addUser->telephone ?>">
+                <span class="error"> <?php if (isset($telephoneErr)) : ?><span><?= $telephoneErr ?> <?php endif ?></span>
             </p>
             <p>
                 Username:
-                <input type="text" name="username" value="<?php echo $row['username']; ?>">
-                <span class="error"> <?php echo $usernameErr; ?></span>
+                <input type="text" name="username" value="<?= $addUser->username ?>">
+                <span class="error"> <?php if (isset($usernameErr)) : ?><span><?= $usernameErr ?> <?php endif ?></span>
             </p>
             <p>
                 Address:
-                <input type="text" name="address" value="<?php echo $row['address']; ?>">
-                <span class="error"> <?php echo $addressErr; ?></span>
+                <input type="text" name="address" value="<?= $addUser->address ?>">
+                <span class="error"> <?php if (isset($addressErr)) : ?><span><?= $addressErr ?> <?php endif ?></span>
             </p>
             <p>
                 Location:
-                <input type="text" name="location" value="<?php echo $row['location']; ?>">
-                <span class="error"> <?php echo $locationErr; ?></span>
+                <input type="text" name="location" value="<?= $addUser->location ?>">
+                <span class="error"> <?php if (isset($locationErr)) : ?><span><?= $locationErr ?> <?php endif ?></span>
+            </p>
+            <p>
+                User level: (0=Regular user, 1=Manager, 2=Admin)
+                <input type="text" name="userLevelUser" value="<?= $addUser->userLevel ?>">
+                <span class="error"> <?php if (isset($userLevelUserErr)) : ?><span><?= $userLevelUserErr ?> <?php endif ?></span>
             </p>
             <p>
                 Postcode:
-                <input type="text" name="postcode" value="<?php echo $row['postcode']; ?>">
-                <span class="error"> <?php echo $postcodeErr; ?></span>
-            </p>
-            <p>
-                User level:
-                <input type="text" name="userLevel" value="<?php echo $row['user_level']; ?>">
-                <span class="error"> <?php echo $userLevelErr; ?></span>
+                <input type="text" name="postcode" value="<?= $addUser->postcode ?>">
+                <span class="error"> <?php if (isset($postcodeErr)) : ?><span><?= $postcodeErr ?> <?php endif ?></span>
             </p>
             <p>
                 Data of birth:
-                <input type="date" name="dob" value="<?php echo $row['dob']; ?>">
-                <span class="error"><?php if (isset($dobErr)) echo "<i class='fas fa-exclamation-circle mr-1'></i>" . $dobErr; ?></span>
+                <input type="date" name="dob" value="<?= $addUser->dob ?>">
+                <span class="error"> <?php if (isset($dobErr)) : ?><span><?= $dobErr ?> <?php endif ?></span>
             </p>
             <p>
                 Password:
-                <input type="password" name="password" value="<?php  ?>">
-                <span class="error"> <?php echo $passwordErr; ?></span>
+                <input type="password" name="password" value="<?= $addUser->password ?>">
+                <span class="error"> <?php if (isset($passwordErr)) : ?><span><?= $passwordErr ?> <?php endif ?></span>
             </p>
             <p>
                 Retype password:
                 <input type="password" name="retypePassword">
-                <span class="error"> <?php echo $retypePasswordErr; ?></span>
+                <span class="error"> <?php if (isset($retypePasswordErr)) : ?><span><?= $retypePasswordErr ?> <?php endif ?></span>
             </p>
             <br>
             <p>

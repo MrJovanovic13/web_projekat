@@ -83,7 +83,7 @@ if (!isset($_SESSION['userObj'])) {
             $result = $conn->query($q);
 
             if ($result->num_rows > 0) {
-                $emailErr = "Username already in use!";
+                $usernameErr = "Username already in use!";
             }
         }
         //telephone name validation

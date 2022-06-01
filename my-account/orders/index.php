@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $orderTotal = 0;
 
     $user = unserialize($_SESSION['userObj']);
-    if ($user->user_level == 0) {
+    if ($user->userLevel == 0) {
 
         $q = "SELECT `id`, `date`, `user_id`
             FROM `orders`

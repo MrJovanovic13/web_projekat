@@ -31,7 +31,7 @@ require_once "../template/navbar.php";
             <?php endif ?>
           <?php endforeach; ?>
         </select>
-        <?php if (isset($categoryErr)) echo "<span style='color:red;'>" . $categoryErr . "</span>"; ?>
+        <?php if (isset($categoryErr)) : ?><span><?= $categoryErr ?> <?php endif ?></span>
       </form>
     </div>
 

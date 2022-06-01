@@ -118,7 +118,6 @@ a.buy-btn{
   border-radius:50%;
   border:1px solid #212121;
   transition: all 0.2s ease-in-out;
-  padding-top: 5px;
 }
 a.buy-btn:hover , a.buy-btn:active, a.buy-btn:focus{
   border-color: #FF9800;

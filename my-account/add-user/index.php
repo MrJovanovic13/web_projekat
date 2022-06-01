@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $result = $conn->query($q);
 
         if ($result->num_rows > 0) {
-            $emailErr = "Username already in use!";
+            $usernameErr = "Username already in use!";
         }
     }
 

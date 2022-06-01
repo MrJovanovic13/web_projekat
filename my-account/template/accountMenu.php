@@ -3,7 +3,7 @@
 <?php 
 require_once "../../controller/user.php";
 $user = unserialize($_SESSION['userObj']);
-$userLevel = $user->user_level;    
+$userLevel = $user->userLevel;    
 
 if ($userLevel==2){
 echo '

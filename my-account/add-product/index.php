@@ -1,36 +1,38 @@
 <?php
 require_once "../../connection/connection.php";
 require_once "../../controller/category.php";
+require_once "../../controller/product.php";
 
 session_start();
 if (isset($_SESSION['userObj'])) {
+
+    $categories = array();
+$skipFirst = 0;
+
+$q = "SELECT `id`, `name` FROM `category`";
+
+$result = $conn->query($q);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if (!$skipFirst++) {
+            continue;
+        }
+        if (isset($_POST["category"]) && $_POST["category"] == $row["id"]) {
+            $categoryObj = new CategoryProduct($row['id'], $row['name'],1);
+            $categories[] = $categoryObj;
+            continue;
+        }
+        $categoryObj = new CategoryProduct($row['id'], $row['name'],0);
+        $categories[] = $categoryObj;
+    }
+} else {
+    $categoryErr = "No categories";
+}
+
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         
-        $categories = array();
-        $skipFirst = 0;
-        
-        $q = "SELECT `id`, `name` FROM `category`";
-
-        $result = $conn->query($q);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                if (!$skipFirst++) {
-                    continue;
-                }
-                if (isset($_POST["category"]) && $_POST["category"] == $row["id"]) {
-                    $categoryObj = new CategoryProduct($row['id'], $row['name'],1);
-                    $categories[] = $categoryObj;
-                    continue;
-                }
-                $categoryObj = new CategoryProduct($row['id'], $row['name'],0);
-                $categories[] = $categoryObj;
-            }
-        } else {
-            $categoryErr = "No categories";
-        }
-
-
+        $addProduct = new EditProduct("", "", "", "", "","");
         include("../view/add-product.php");
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
         function test_input($data)
@@ -76,10 +78,10 @@ if (isset($_SESSION['userObj'])) {
             $category = test_input($_POST["category"]);
         }
 
-        if (empty($_POST["stock"])) {
+        if (!isset($_POST["stock"])) {
             $stockErr = "You must select one!";
         } else {
-            $in_stock = $_POST["stock"];
+            $inStock = $_POST["stock"];
         }
 
         if (empty($_POST["category"])) {
@@ -93,13 +95,14 @@ if (isset($_SESSION['userObj'])) {
             $name = isset($_POST['name']) ? $_POST['name'] : "";
             $description = isset($_POST['description']) ? $_POST['description'] : "";
             $price = isset($_POST['price']) ? $_POST['price'] : "";
+            $stock = isset($_POST['stock']) ? $_POST['stock'] : "";
             $imgUrl = isset($_POST['imgUrl']) ? $_POST['imgUrl'] : "";
             $category = isset($_POST['category']) ? $_POST['category'] : "";
+            $addProduct = new EditProduct(0, $name, $price, $imgUrl, $description,$stock);
             include_once('../view/add-product.php');
-            
         } else {
                 $q = "INSERT INTO `products`(`name`,`description`, `price`, `imgUrl`, `in_stock`, `category_id`) 
-                VALUES ('$name', '$description', '$price', '$imgUrl', '$in_stock', '$category')";
+                VALUES ('$name', '$description', '$price', '$imgUrl', '$inStock', '$category')";
                 $conn->query($q);
                 header("Location: ../products/");
         }

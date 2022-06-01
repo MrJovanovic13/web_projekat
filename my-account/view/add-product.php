@@ -24,35 +24,34 @@ require_once "../../connection/connection.php";
 
         <p>
             Name:
-            <input type="text" name="name" value="<?php if (isset($name)) echo $name; ?>">
-            <span class="error"> <?php if (isset($nameErr)) echo "<span style='color:red;'>" . $nameErr . "</span>"; ?></span>
+            <input type="text" name="name" value="<?= $addProduct->name?>">
+            <span class="error"> <?php if (isset($nameErr)): ?><span><?=$nameErr?> <?php endif ?></span>
         </p>
         <p>
             Description:
-            <input type="text" name="description" value="<?php if (isset($description)) echo $description; ?>">
-            <span class="error"> <?php if (isset($descriptionErr)) echo "<span style='color:red;'>" . $descriptionErr . "</span>"; ?></span>
+            <input type="text" name="description" value="<?= $addProduct->description?>">
+            <span class="error"> <?php if (isset($descriptionErr)): ?><span><?=$descriptionErr?> <?php endif ?></span>
         </p>
         <p>
             Price:
-            <input type="number" name="price" value="<?php if (isset($price)) echo $price; ?>">
-            <span class="error"> <?php if (isset($priceErr)) echo "<span style='color:red;'>" . $priceErr . "</span>";  ?></span>
+            <input type="number" name="price" value="<?= $addProduct->price?>">
+            <span class="error"> <?php if (isset($priceErr)): ?><span><?=$priceErr?> <?php endif ?></span>
         </p>
         <p>
             Image filename: (assumes that image is in the images folder)
-            <input type="text" name="imgUrl" value="<?php if (isset($imgUrl)) echo $imgUrl; ?>">
-            <span class="error"> <?php if (isset($imgUrlErr)) echo "<span style='color:red;'>" . $imgUrlErr . "</span>"; ?></span>
+            <input type="text" name="imgUrl" value="<?= $addProduct->imgUrl?>">
+            <span class="error"> <?php if (isset($imgUrlErr)): ?><span><?=$imgUrlErr?> <?php endif ?></span>
         </p>
 
         <p>
             Product in stock?
         </p>
         <p>
-            <input type="radio" id="yes" name="stock" value="1" <?php if (isset($stock) && $stock) echo "checked='checked'"; ?>>
+            <input type="radio" id="yes" name="stock" value="1" <?php if($addProduct->inStock):?> checked <?php endif ?>>
             <label for="yes">Yes</label>
-
-            <input type="radio" id="no" name="stock" value="0" <?php if (isset($stock) && !$stock) echo "checked='checked'"; ?>>
+            <input type="radio" id="no" name="stock" value="0" <?php if(!$addProduct->inStock):?> checked <?php endif ?>>
             <label for="no">No</label>
-            <?php if (isset($stockErr)) echo "<span style='color:red;'>" . $stockErr . "</span>"; ?>
+            <span class="error"> <?php if (isset($stockErr)): ?><span><?=$stockErr?> <?php endif ?> </span>
         </p>
 
         <label for="category">Choose a category:</label>
@@ -71,7 +70,6 @@ require_once "../../connection/connection.php";
         <!--First br does nothing for some reason, so i put another one. -->
         <p>
             <input id="button-helper" type="submit" value="Add product">
-            <input type="hidden" name="updateType" value="Add product">
         </p>
 
     </form>

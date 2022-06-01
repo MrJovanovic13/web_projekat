@@ -22,6 +22,16 @@
             $this->description = $description;
         }
     }
+    class EditProduct extends ShopProduct{
+
+        var $inStock;
+
+        function __construct($id,$name,$price,$imgUrl,$description,$inStock)
+        {
+            parent::__construct($id,$name,$price,$imgUrl,$description);
+            $this->inStock = $inStock;
+        }
+    }
     class OrderProduct extends Product{
         var $quantity;
 

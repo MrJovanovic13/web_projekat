@@ -25,9 +25,9 @@ require_once "../template/navbar.php";
         <select id="category" name="category" size="0" onchange="this.form.submit()">
           <?php foreach ($categories as $category) : ?>
             <?php if ($category->selected) : ?>
-              <option value=<?= $category->id ?> selected><?= $category->name ?></option>";
+              <option value=<?= $category->id ?> selected><?= $category->name ?></option>
             <?php else : ?>
-              <option value=<?= $category->id ?>><?= $category->name ?></option>";
+              <option value=<?= $category->id ?>><?= $category->name ?></option>
             <?php endif ?>
           <?php endforeach; ?>
         </select>
@@ -36,7 +36,7 @@ require_once "../template/navbar.php";
     </div>
 
     <div class="container">
-      <div class="row">'
+      <div class="row">
         <?php foreach ($products as $product) : ?>
           <?php if ($counter % 4 == 0 && $counter != 0) : ?>
       </div>

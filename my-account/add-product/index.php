@@ -1,10 +1,36 @@
 <?php
 require_once "../../connection/connection.php";
+require_once "../../controller/category.php";
 
 session_start();
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
-        $switchUpdate = 'Add product';
+        
+        $categories = array();
+        $skipFirst = 0;
+        
+        $q = "SELECT `id`, `name` FROM `category`";
+
+        $result = $conn->query($q);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if (!$skipFirst++) {
+                    continue;
+                }
+                if (isset($_POST["category"]) && $_POST["category"] == $row["id"]) {
+                    $categoryObj = new CategoryProduct($row['id'], $row['name'],1);
+                    $categories[] = $categoryObj;
+                    continue;
+                }
+                $categoryObj = new CategoryProduct($row['id'], $row['name'],0);
+                $categories[] = $categoryObj;
+            }
+        } else {
+            $categoryErr = "No categories";
+        }
+
+
         include("../view/add-product.php");
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
         function test_input($data)
@@ -46,7 +72,7 @@ if (isset($_SESSION['userObj'])) {
         //Category validation
         if (empty($_POST["category"])) {
             $categoryErr = "You must input this field!";
-        } elseif($_POST["category"]==1) {
+        } elseif ($_POST["category"] == 1) {
             $category = test_input($_POST["category"]);
         }
 
@@ -62,7 +88,7 @@ if (isset($_SESSION['userObj'])) {
             $category = $_POST["category"];
         }
 
-        if (isset($nameErr) || isset($descriptionErr) || isset($priceErr) || isset($imgUrlErr) || isset($categoryErr)){
+        if (isset($nameErr) || isset($descriptionErr) || isset($priceErr) || isset($imgUrlErr) || isset($categoryErr)) {
             $name = isset($_POST['name']) ? $_POST['name'] : "";
             $description = isset($_POST['description']) ? $_POST['description'] : "";
             $price = isset($_POST['price']) ? $_POST['price'] : "";
@@ -71,14 +97,14 @@ if (isset($_SESSION['userObj'])) {
             $switchUpdate = 'Add product';
             include_once('../view/add-product.php');
         } else {
-            if($_POST['updateType']=='Add product'){
+            if ($_POST['updateType'] == 'Add product') {
                 $q = "INSERT INTO `products`(`name`,`description`, `price`, `imgUrl`, `in_stock`, `category_id`) 
                 VALUES ('$name', '$description', '$price', '$imgUrl', '$in_stock', '$category')";
                 $conn->query($q);
                 header("Location: ../products/");
             } else {
                 $q = "UPDATE `products` SET `name` = '$name', `description` = '$description', `price` = '$price', `imgUrl` = '$imgUrl', `in_stock` = '$in_stock', `category_id` = '$category'
-                WHERE `id` =". $_POST['productId'];
+                WHERE `id` =" . $_POST['productId'];
                 $conn->query($q);
                 header("Location: ../products/");
             }

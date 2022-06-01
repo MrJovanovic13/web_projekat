@@ -65,16 +65,13 @@ require_once "../../connection/connection.php";
                 <?php endif ?>
             <?php endforeach; ?>
         </select>
-        <?php if (isset($categoryErr)) echo "<span style='color:red;'>" . $categoryErr . "</span>"; ?>
+        <?php if (isset($categoryErr)): ?><span><?=$categoryErr?> <?php endif ?>
         <br>
         <br>
         <!--First br does nothing for some reason, so i put another one. -->
         <p>
             <input id="button-helper" type="submit" value="Add product">
             <input type="hidden" name="updateType" value="Add product">
-            <input type="hidden" id="productId" name="productId" value="<?php if (isset($id)) {
-                                                                            echo $id;
-                                                                        } ?>">
         </p>
 
     </form>

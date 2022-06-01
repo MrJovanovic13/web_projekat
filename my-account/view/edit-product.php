@@ -19,38 +19,38 @@ require_once "../template/navbarLogged.php";
     </div>
     <br>
 
-    <form action="../add-product/" method="post">
+    <form action="../edit-product/" method="post">
 
         <p>
             Name:
             <input type="text" name="name" value="<?= $editProduct->name?>">
-            <span class="error"> <?php if (isset($nameErr)) echo "<span style='color:red;'>" . $nameErr . "</span>"; ?></span>
+            <span class="error"> <?php if (isset($nameErr)): ?><span><?=$nameErr?> <?php endif ?></span>
         </p>
         <p>
             Description:
             <input type="text" name="description" value="<?= $editProduct->description?>">
-            <span class="error"> <?php if (isset($descriptionErr)) echo "<span style='color:red;'>" . $descriptionErr . "</span>"; ?></span>
+            <span class="error"> <?php if (isset($descriptionErr)): ?><span><?=$descriptionErr?> <?php endif ?></span>
         </p>
         <p>
             Price:
             <input type="number" name="price" value="<?= $editProduct->price?>">
-            <span class="error"> <?php if (isset($priceErr)) echo "<span style='color:red;'>" . $priceErr . "</span>";  ?></span>
+            <span class="error"> <?php if (isset($priceErr)): ?><span><?=$priceErr?> <?php endif ?></span>
         </p>
         <p>
             Image filename: (assumes that image is in the images folder)
             <input type="text" name="imgUrl" value="<?= $editProduct->imgUrl?>">
-            <span class="error"> <?php if (isset($imgUrlErr)) echo "<span style='color:red;'>" . $imgUrlErr . "</span>"; ?></span>
+            <span class="error"> <?php if (isset($imgUrlErr)): ?><span><?=$imgUrlErr?> <?php endif ?></span>
         </p>
 
         <p>
             Product in stock?
         </p>
         <p>
-            <input type="radio" id="yes" name="stock" value="1" <?php if($editProduct->inStock):?> checked='checked' <?php endif ?>>
+            <input type="radio" name="stock" value="1" <?php if($editProduct->inStock):?> checked <?php endif ?>>
             <label for="yes">Yes</label>
-            <input type="radio" id="no" name="stock" value="0" <?php if(!$editProduct->inStock):?> checked='checked' <?php endif ?>>
+            <input type="radio" name="stock" value="0" <?php if(!$editProduct->inStock):?> checked <?php endif ?>>
             <label for="no">No</label>
-            <?php if (isset($stockErr)) echo "<span style='color:red;'>" . $stockErr . "</span>"; ?>
+            <?php if (isset($stockErr)): ?><span><?=$stockErr?> <?php endif ?> 
         </p>
 
         <label for="category">Choose a category:</label>
@@ -63,14 +63,13 @@ require_once "../template/navbarLogged.php";
                 <?php endif ?>
             <?php endforeach; ?>
         </select>
-        <?php if (isset($categoryErr)) echo "<span style='color:red;'>" . $categoryErr . "</span>"; ?>
+        <?php if (isset($categoryErr)): ?><span><?=$categoryErr?> <?php endif ?>
         <br>
         <br>
         <!--First br does nothing for some reason, so i put another one. -->
-        <p>
+        <p> 
             <input id="button-helper" type="submit" value="Edit product">
-            <input type="hidden" name="updateType" value="Edit product">
-            <input type="hidden" id="productId" name="productId" value="<?php if (isset($id)) { echo $id; } ?>">
+            <input type="hidden" id="productId" name="productId" value="<?php if (isset($id)): ?><?=$id?> <?php endif ?>">
         </p>
 
     </form>

@@ -4,7 +4,7 @@ require_once "../../connection/connection.php";
 session_start();
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
-        include("../view/dashboard.php");
+        include("../orders/");
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
         function test_input($data)
         {

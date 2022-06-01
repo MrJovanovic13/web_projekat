@@ -1,5 +1,6 @@
 <?php
 require_once "../../connection/connection.php";
+require_once "../../controller/user.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -13,13 +14,10 @@ if (!isset($_SESSION['userObj'])) {
     die();
 } else {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
-        if ($action == 'editUser') {
-            $q = "SELECT `id`, `name`, `surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`
-            FROM `users`
-            WHERE `id`=" . $id;
-            $result = $conn->query($q);
-            $row = $result->fetch_assoc();
-        }
+        $user = unserialize($_SESSION['userObj']);
+
+        $nameErr = $locationErr = $postcodeErr = $addressErr = $emailErr = $telephoneErr = $surnameErr  = $usernameErr = $userLevelErr = $passwordErr = $retypePasswordErr = "";
+
         include("../view/account-info.php");
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
         function test_input($data)
@@ -29,11 +27,12 @@ if (!isset($_SESSION['userObj'])) {
             $data = htmlspecialchars($data);
             return $data;
         }
+
         $userId = $_POST["userId"];
 
         // email validation
         if (empty($_POST["email"])) {
-            $emailErr = "You must input this field";
+            $emailErr = "You must input this field!";
         } else {
             $email = test_input($_POST["email"]);
 
@@ -49,13 +48,13 @@ if (!isset($_SESSION['userObj'])) {
             $result = $conn->query($q);
 
             if ($result->num_rows > 0) {
-                $emailErr = "Email already in use";
+                $emailErr = "Email already in use!";
             }
         }
 
         //Password validation
         if (empty($_POST["password"])) {
-            $passwordErr = "You must input this field";
+            $passwordErr = "You must input this field!";
         } else {
             $password = test_input($_POST["password"]);
             $uppercase = preg_match('@[A-Z]@', $password);
@@ -63,7 +62,7 @@ if (!isset($_SESSION['userObj'])) {
             $number    = preg_match('@[0-9]@', $password);
 
             if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-                $passwordErr = 'Password must be longer than 8 characters and it must contain at least 1 uppercase,1 lowercase character and 1 numberr';
+                $passwordErr = 'Password must be longer than 8 characters and it must contain at least 1 uppercase,1 lowercase character and 1 number';
             }
         }
 
@@ -80,21 +79,21 @@ if (!isset($_SESSION['userObj'])) {
 
         //First name validation
         if (empty($_POST["name"])) {
-            $nameErr = "You must input this field";
+            $nameErr = "You must input this field!";
         } else {
             $name = test_input($_POST["name"]);
         }
 
         //Surname validation
         if (empty($_POST["surname"])) {
-            $surnameErr = "You must input this field";
+            $surnameErr = "You must input this field!";
         } else {
             $surname = test_input($_POST["surname"]);
         }
 
         //Username validation
         if (empty($_POST["username"])) {
-            $usernameErr = "You must input this field";
+            $usernameErr = "You must input this field!";
         } else {
             $username = test_input($_POST["username"]);
 
@@ -106,26 +105,26 @@ if (!isset($_SESSION['userObj'])) {
             $result = $conn->query($q);
 
             if ($result->num_rows > 0) {
-                $emailErr = "Username already in use";
+                $usernameErr = "Username already in use";
             }
         }
         //telephone name validation
         if (empty($_POST["telephone"])) {
-            $telephoneErr = "You must input this field";
+            $telephoneErr = "You must input this field!";
         } else {
             $telephone = test_input($_POST["telephone"]);
         }
 
         //city name(location) validation
         if (empty($_POST["location"])) {
-            $locationErr = "You must input this field";
+            $locationErr = "You must input this field!";
         } else {
             $location = test_input($_POST["location"]);
         }
 
         //Postcode name validation
         if (empty($_POST["postcode"])) {
-            $postcodeErr = "You must input this field";
+            $postcodeErr = "You must input this field!";
         } else {
             $postcode = test_input($_POST["postcode"]);
             if (!is_numeric($postcode))
@@ -134,33 +133,35 @@ if (!isset($_SESSION['userObj'])) {
 
         //address validation
         if (empty($_POST["address"])) {
-            $addressErr = "You must input this field";
+            $addressErr = "You must input this field!";
         } else {
             $address = test_input($_POST["address"]);
         }
 
         //dob validation
         if (empty($_POST["dob"])) {
-            $dobErr = "You must input this field";
+            $dobErr = "You must input this field!";
         } else {
             $dob = test_input($_POST["dob"]);
         }
 
-        if (empty($_POST["userLevel"])) {
-            $userLevelErr = "You must input this field";
-        } else {
-            $userLevel = test_input($_POST["userLevel"]);
-        }
 
-        if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($passwordErr) || isset($retypePasswordErr) || isset($telephoneErr) || isset($usernameErr)|| isset($addressErr)|| isset($postcodeErr)|| isset($dobErr)) {
+
+        if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($passwordErr) || isset($retypePasswordErr) || isset($telephoneErr) || isset($usernameErr) || isset($addressErr) || isset($postcodeErr) || isset($dobErr)) {
             include_once('../view/account-info.php');
         } else {
             $password = sha1($password);
 
-            $q = "UPDATE `users` SET `name` = '$name', `surname` = '$surname', `email` = '$email', `username` = '$username', `password` = '$password', `phone_number` = '$telephone', `address` = '$address', `location` = '$location', `user_level` = '$userLevel', `postcode` = '$postcode', `dob` = '$dob'
-            WHERE `id` = $userId";
-            $conn->query($q);
+            $q = "UPDATE `users` SET `name` = '$name', `surname` = '$surname', `email` = '$email', `username` = '$username', `password` = '$password', `phone_number` = '$telephone', `address` = '$address', `location` = '$location', `postcode` = '$postcode', `dob` = '$dob'
+            WHERE `id` =" . $userId;
+            $result = $conn->query($q);
+
+            $userObj = new LoggedUser($userId, $name, $surname, $email, $username, $password, $telephone, $address, $location, 0, $postcode, $dob);
+            unset($_SESSION['userObj']);
+            $_SESSION['userObj'] = serialize($userObj);
+
             header("Location: ../../my-account");
+
         }
     }
 }

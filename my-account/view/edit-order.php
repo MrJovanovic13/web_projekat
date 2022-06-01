@@ -63,7 +63,8 @@ require_once "../template/navbarLogged.php";
                 </select>
                 <input type="hidden" name="orderId" value="<?= $orderId ?>">
                 <br>
-                <button type="submit">Edit</button>
+                <br>
+                <button id="button-helper" type="submit">Submit edit</button>
             </form>
         <?php endif; ?>
     </div>

@@ -1,23 +1,5 @@
 <?php
 require_once "../template/navbarLogged.php";
-require_once "../../controller/user.php";
-$user = unserialize($_SESSION['userObj']);
-
-$nameErr = $locationErr = $postcodeErr = $addressErr = $emailErr = $telephoneErr = $surnameErr  = $usernameErr = $userLevelErr = $passwordErr = $retypePasswordErr = "";
-
-$name = $user->name;
-$surname = $user->surname;
-$email = $user->email;
-$telephone = $user->telephone;
-$username = $user->username;
-$address = $user->address;
-$location = $user->location;
-$postcode = $user->postcode;
-$dob = $user->dob;
-$password = "";
-$retypePassword = "";
-$userLevel = $user->user_level;
-
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
 
@@ -33,63 +15,63 @@ require_once "../template/accountMenu.php";
 
         <p>
                 Name:
-                <input type="text" name="name" value="<?php if (isset($name)) echo $name; ?>">
-                <span class="error"> <?php echo $nameErr; ?></span>
+                <input type="text" name="name" value="<?=$user->name;?>">
+                <span class="error"> <?php if (isset($nameErr)): ?><span><?=$nameErr?> <?php endif ?></span>
             </p>
             <p>
                 Surname:
-                <input type="text" name="surname" value="<?php if (isset($surname)) echo $surname; ?>">
-                <span class="error"> <?php echo $surnameErr; ?></span>
+                <input type="text" name="surname" value="<?=$user->surname;?>">
+                <span class="error"> <?php if (isset($surnameErr)): ?><span><?=$surnameErr?> <?php endif ?></span>
             </p>
             <p>
                 Email:
-                <input type="text" name="email" value="<?php if (isset($email)) echo $email; ?>">
-                <span class="error"> <?php echo $emailErr; ?></span>
+                <input type="text" name="email" value="<?=$user->email;?>">
+                <span class="error"> <?php if (isset($emailErr)): ?><span><?=$emailErr?> <?php endif ?></span>
             </p>
             <p>
                 Telephone number:
-                <input type="text" name="telephone" value="<?php if (isset($telephone)) echo $telephone; ?>">
-                <span class="error"> <?php echo $telephoneErr; ?></span>
+                <input type="text" name="telephone" value="<?=$user->telephone;?>">
+                <span class="error"> <?php if (isset($telephoneErr)): ?><span><?=$telephoneErr?> <?php endif ?></span>
             </p>
             <p>
                 Username:
-                <input type="text" name="username" value="<?php if (isset($username)) echo $username; ?>">
-                <span class="error"> <?php echo $usernameErr; ?></span>
+                <input type="text" name="username" value="<?=$user->username;?>">
+                <span class="error"> <?php if (isset($usernameErr)): ?><span><?=$usernameErr?> <?php endif ?></span>
             </p>
             <p>
                 Address:
-                <input type="text" name="address" value="<?php if (isset($address)) echo $address; ?>">
-                <span class="error"> <?php echo $addressErr; ?></span>
+                <input type="text" name="address" value="<?=$user->address;?>">
+                <span class="error"> <?php if (isset($addressErr)): ?><span><?=$addressErr?> <?php endif ?></span>
             </p>
             <p>
                 Location:
-                <input type="text" name="location" value="<?php if (isset($location)) echo $location; ?>">
-                <span class="error"> <?php echo $locationErr; ?></span>
+                <input type="text" name="location" value="<?=$user->location;?>">
+                <span class="error"> <?php if (isset($locationErr)): ?><span><?=$locationErr?> <?php endif ?></span>
             </p>
             <p>
                 Postcode:
-                <input type="text" name="postcode" value="<?php if (isset($postcode)) echo $postcode; ?>">
-                <span class="error"> <?php echo $postcodeErr; ?></span>
+                <input type="text" name="postcode" value="<?=$user->postcode;?>">
+                <span class="error"> <?php if (isset($postcodeErr)): ?><span><?=$postcodeErr?> <?php endif ?></span>
             </p>
             <p>
                 Data of birth:
-                <input type="date" name="dob" value="<?php if (isset($dob)) echo $dob; ?>">
-                <span class="error"><?php if(isset($dobErr)) echo $dobErr; ?></span>
+                <input type="date" name="dob" value="<?=$user->dob;?>">
+                <span class="error"> <?php if (isset($dobErr)): ?><span><?=$dobErr?> <?php endif ?></span>
             </p>
             <p>
                 Password:
-                <input type="password" name="password" value="<?php if (isset($password)) echo $password; ?>">
-                <span class="error"> <?php echo $passwordErr; ?></span>
+                <input type="password" name="password" value="">
+                <span class="error"> <?php if (isset($passwordErr)): ?><span><?=$passwordErr?> <?php endif ?></span>
             </p>
             <p>
                 Retype password:
-                <input type="password" name="retypePassword">
-                <span class="error"> <?php echo $retypePasswordErr; ?></span>
+                <input type="password" name="retypePassword" value = "">
+                <span class="error"> <?php if (isset($retypePasswordErr)): ?><span><?=$retypePasswordErr?> <?php endif ?></span>
             </p>
             <br>
             <p>
                 <input id="button-helper" type="submit" value="Edit user">
-                <input type="hidden" id="userId" name="userId" value="<?php echo $id ?>">
+                <input type="hidden" id="userId" name="userId" value="<?=$user->id;?>">
             </p>
         </form>
     </div>

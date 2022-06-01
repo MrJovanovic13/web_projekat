@@ -46,7 +46,7 @@ if ($action == 'checkout') {
     }
 } else {
     if (isset($_SESSION['userObj'])){
-        header("Location: dashboard/");
+        header("Location: orders/");
     } else {
         header("Location: ../login/");
     }

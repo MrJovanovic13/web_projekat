@@ -8,8 +8,8 @@ require_once "../template/navbarLogged.php";
     require_once "../template/accountMenu.php";
     ?>
 
-</div><br>
-
+</div>
+<br>
 <div class="container" id="container">
     <div class="buttons-div-second">
         <form class="menuForm" action="../categories/">
@@ -20,8 +20,8 @@ require_once "../template/navbarLogged.php";
     <form action="../add-category/" method="post">
         <p>
             Name:
-            <input type="text" name="name" value="<?php if (isset($name)) echo $name; ?>">
-            <span class="error"> <?php if (isset($nameErr)) echo "<span style='color:red;'>" . $nameErr . "</span>"; ?></span>
+            <input type="text" name="name" value="<?php if (isset($name)): ?> <?=$name?> <?php endif ?>">
+            <span class="error"> <?php if (isset($nameErr)): ?><span><?=$nameErr?> <?php endif ?>></span>
         </p>
         <br>
         <input id="button-helper" type="submit" value="Add category">

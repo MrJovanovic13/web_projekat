@@ -4,7 +4,7 @@ body{
   background:#ddd;
 }
 .shell{
-  padding:80px 0;
+  margin-top: 5%;
 }
 .wsk-cp-product{
   background:#fff;
@@ -153,6 +153,7 @@ a.buy-btn:hover , a.buy-btn:active, a.buy-btn:focus{
     margin-left:20%;
 }
 
+
 @media screen and (max-width: 991px) {
   .wsk-cp-product{
     margin:40px auto;
@@ -176,4 +177,8 @@ a.buy-btn{
   background: #FF9800;
   color: #fff;
 }
+}
+
+.row {
+  margin-right: 0px;
 }

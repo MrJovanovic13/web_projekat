@@ -1,5 +1,5 @@
 <?php
-	class LightUser {
+	class User {
 		var $id;
 		var $name;
 		var $email;
@@ -10,7 +10,7 @@
 			$this->email= $email;
 	}
 }
-	class LoggedUser extends LightUser{
+	class LoggedUser extends User{
 		
 		var $surname;
         var $username;

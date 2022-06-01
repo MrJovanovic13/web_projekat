@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="../../css/footer.css">
 
-
 <footer class="footer-distributed">
 
 	<div class="footer-right">

@@ -7,7 +7,7 @@
   }
 
 body {
-  height: 125vh;
+  height: auto;
   background-size: cover;
   font-family: 'Muli', sans-serif;
   margin-top: 10%;

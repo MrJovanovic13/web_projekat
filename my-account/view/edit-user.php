@@ -5,15 +5,16 @@ $nameErr = $locationErr = $postcodeErr = $addressErr = $emailErr = $telephoneErr
 
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
+<div class="shell">
 
-<div class="buttons-div">
-<?php
-require_once "../template/accountMenu.php";
-?>
+    <div class="buttons-div">
+        <?php
+        require_once "../template/accountMenu.php";
+        ?>
 
-</div>
-<br>
-<div class="container" id="container">
+    </div>
+    <br>
+    <div class="container" id="container">
         <form action="../edit-user/" method="post">
 
             <p>
@@ -64,10 +65,10 @@ require_once "../template/accountMenu.php";
             <p>
                 Data of birth:
                 <input type="date" name="dob" value="<?php echo $row['dob']; ?>">
-                <span class="error"><?php if(isset($dobErr)) echo "<i class='fas fa-exclamation-circle mr-1'></i>".$dobErr; ?></span>
+                <span class="error"><?php if (isset($dobErr)) echo "<i class='fas fa-exclamation-circle mr-1'></i>" . $dobErr; ?></span>
             </p>
             <p>
-                Password: 
+                Password:
                 <input type="password" name="password" value="<?php  ?>">
                 <span class="error"> <?php echo $passwordErr; ?></span>
             </p>
@@ -83,7 +84,7 @@ require_once "../template/accountMenu.php";
             </p>
         </form>
     </div>
-</table>
+</div>
 
 <?php
 require_once "../template/footer.php";

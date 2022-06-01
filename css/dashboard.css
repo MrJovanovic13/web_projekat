@@ -102,8 +102,20 @@ table {
   -webkit-filter: invert(100%);
   filter: invert(100%);
   transition: all 0.2s ease-in-out;
+  cursor:pointer;
 }
 
+a:hover {
+  cursor:pointer;
+ }
+
+.menuButton:hover{
+    cursor:pointer;
+}
 .error {
   color:red;
+}
+
+.shell {
+  min-height: 66.5vh;
 }

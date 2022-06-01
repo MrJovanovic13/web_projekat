@@ -1,5 +1,7 @@
 <?php
 require_once "../../connection/connection.php";
+require_once "../../controller/product.php";
+
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
@@ -132,13 +134,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($passwordErr) || isset($retypePasswordErr) || isset($telephoneErr) || isset($usernameErr)|| isset($addressErr)|| isset($postcodeErr)|| isset($dobErr)) {
+        
+        $userObj = new LoggedUser($row['id'], $row['name'], $row['surname'], $row['email'], $row['username'], $row['password'],$row['phone_number'], $row['address'], $row['location'], $row['user_level'], $row['postcode'], $row['dob']);
+        
         include_once('../view/add-user.php');
     } else {
         $password = sha1($password);
         $q = "INSERT INTO `users`(`name`,`surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`) 
                         VALUES ('$name', '$surname', '$email', '$username', '$password', '$telephone', '$address', '$location', '0', '$postcode', '$dob')";
         $conn->query($q);
-        header("Location: ../../my-account");
+        header("Location: ../users");
     }
 } else {
     header("Location: 404.php");

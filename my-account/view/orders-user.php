@@ -13,48 +13,49 @@ require_once "../template/navbarLogged.php";
 </head>
 
 <body>
-    <div class="buttons-div">
-        <?php
-        require_once "../template/accountMenu.php";
-        ?>
-    </div><br>
-    <div class="container" id="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order) : ?>
-                    <?php if ($highlightCounter++ % 2 == 0) : ?>
-                        <tr class="highlighted">
-                        <?php else : ?>
-                        <tr>
-                        <?php endif; ?>
+    <div class="shell">
 
-                        <td><?= $order->id ?></td>
-                        <td><?= $order->date ?></td>
-                        <td><?= $order->price ?>$</td>
-                        <td><?= $order->status ?></td>
+        <div class="buttons-div">
+            <?php
+            require_once "../template/accountMenu.php";
+            ?>
+        </div><br>
+        <div class="container" id="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order) : ?>
+                        <?php if ($highlightCounter++ % 2 == 0) : ?>
+                            <tr class="highlighted">
+                            <?php else : ?>
+                            <tr>
+                            <?php endif; ?>
 
-                        <td>
-                            <a href='../edit-order?action=editOrder&userId=<?= $order->userId ?>&orderId=<?= $order->id ?>'>
-                                <button class='iconButton'>
-                                    <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
-                                </button>
-                            </a>
-                        </td>
-                        </tr>
-                    <?php endforeach; ?>
-            </tbody>
+                            <td><?= $order->id ?></td>
+                            <td><?= $order->date ?></td>
+                            <td><?= $order->price ?>$</td>
+                            <td><?= $order->status ?></td>
 
-        </table>
-
+                            <td>
+                                <a href='../edit-order?action=editOrder&userId=<?= $order->userId ?>&orderId=<?= $order->id ?>'>
+                                    <button class='iconButton'>
+                                        <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
+                                    </button>
+                                </a>
+                            </td>
+                            </tr>
+                        <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 

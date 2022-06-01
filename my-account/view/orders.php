@@ -13,53 +13,56 @@ require_once "../template/navbarLogged.php";
 </head>
 
 <body>
-    <div class="buttons-div">
-        <?php
-        require_once "../template/accountMenu.php";
-        ?>
+    <div class="shell">
 
-    </div><br>
-    <div class="container" id="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order) : ?>
-                    <?php if ($highlightCounter++%2==0) : ?>
-                        <tr class="highlighted">
-                        <?php else : ?>
+        <div class="buttons-div">
+            <?php
+            require_once "../template/accountMenu.php";
+            ?>
+
+        </div><br>
+        <div class="container" id="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order) : ?>
+                        <?php if ($highlightCounter++ % 2 == 0) : ?>
+                            <tr class="highlighted">
+                            <?php else : ?>
                             <tr>
-                        <?php endif; ?>
+                            <?php endif; ?>
 
-                        <td><?= $order->id ?></td>
-                        <td><?= $order->date ?></td>
-                        <td><?= $order->price ?>$</td>
-                        <td><?= $order->status ?></td>
+                            <td><?= $order->id ?></td>
+                            <td><?= $order->date ?></td>
+                            <td><?= $order->price ?>$</td>
+                            <td><?= $order->status ?></td>
 
-                        <td>
-                            <a href='../orders?action=removeOrder&orderId=<?= $order->id ?>'>
+                            <td>
+                                <a href='../orders?action=removeOrder&orderId=<?= $order->id ?>'>
                                     <button class='iconButton'>
                                         <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
                                     </button>
-                            </a>
+                                </a>
 
-                            <a href='../edit-order?action=editOrder&userId=<?= $order->userId ?>&orderId=<?= $order->id ?>'>
+                                <a href='../edit-order?action=editOrder&userId=<?= $order->userId ?>&orderId=<?= $order->id ?>'>
                                     <button class='iconButton'>
                                         <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
                                     </button>
-                            </a>
-                        </td>
-                        </tr>
-                    <?php endforeach; ?>
-            </tbody>
-        </table>
+                                </a>
+                            </td>
+                            </tr>
+                        <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 

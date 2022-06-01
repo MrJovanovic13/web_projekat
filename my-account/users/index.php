@@ -29,7 +29,7 @@ if (!isset($_SESSION['userObj']))
 
         $result = $conn->query($q);
         while ($row = $result->fetch_assoc()) {
-            $userObj = new LightUser($row['id'], $row['name'], $row['email']);
+            $userObj = new User($row['id'], $row['name'], $row['email']);
             $users[] = $userObj;
         }
         include("../view/users.php");

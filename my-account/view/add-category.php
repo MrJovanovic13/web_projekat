@@ -22,7 +22,7 @@ require_once "../template/navbarLogged.php";
             <p>
                 Name:
                 <input type="text" name="name" value="<?php if (isset($name)) : ?> <?= $name ?> <?php endif ?>">
-                <span class="error"> <?php if (isset($nameErr)) : ?><span><?= $nameErr ?> <?php endif ?></span>
+                <?php if (isset($nameErr)) : ?><span class="error"><?= $nameErr ?> <?php endif ?></span>
             </p>
             <br>
             <input id="button-helper" type="submit" value="Add category">
@@ -33,5 +33,4 @@ require_once "../template/navbarLogged.php";
 
 <?php
 require_once "../template/footer.php";
-
 ?>

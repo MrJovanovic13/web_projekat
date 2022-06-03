@@ -71,7 +71,7 @@ $sql .= "CREATE TABLE IF NOT EXISTS `order_status` (
   FOREIGN KEY(status_id) REFERENCES status(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
-$sql .="CREATE TABLE IF NOT EXISTS `items` (
+$sql .= "CREATE TABLE IF NOT EXISTS `items` (
     `order_id` int(11) NOT NULL,
     `product_id` int(11) NOT NULL,
     `amount` int(11) NOT NULL,
@@ -81,7 +81,7 @@ $sql .="CREATE TABLE IF NOT EXISTS `items` (
     FOREIGN KEY(product_id) REFERENCES products(id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
-$sql .="CREATE TABLE IF NOT EXISTS `wishlist` (
+$sql .= "CREATE TABLE IF NOT EXISTS `wishlist` (
     `user_id` int(11) NOT NULL,
     `product_id` int(11) NOT NULL,
     PRIMARY KEY(`user_id`, product_id),
@@ -89,8 +89,27 @@ $sql .="CREATE TABLE IF NOT EXISTS `wishlist` (
     FOREIGN KEY(`product_id`) REFERENCES products(id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
+$sql .= "CREATE TABLE IF NOT EXISTS `message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `date_time` DATETIME NOT NULL,
+  `message_content` TEXT NOT NULL,
+  `ticket_id` int(11) NOT NULL,
+  PRIMARY KEY(`id`),
+  FOREIGN KEY(`ticket_id`) REFERENCES tickets(id),
+  FOREIGN KEY(`user_id`) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+
+$sql .= "CREATE TABLE IF NOT EXISTS `tickets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(127) NOT NULL,
+  `user_sender` int(11) NOT NULL,
+  `is_open` int(11) NOT NULL,
+  PRIMARY KEY(`id`) 
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+
 if ($conn->multi_query($sql)) {
-    echo "<p>Successful</p>";
+  echo "<p>Successful</p>";
 } else {
-    echo "<p>Error: $conn->error </p>";
+  echo "<p>Error: $conn->error </p>";
 }

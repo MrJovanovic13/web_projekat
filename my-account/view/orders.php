@@ -13,14 +13,14 @@ require_once "../template/navbarLogged.php";
 </head>
 
 <body>
-    <div class="shell">
+<div class="shell">
 
-        <div class="buttons-div">
-            <?php
-            require_once "../template/accountMenu.php";
-            ?>
+    <div class="buttons-div">
+        <?php
+        require_once "../template/accountMenu.php";
+        ?>
 
-        </div><br>
+    </div><br>
         <div class="container" id="container">
             <table>
                 <thead>

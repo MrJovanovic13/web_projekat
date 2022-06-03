@@ -52,7 +52,7 @@ require_once "../template/navbarLogged.php";
             <tbody>
             </tbody>
         </table>
-        <?php if (isset($deleteErr)) echo "<span style='color:red;'>" . $deleteErr . "</span>"; ?>
+       <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>
     </div>
 </div>
 <?php

@@ -36,8 +36,19 @@ require_once "../template/navbar.php";
     </div>
 
     <div class="container">
+      <div class="pages">
+      <?php while ($i <= $pageCounter) : ?>
+        <?php if($currentPageUser == $i): ?>
+          <a class="page-current"> <?= $i ?>
+        <?php else: ?>
+          <a class="page" href='../products?page=<?= $i ?>'> <?= $i ?>
+        <?php endif; ?>
+        </a>
+        <?php $i++ ?>
+      <?php endwhile; ?>
+      </div>
       <div class="row">
-        <?php foreach ($products as $product) : ?>
+        <?php foreach (returnProductsFromPage($currentPageUser, $products) as $product) : ?>
           <?php if ($counter % 4 == 0 && $counter != 0) : ?>
       </div>
       <div class="row">
@@ -62,14 +73,13 @@ require_once "../template/navbar.php";
           </div>
         </div>
       </div>
-
     <?php endforeach; ?>
-
       </div>
     </div>
-          </div>
+  </div>
 </body>
 <?php
 require_once "../template/footer.php";
 ?>
+
 </html>

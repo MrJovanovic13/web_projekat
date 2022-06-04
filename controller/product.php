@@ -63,4 +63,28 @@
             $this->category = $category;
         }
     }
+    class PageProduct extends Product{
+
+        var $imgUrl;
+        var $description;
+        var $page;
+
+        function __construct($id,$name,$price,$imgUrl,$description,$page)
+        {
+            parent::__construct($id,$name,$price);
+            $this->imgUrl = $imgUrl;
+            $this->description = $description;
+            $this->page = $page;
+        }
+    }
+    function returnProductsFromPage($page,$arrayOfProducts) 
+    {
+        $products = array();
+        foreach($arrayOfProducts as $product){
+            if($product->page == $page){
+                $products[] = $product;
+            }
+        }
+        return $products;
+    }
 ?>

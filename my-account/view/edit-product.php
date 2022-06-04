@@ -70,7 +70,6 @@ require_once "../template/navbarLogged.php";
                     <input id="button-helper" type="submit" value="Edit product">
                     <input type="hidden" id="productId" name="productId" value="<?php if (isset($id)) : ?><?= $id ?> <?php endif ?>">
                 </p>
-
         </form>
     </div>
 </div>

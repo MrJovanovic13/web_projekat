@@ -1,10 +1,12 @@
 <?php
-require_once "../controller/user.php";
-require_once "../controller/cartL.php";
-require_once "../connection/connection.php";
+require "../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
-session_start();
+
 
 if ($action == 'checkout') {
     if (isset($_SESSION['userObj'])) {
@@ -21,8 +23,8 @@ if ($action == 'checkout') {
         $q = "INSERT INTO `orders`(`date`,`user_id`) 
         VALUES ('$date', '$user_id')";
 
-        $result = $conn->query($q);
-        $order_id = $conn->insert_id;
+        $result = $database->executeQuery($q);
+        $order_id = $database->lastInsertedId();
 
         for ($i = 0; $i < count($_SESSION['cart']); $i++) {
             $product_id = $_SESSION['cart'][$i]->id;
@@ -30,13 +32,13 @@ if ($action == 'checkout') {
 
             $q = "INSERT INTO `items`(`order_id`,`product_id`,`amount`) 
                 VALUES ('$order_id', '$product_id', '$quantity')";
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
         }
 
         $time = date('H:i:s', time());
         $q = "INSERT INTO `order_status`(`date`,`time`,`order_id`,`status_id`) 
         VALUES ('$date', '$time','$order_id',1)";
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
 
         unset($_SESSION['cart']);
     

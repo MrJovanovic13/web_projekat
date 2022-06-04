@@ -1,8 +1,5 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/category.php";
-require_once "../../controller/product.php";
-
+require "../../vendor/autoload.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -11,12 +8,13 @@ if (!isset($_SESSION['userObj'])) {
     die();
 }
 
+$database = new Database();
 $categories = array();
 $skipFirst = 0;
 
 $q = "SELECT `id`, `name` FROM `category`";
 
-$result = $conn->query($q);
+$result = $database->executeQuery($q);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -43,12 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $q = "SELECT `id`, `name`,`description`,`imgUrl`, `category_id`, `price`, `in_stock`
     FROM `products` WHERE `id`=" . $id;
 
-    $result = $conn->query($q);
+    $result = $database->executeQuery($q);
     $row = $result->fetch_assoc();
     $inStock = $row['in_stock'];
 
     $q1 = "SELECT `name` FROM `category` WHERE `id`=" . $row['category_id'];
-    $result1 = $conn->query($q1);
+    $result1 = $database->executeQuery($q1);
     $row1 = $result1->fetch_assoc();
 
     $editProduct = new EditProduct($row['id'], $row['name'], $row['price'], $row['imgUrl'], $row['description'], $row['in_stock']);
@@ -118,12 +116,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $q = "SELECT `id`, `name`,`description`,`imgUrl`, `category_id`, `price`, `in_stock`
         FROM `products` WHERE `id`=" . $_POST['productId'];
     
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
         $row = $result->fetch_assoc();
         $inStock = $row['in_stock'];
     
         $q1 = "SELECT `name` FROM `category` WHERE `id`=" . $row['category_id'];
-        $result1 = $conn->query($q1);
+        $result1 = $database->executeQuery($q1);
         $row1 = $result1->fetch_assoc();
     
         $editProduct = new EditProduct($row['id'], $row['name'], $row['price'], $row['imgUrl'], $row['description'], $row['in_stock']);
@@ -133,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     } else {
         $q = "UPDATE `products` SET `name` = '$name', `description` = '$description', `price` = '$price', `imgUrl` = '$imgUrl', `in_stock` = '$inStock', `category_id` = '$category'
         WHERE `id` =" . $_POST['productId'];
-        $conn->query($q);
+        $result = $database->executeQuery($q1);
         header("Location: ../products/");
     }
 } else {

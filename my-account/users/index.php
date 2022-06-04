@@ -1,11 +1,10 @@
 <?php
+require "../../vendor/autoload.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once "../../connection/connection.php";
-require_once "../../controller/user.php";
+$database = new Database();
 $user = unserialize($_SESSION['userObj']);
-
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $id = isset($_GET['userId']) ? $_GET['userId'] : "";
 
@@ -16,7 +15,7 @@ if (!isset($_SESSION['userObj']))
 } else {
     if($action=='deleteUser'){
         $q = "DELETE FROM `users` WHERE `id`=".$id;
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
     }
     if ($user->userLevel==0){
         header("Location: ../account-info/");
@@ -26,7 +25,7 @@ if (!isset($_SESSION['userObj']))
         $q = "SELECT `id`, `name`, `email`
         FROM `users`";
 
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
         while ($row = $result->fetch_assoc()) {
             $userObj = new User($row['id'], $row['name'], $row['email']);
             $users[] = $userObj;

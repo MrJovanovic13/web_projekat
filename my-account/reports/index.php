@@ -1,14 +1,14 @@
 <?php
-require_once "../../connection/connection.php";
-require("../../vendor/fpdf/fpdf/original/fpdf.php");
 require "../../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+$database = new Database();
+
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     include("../view/reports.php");
@@ -39,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $counter = 2;
 
             $q = "SELECT `id`,`name`,`price` FROM `products`";
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             while ($row = $result->fetch_assoc()) {
                 $sheet->setCellValueByColumnAndRow(1, $counter, $row['name']);
                 $sheet->setCellValueByColumnAndRow(2, $counter, $row['price'] . '$');
 
                 $q1 = "SELECT `amount` from `items` WHERE `product_id` =" . $row['id'];
-                $result1 = $conn->query($q1);
+                $result1 = $database->executeQuery($q1);
                 $product_total_count = 0;
                 while ($row1 = $result1->fetch_assoc()) {
                     $product_total_count += $row1['amount'];
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $q = "SELECT `name`, `email`, `location`
                 FROM `users`";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             while ($row = $result->fetch_assoc()) {
                 $sheet->setCellValueByColumnAndRow(1, $counter, $row['name']);
                 $sheet->setCellValueByColumnAndRow(2, $counter, $row['email']);
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             FROM `users`
             GROUP BY `location`
             ORDER BY COUNT(*) DESC";
-            $result1 = $conn->query($q1);
+            $result1 = $database->executeQuery($q1);
             while ($row1 = $result1->fetch_assoc()) {
                 $sheet->setCellValueByColumnAndRow(1, $counter, $row1['location']);
                 $sheet->setCellValueByColumnAndRow(2, $counter, $row1['number2']);
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $q = "SELECT `date`,`id` FROM `orders`
             WHERE `date` BETWEEN '" . $dateStart . "' AND '" . $dateEnd . "'";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
 
             $counter = 2;
             $orderCount = mysqli_num_rows($result);
@@ -130,12 +130,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $q2 = "SELECT `product_id`, `amount`
                 FROM `items`
                 WHERE `order_id`=" . $row['id'];
-                $result2 = $conn->query($q2);
+                $result2 = $database->executeQuery($q2);
                 while ($row2 = $result2->fetch_assoc()) {
                     $q3 = "SELECT `price` 
                     FROM `products`
                     WHERE `products`.`id`=" . $row2['product_id'];
-                    $result3 = $conn->query($q3);
+                    $result3 = $database->executeQuery($q3);
                     while ($row3 = $result3->fetch_assoc()) {
                         $order_total += $row3['price'] * $row2['amount'];
                     }
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             ON `order_status`.`status_id` = `status`.`id`
             WHERE `order_status`.`order_id`=" . $row['id'] . "
             ORDER BY `date` DESC, `time` DESC";
-                $result4 = $conn->query($q4);
+                $result4 = $database->executeQuery($q4);
                 $row4 = $result4->fetch_assoc();
 
                 
@@ -192,13 +192,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $totalRevenue = 0;
 
             $q = "SELECT `id`,`name`,`price` FROM `products`";
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             while ($row = $result->fetch_assoc()) {
                 $pdf->Cell(50, 10, $row['name']);
                 $pdf->Cell(40, 10, $row['price']);
 
                 $q1 = "SELECT `amount` from `items` WHERE `product_id` =" . $row['id'];
-                $result1 = $conn->query($q1);
+                $result1 = $database->executeQuery($q1);
                 $product_total_count = 0;
                 while ($row1 = $result1->fetch_assoc()) {
                     $product_total_count += $row1['amount'];
@@ -241,7 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $q = "SELECT `name`, `email`, `location`
                 FROM `users`";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             while ($row = $result->fetch_assoc()) {
                 $pdf->Cell(50, 10, $row['name']);
                 $pdf->Cell(70, 10, $row['email']);
@@ -260,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             FROM `users`
             GROUP BY `location`
             ORDER BY COUNT(*) DESC";
-            $result1 = $conn->query($q1);
+            $result1 = $database->executeQuery($q1);
             while ($row1 = $result1->fetch_assoc()) {
                 $pdf->Cell(40, 10, $row1['location']);
                 $pdf->Cell(40, 10, $row1['number2']);
@@ -278,7 +278,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $q = "SELECT `date`,`id` FROM `orders`
             WHERE `date` BETWEEN '" . $dateStart . "' AND '" . $dateEnd . "'";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
 
             $orderCount = mysqli_num_rows($result);
 
@@ -298,12 +298,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $q2 = "SELECT `product_id`, `amount`
                 FROM `items`
                 WHERE `order_id`=" . $row['id'];
-                $result2 = $conn->query($q2);
+                $result2 = $database->executeQuery($q2);
                 while ($row2 = $result2->fetch_assoc()) {
                     $q3 = "SELECT `price` 
                     FROM `products`
                     WHERE `products`.`id`=" . $row2['product_id'];
-                    $result3 = $conn->query($q3);
+                    $result3 = $database->executeQuery($q3);
                     while ($row3 = $result3->fetch_assoc()) {
                         $order_total += $row3['price'] * $row2['amount'];
                     }
@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             ON `order_status`.`status_id` = `status`.`id`
             WHERE `order_status`.`order_id`=" . $row['id'] . "
             ORDER BY `date` DESC, `time` DESC";
-                $result4 = $conn->query($q4);
+                $result4 = $database->executeQuery($q4);
                 $row4 = $result4->fetch_assoc();
 
                 $pdf->Cell(40, 10, $row['date']);

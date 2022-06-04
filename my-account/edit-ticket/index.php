@@ -1,11 +1,9 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/message.php";
-require_once "../../controller/ticket.php";
+require "../../vendor/autoload.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $deleteErr;
 
@@ -23,21 +21,21 @@ if (isset($_SESSION['userObj'])) {
             $q = "SELECT `id`, `name`, `is_open`
                 FROM `tickets` 
                 WHERE `id`=" . $ticketId;
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             $row = $result->fetch_assoc();
             $ticket = new Ticket($row['id'], $row['name'], $row['is_open']);
             $messages = array();
             $q1 = "SELECT `user_id`, `date_time`, `message_content`
                 FROM `message`
                 WHERE `ticket_id`=". $ticketId;
-            $result1 = $conn->query($q1);
+            $result1 = $database->executeQuery($q1);
             
             while ($row1 = $result1->fetch_assoc()) {
 
                 $q2 = "SELECT `name`, `user_level`
                 FROM `users`
                 WHERE `id`=". $row1['user_id'];
-                $result2 = $conn->query($q2);
+                $result2 = $database->executeQuery($q2);
                 $row2 = $result2->fetch_assoc();
 
                 $time = strtotime($row1['date_time']);
@@ -71,7 +69,7 @@ if (isset($_SESSION['userObj'])) {
         } else {
             $q = "INSERT INTO `message`(`user_id`,`message_content`,`date_time`,`ticket_id`) 
             VALUES ('$userId','$messageContent','$date','$ticketId')";
-            $conn->query($q);
+            $result = $database->executeQuery($q);
         }
         
         header("Location: ../edit-ticket/?ticketId=".$ticketId."&errorMessageFlag=".$errorMessageFlag);

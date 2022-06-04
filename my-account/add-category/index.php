@@ -1,9 +1,11 @@
 <?php
-require_once "../../connection/connection.php";
+require "../../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
-
-session_start();
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
@@ -27,7 +29,7 @@ if (isset($_SESSION['userObj'])) {
                 FROM `category`
                 WHERE `name` = '$name'";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
 
             if($result->num_rows != 0) {
                 $nameErr = "Category already exists!";
@@ -39,7 +41,7 @@ if (isset($_SESSION['userObj'])) {
         } else {
             $q = "INSERT INTO `category`(`name`) 
                             VALUES ('$name')";
-            $conn->query($q);
+            $result = $database->executeQuery($q);
             header("Location: ../categories/");
         }
     }

@@ -14,7 +14,7 @@ require_once "../template/navbarLogged.php";
     <div class="container" id="container">
         <div class="buttons-div-second">
             <form class="menuForm" action="../categories/">
-                <input class="menuButton" type="submit" value="Categories" />
+                <input class="menuButton" type="submit" value="Return" />
             </form>
         </div>
         <br>

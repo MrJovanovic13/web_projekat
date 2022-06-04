@@ -1,8 +1,7 @@
 <?php
-require_once "../connection/connection.php";
-require_once "../controller/category.php";
-require_once "../controller/product.php";
+require "../vendor/autoload.php";
 
+$database = new Database();
 $categories = array();
 $products = array();
 $counter = 0;
@@ -12,7 +11,7 @@ $i = 1;
 $currentPageUser = isset($_GET['page']) ? $_GET['page'] : "1";
 $q = "SELECT `id`, `name` FROM `category`";
 
-$result = $conn->query($q);
+$result = $database->executeQuery($q);
 
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
@@ -37,7 +36,7 @@ if (isset($_POST["category"]) && $_POST["category"] != 1) { // 1 is the default 
                 FROM `products`;";
 }
 
-$result = $conn->query($q);
+$result = $database->executeQuery($q);
 
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {

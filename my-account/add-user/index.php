@@ -1,13 +1,14 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/product.php";
-require_once "../../controller/user.php";
-
+require "../../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
-    $addUser = new LoggedUser(0, "", "", "", "", "","", "", "", "", "", "");
+    $addUser = new LoggedUser(0, "", "", "", "", "", "", "", "", "", "", "");
     include("../view/add-user.php");
 } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
     function test_input($data)
@@ -32,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     FROM `users` 
                     WHERE `email` = '$email'";
 
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
+
 
         if ($result->num_rows > 0) {
             $emailErr = "Email already in use!";
@@ -55,11 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
     //Password  repeat validation
     if (empty($_POST["retypePassword"])) {
-        
-    }else{
+    } else {
         $password = test_input($_POST["password"]);
         $retypepassword = test_input($_POST["retypePassword"]);
-    
+
         if ($password != $retypepassword) {
             $retypePasswordErr = "Passwords don't match!";
         }
@@ -90,7 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     FROM `users` 
                     WHERE `username` = '$username'";
 
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
+
 
         if ($result->num_rows > 0) {
             $usernameErr = "Username already in use!";
@@ -131,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     //userLevel validation
     if (!isset($_POST["userLevelUser"])) {
         $userLevelUserErr = "You must input this field!";
-    } elseif($_POST['userLevel']!=0&&$_POST['userLevelUser']!=1&&$_POST['userLevelUser']!=2) {
+    } elseif ($_POST['userLevel'] != 0 && $_POST['userLevelUser'] != 1 && $_POST['userLevelUser'] != 2) {
         $userLevelUserErr = "Invalid user level!";
     } else {
         $userLevelUser = test_input($_POST["userLevelUser"]);
@@ -144,8 +146,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $dob = test_input($_POST["dob"]);
     }
 
-    if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($passwordErr) || isset($retypePasswordErr) || isset($telephoneErr) || isset($usernameErr)|| isset($addressErr)|| isset($postcodeErr)|| isset($dobErr) || isset($userLevelUserErr)) {
-        
+    if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($passwordErr) || isset($retypePasswordErr) || isset($telephoneErr) || isset($usernameErr) || isset($addressErr) || isset($postcodeErr) || isset($dobErr) || isset($userLevelUserErr)) {
+
         $name = isset($_POST['name']) ? $_POST['name'] : "";
         $surname = isset($_POST['surname']) ? $_POST['surname'] : "";
         $email = isset($_POST['email']) ? $_POST['email'] : "";
@@ -159,14 +161,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $password = isset($_POST['password']) ? $_POST['password'] : "";
         $retypePassword = isset($_POST['retypePassword']) ? $_POST['retypePassword'] : "";
 
-        $addUser = new LoggedUser(0, $name, $surname, $email, $username, $password,$telephone, $address, $location, $userLevelUser, $postcode, $dob);
-        
+        $addUser = new LoggedUser(0, $name, $surname, $email, $username, $password, $telephone, $address, $location, $userLevelUser, $postcode, $dob);
+
         include_once('../view/add-user.php');
     } else {
         $password = sha1($password);
         $q = "INSERT INTO `users`(`name`,`surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`) 
                         VALUES ('$name', '$surname', '$email', '$username', '$password', '$telephone', '$address', '$location', '0', '$postcode', '$dob')";
-        $conn->query($q);
+        $result = $database->executeQuery($q);
         header("Location: ../users");
     }
 } else {

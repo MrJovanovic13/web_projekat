@@ -17,7 +17,7 @@ require_once "../../connection/connection.php";
         <div class="container" id="container">
             <table>
                 <form class="menuForm" action="../add-user/">
-                    <input class="menuButton" type="submit" value="Add user" />
+                    <input class="menuButton" type="submit" value="Return" />
                 </form>
                 <br>
                 <br>

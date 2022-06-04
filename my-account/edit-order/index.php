@@ -1,14 +1,9 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/user.php";
-require_once "../../controller/product.php";
-require_once "../../controller/cartL.php";
-require_once "../../controller/orderStatus.php";
-
+require "../../vendor/autoload.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+$database = new Database();
 $id = isset($_GET['userId']) ? $_GET['userId'] : "";
 $orderId = isset($_GET['orderId']) ? $_GET['orderId'] : "";
 
@@ -19,7 +14,7 @@ if (!isset($_SESSION['userObj'])) {
     $q = "SELECT `id`, `name`, `surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`
             FROM `users`
             WHERE `id`=" . $id;
-    $result = $conn->query($q);
+    $result = $database->executeQuery($q);
     $row = $result->fetch_assoc();
 
     $orderUser = new LoggedUser($row['id'], $row['name'], $row['surname'], $row['email'], $row['username'], $row['password'], $row['phone_number'], $row['address'], $row['location'], $row['user_level'], $row['postcode'], $row['dob']);
@@ -27,7 +22,7 @@ if (!isset($_SESSION['userObj'])) {
     $q = "SELECT `product_id`, `amount`
             FROM `items`
             WHERE `order_id`=" . $orderId;
-    $result = $conn->query($q);
+    $result = $database->executeQuery($q);
 
     $orderCart = array();
     $i = 0;
@@ -46,18 +41,18 @@ if (!isset($_SESSION['userObj'])) {
         $q = "SELECT `id`, `name`, `price`
                 FROM `products`
                 WHERE `id`=$cartItemId";
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
         $row = $result->fetch_assoc();
 
         $productObj = new OrderProduct($row['id'], $row['name'], $row['price'], $orderCart[$i]->quantity);
         $cartProducts[] = $productObj;
-        
+
         $cartTotal += $row['price'] * $orderCart[$i]->quantity;
         $q3 = "SELECT `status`.`id`,`date`,`time`, `status`.`name` FROM `order_status` 
                 INNER JOIN `status` ON `order_status`.`status_id` = `status`.`id`
                 WHERE `order_status`.`order_id`=" . $orderId . "
                 ORDER BY `date` DESC, `time` DESC";
-        $result3 = $conn->query($q3);
+        $result3 = $database->executeQuery($q3);
         $row3 = $result3->fetch_assoc();
         $orderStatus = $row3['name'];
     }
@@ -65,7 +60,7 @@ if (!isset($_SESSION['userObj'])) {
     $q = "SELECT `id`, `name` 
     FROM `status`";
 
-    $result = $conn->query($q);
+    $result = $database->executeQuery($q);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {

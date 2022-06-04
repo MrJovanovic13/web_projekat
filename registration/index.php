@@ -1,6 +1,6 @@
 <?php
-require_once "../connection/connection.php";
-require_once "../controller/user.php";
+require "../vendor/autoload.php";
+$database = new Database();
 
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
@@ -29,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     FROM `users` 
                     WHERE `email` = '$email'";
 
-        $result = $conn->query($q);
+$result = $database->executeQuery($q);
+
 
         if ($result->num_rows > 0) {
             $emailErr = "Email already in use!";
@@ -87,7 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     FROM `users` 
                     WHERE `username` = '$username'";
 
-        $result = $conn->query($q);
+$result = $database->executeQuery($q);
+
 
         if ($result->num_rows > 0) {
             $usernameErr = "Username already in use!";
@@ -161,4 +163,3 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     header("Location: 404.php");
     die();
 }
-?>

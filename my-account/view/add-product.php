@@ -1,6 +1,5 @@
 <?php
 require_once "../template/navbarLogged.php";
-require_once "../../connection/connection.php";
 
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
@@ -14,7 +13,7 @@ require_once "../../connection/connection.php";
     <div class="container" id="container">
         <div class="buttons-div-second">
             <form class="menuForm" action="../products/">
-                <input class="menuButton" type="submit" value="Products" />
+                <input class="menuButton" type="submit" value="Return" />
             </form>
         </div>
         <br>

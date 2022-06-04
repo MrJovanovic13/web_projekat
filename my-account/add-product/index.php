@@ -1,17 +1,18 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/category.php";
-require_once "../../controller/product.php";
+require "../../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-session_start();
 if (isset($_SESSION['userObj'])) {
 
-    $categories = array();
+$database = new Database();
+$categories = array();
 $skipFirst = 0;
 
 $q = "SELECT `id`, `name` FROM `category`";
 
-$result = $conn->query($q);
+$result = $database->executeQuery($q);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -103,7 +104,7 @@ if ($result->num_rows > 0) {
         } else {
                 $q = "INSERT INTO `products`(`name`,`description`, `price`, `imgUrl`, `in_stock`, `category_id`) 
                 VALUES ('$name', '$description', '$price', '$imgUrl', '$inStock', '$category')";
-                $conn->query($q);
+                $result = $database->executeQuery($q);
                 header("Location: ../products/");
         }
     }

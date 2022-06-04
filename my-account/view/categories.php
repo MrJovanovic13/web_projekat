@@ -17,7 +17,7 @@ require_once "../template/navbarLogged.php";
                 <input class="menuButton" type="submit" value="Add category" />
             </form>
             <form class="menuForm" action="../products/">
-                <input class="menuButton" type="submit" value="Products" />
+                <input class="menuButton" type="submit" value="Return" />
             </form>
         </div>
         <br>

@@ -1,6 +1,9 @@
 {
-    "require": {
-        "fpdf/fpdf": "^1.84",
-        "phpoffice/phpspreadsheet": "^1.23"
-    }
+  "require": {
+    "fpdf/fpdf": "^1.84",
+    "phpoffice/phpspreadsheet": "^1.23"
+  },
+  "autoload": {
+    "classmap": ["controller/","connection/","vendor/fpdf/fpdf/original/"]
+  }
 }

@@ -1,10 +1,9 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/user.php";
+require "../../vendor/autoload.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $id = isset($_GET['userId']) ? $_GET['userId'] : $_POST['userId'];
 
@@ -17,7 +16,7 @@ if (!isset($_SESSION['userObj'])) {
             $q = "SELECT `id`, `name`, `surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`
             FROM `users`
             WHERE `id`=" . $id;
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             $row = $result->fetch_assoc();
 
             $addUser = new LoggedUser($row['id'], $row['name'], $row['surname'], $row['email'], $row['username'], "", $row['phone_number'], $row['address'], $row['location'], $row['user_level'], $row['postcode'], $row['dob']);
@@ -48,7 +47,8 @@ if (!isset($_SESSION['userObj'])) {
                     WHERE `email` = '$email'
                     AND `id` != $userId";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
+
 
             if ($result->num_rows > 0) {
                 $emailErr = "Email already in use!";
@@ -80,7 +80,7 @@ if (!isset($_SESSION['userObj'])) {
                     WHERE `username` = '$username'
                     AND `id` != $userId";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
 
             if ($result->num_rows > 0) {
                 $usernameErr = "Username already in use!";
@@ -184,12 +184,12 @@ if (!isset($_SESSION['userObj'])) {
                 $password = sha1($password);
                 $q = "UPDATE `users` SET `password` = '$password' 
                 WHERE `id` = $userId";
-                $conn->query($q);
+                $result = $database->executeQuery($q);
             }
 
             $q = "UPDATE `users` SET `name` = '$name', `surname` = '$surname', `email` = '$email', `username` = '$username', `phone_number` = '$telephone', `address` = '$address', `location` = '$location', `user_level` = '$userLevel', `postcode` = '$postcode', `dob` = '$dob'
             WHERE `id` = $userId";
-            $conn->query($q);
+            $result = $database->executeQuery($q);
             header("Location: ../users");
         }
     }

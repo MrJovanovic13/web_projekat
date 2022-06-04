@@ -1,29 +1,30 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/category.php";
-
+require "../../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $deleteErr;
 
-session_start();
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         if ($action == 'removeCategory') {
             $q = "SELECT `id` FROM `products` WHERE `category_id`=" . $_GET['categoryId'];
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             if ($row = $result->fetch_assoc()) {
                 $deleteErr = "Category still has products using it!";
             } else {
                 $q = "DELETE FROM `category` WHERE `id`=" . $_GET['categoryId'];
-                $result = $conn->query($q);
+                $result = $database->executeQuery($q);
             }
         }
 
         $categories = array();
         $q = "SELECT `id`, `name`
             FROM `category`";
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             while ($row = $result->fetch_assoc()) {
                 $categories[] = new Category($row['id'],$row['name']);
             }

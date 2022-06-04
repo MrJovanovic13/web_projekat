@@ -1,11 +1,9 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/message.php";
-require_once "../../controller/ticket.php";
+require "../../vendor/autoload.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $deleteErr;
 
@@ -45,12 +43,12 @@ if (isset($_SESSION['userObj'])) {
 
             $q = "INSERT INTO `tickets`(`name`,`user_sender`,`is_open`) 
             VALUES ('$title','$userId','1')";
-            $conn->query($q);
-            $ticketId = $conn->insert_id;
+            $result = $database->executeQuery($q);
+            $ticketId = $database->lastInsertedId();
 
             $q = "INSERT INTO `message`(`user_id`,`message_content`,`date_time`,`ticket_id`) 
                             VALUES ('$userId','$messageContent','$date','$ticketId')";
-            $conn->query($q);
+            $result = $database->executeQuery($q);
             header("Location: ../tickets/");
         }
     }

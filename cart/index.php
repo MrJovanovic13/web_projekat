@@ -1,11 +1,10 @@
 <?php
-require_once "../controller/cartL.php";
-require_once "../controller/product.php";
-require_once "../connection/connection.php";
+require "../vendor/autoload.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$database = new Database();
 
 if ($_SERVER['REQUEST_METHOD']=="GET"){
     $cartTotal = 0;
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD']=="GET"){
             $q = "SELECT `id`, `name`, `description`, `price`, `imgUrl`
                   FROM `products`
                   WHERE `id`=$cartItemId";
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
             $row = $result->fetch_assoc();
   
             $cartTotal += $row['price'] * $_SESSION['cart'][$i]->quantity;

@@ -1,7 +1,10 @@
 <?php
-require_once "../../connection/connection.php";
+require "../../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$database = new Database();
 
-session_start();
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         include("../orders/");
@@ -56,7 +59,7 @@ if (isset($_SESSION['userObj'])) {
         } else {
             $q = "INSERT INTO `products`(`name`,`description`, `price`, `imgUrl`, `in_stock`, `category_id`) 
                             VALUES ('$name', '$description', '$price', '$imgurl', '1', '1')";
-            $conn->query($q);
+            $result = $database->executeQuery($q);
             header("Location: ../../my-account/");
         }
     }

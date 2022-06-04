@@ -1,8 +1,10 @@
 <?php
-require_once "../connection/connection.php";
-require_once '../controller/logging.php';
+require "../vendor/autoload.php";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
-
+$database = new Database();
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
         if ($action == "logOut") {
@@ -19,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $q = "SELECT * FROM users WHERE email = '$email'";
 
-        $result = $conn->query($q);
+        $result = $database->executeQuery($q);
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
             $dbPass = $row['password'];
@@ -27,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $msg = "Incorrect login info!";
                 include_once("../view/login.php");
             } else {
-                require_once '../controller/user.php';
                 session_start();
                 $_SESSION['loggedIn'] = $email;
 

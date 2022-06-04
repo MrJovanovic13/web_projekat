@@ -1,11 +1,10 @@
 <?php
-require_once "../../connection/connection.php";
-require_once "../../controller/user.php";
+require "../../vendor/autoload.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+$database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $id = isset($_GET['userId']) ? $_GET['userId'] : "";
 
@@ -45,7 +44,7 @@ if (!isset($_SESSION['userObj'])) {
                     WHERE `email` = '$email'
                     AND `id` != $userId";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
 
             if ($result->num_rows > 0) {
                 $emailErr = "Email already in use!";
@@ -102,7 +101,7 @@ if (!isset($_SESSION['userObj'])) {
                     WHERE `username` = '$username'
                     AND `id` != $userId";
 
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
 
             if ($result->num_rows > 0) {
                 $usernameErr = "Username already in use";
@@ -154,7 +153,7 @@ if (!isset($_SESSION['userObj'])) {
 
             $q = "UPDATE `users` SET `name` = '$name', `surname` = '$surname', `email` = '$email', `username` = '$username', `password` = '$password', `phone_number` = '$telephone', `address` = '$address', `location` = '$location', `postcode` = '$postcode', `dob` = '$dob'
             WHERE `id` =" . $userId;
-            $result = $conn->query($q);
+            $result = $database->executeQuery($q);
 
             $userObj = new LoggedUser($userId, $name, $surname, $email, $username, $password, $telephone, $address, $location, 0, $postcode, $dob);
             unset($_SESSION['userObj']);

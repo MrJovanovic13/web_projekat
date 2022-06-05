@@ -357,8 +357,52 @@ class AccountInfoValidator extends EditUserValidator {
 
         if (empty($val)) {
             $this->addError('password', 'Password cannot be empty!');
-        } elseif($row['password']!=$val) {
+        } elseif($row['password']!=sha1($val)) {
             $this->addError('password', 'Incorrect password!');
         } 
+    }
+}
+
+class ChangePasswordValidator extends AccountInfoValidator {
+    protected static $fields = ['password', 'retypePassword', 'newPassword'];
+    public function validateForm()
+    {
+        foreach (self::$fields as $field) {
+            if (!array_key_exists($field, $this->data)) {
+                trigger_error("'$field' is not present in the data");
+                return;
+            }
+        }
+
+        $this->validatePassword();
+        $this->validateRetypePassword();
+        $this->validateNewPassword();
+
+        return $this->errors;
+    }
+    protected function validateNewPassword()
+    {
+        $val = self::testInput($this->data['newPassword']);
+
+        if (empty($val)) {
+            $this->addError('newPassword', 'Password cannot be empty!');
+        } else {
+            $uppercase = preg_match('@[A-Z]@', $val);
+            $lowercase = preg_match('@[a-z]@', $val);
+            $number    = preg_match('@[0-9]@', $val);
+
+            if (!$uppercase || !$lowercase || !$number || strlen($val) < 8) {
+                $this->addError('newPassword', 'Password must be longer than 8 characters and it must contain at least 1 uppercase,1 lowercase character and 1 number!');
+            }
+        }
+    }
+    protected function validateRetypePassword()
+    {
+        $val = self::testInput($this->data['newPassword']);
+        $valRetype = self::testInput($this->data['retypePassword']);
+
+        if ($val != $valRetype) {
+            $this->addError('retypePassword', "Passwords don't match!");
+        }
     }
 }

@@ -6,6 +6,9 @@ $user = unserialize($_SESSION['userObj']);
 $userLevel = $user->userLevel;
 ?>
 <?php if ($userLevel == 2) : ?>
+    <form class="menuForm" action="../account-info/">
+        <input class="menuButton" type="submit" value="Account info" />
+    </form>
     <form class="menuForm" action="../orders/">
         <input class="menuButton" type="submit" value="Orders" />
     </form>
@@ -22,6 +25,9 @@ $userLevel = $user->userLevel;
         <input class="menuButton" type="submit" value="Tickets" />
     </form>
 <?php elseif ($userLevel == 1) : ?>
+    <form class="menuForm" action="../account-info/">
+        <input class="menuButton" type="submit" value="Account info" />
+    </form>
     <form class="menuForm" action="../orders/">
         <input class="menuButton" type="submit" value="Orders" />
     </form>
@@ -35,7 +41,7 @@ $userLevel = $user->userLevel;
     <form class="menuForm" action="../orders/">
         <input class="menuButton" type="submit" value="Orders" />
     </form>
-    <form class="menuForm" action="../users/">
+    <form class="menuForm" action="../account-info/">
         <input class="menuButton" type="submit" value="Account info" />
     </form>
     <form class="menuForm" action="../tickets/">

@@ -15,182 +15,80 @@ if (!isset($_SESSION['userObj'])) {
         if ($action == 'editUser') {
             $q = "SELECT `id`, `name`, `surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`
             FROM `users`
-            WHERE `id`=" . $id;
-            $result = $database->executeQuery($q);
+            WHERE `id`=?";
+            
+            $stmt = $database->prepareQuery($q);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
             $row = $result->fetch_assoc();
 
             $addUser = new LoggedUser($row['id'], $row['name'], $row['surname'], $row['email'], $row['username'], "", $row['phone_number'], $row['address'], $row['location'], $row['user_level'], $row['postcode'], $row['dob']);
             include("../view/edit-user.php");
         }
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-        function test_input($data)
-        {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
+
+        $validation = new EditUserValidator($_POST);
+
+        $name = isset($_POST['name']) ? $validation->testInput($_POST['name']) : "";
+        $surname = isset($_POST['surname']) ? $validation->testInput($_POST['surname']) : "";
+        $email = isset($_POST['email']) ? $validation->testInput($_POST['email']) : "";
+        $telephone = isset($_POST['telephone']) ? $validation->testInput($_POST['telephone']) : "";
+        $username = isset($_POST['username']) ? $validation->testInput($_POST['username']) : "";
+        $address = isset($_POST['address']) ? $validation->testInput($_POST['address']) : "";
+        $location = isset($_POST['location']) ? $validation->testInput($_POST['location']) : "";
+        $postcode = isset($_POST['postcode']) ? $validation->testInput($_POST['postcode']) : "";
+        $dob = isset($_POST['dob']) ? $validation->testInput($_POST['dob']) : "";
+        $password = isset($_POST['password']) ? $validation->testInput($_POST['password']) : "";
+        $retypePassword = isset($_POST['retypePassword']) ? $validation->testInput($_POST['retypePassword']) : "";
+        $userLevel = isset($_POST['userLevel']) ? $validation->testInput($_POST['userLevel']) : "";
+
+        $errors = [];
+
         $userId = $_POST["userId"];
 
-        // email validation
-        if (empty($_POST["email"])) {
-            $emailErr = "You must input this field!";
-        } else {
-            $email = test_input($_POST["email"]);
+        if (isset($_POST['submit'])) {
+            if ($_POST['submit'] == "Edit user") {
+                $errors = $validation->validateForm();
+                if (count($errors) > 0) {
+                    $addUser = new LoggedUser(0, $name, $surname, $email, $username, $password, $telephone, $address, $location, $userLevel, $postcode, $dob);
+                    include_once('../view/edit-user.php');
+                } else {
+                    if (isset($_POST['password']) && isset($_POST['retypePassword'])&&!empty($_POST['password'])) {
+                        $passwordValidator =  new passwordOnlyValidator($_POST);
+                        $passwordErrors = [];
+                        $passwordErrors = $passwordValidator->validateForm();
+                        
+                        if (count($passwordErrors) > 0) {
+                            $addUser = new LoggedUser(0, $name, $surname, $email, $username, $password, $telephone, $address, $location, $userLevel, $postcode, $dob);
+                            include_once('../view/edit-user.php');
+                        } else {
+                            $password = sha1($password);
+                            $q = "UPDATE `users` SET `password` = ? WHERE `id` = ?";
+                            $stmt = $database->prepareQuery($q);
+                            $stmt->bind_param('si', $password, $userId);
+                            $stmt->execute();
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Invalid email adress!";
+                            $q = "UPDATE `users` SET `name` = ?, `surname` = ?, `email` = ?, `username` = ?, `phone_number` = ?, `address` = ?, `location` = ?, `user_level` = ?, `postcode` = ?, `dob` = ?
+                            WHERE `id` = ?";
+                            $stmt = $database->prepareQuery($q);
+                            $stmt->bind_param('sssssssissi', $name, $surname, $email, $username, $telephone, $address, $location, $userLevel, $postcode, $dob, $userId);
+                            $stmt->execute();
+                            header("Location: ../users");
+                        }
+                    } else {
+                        $q = "UPDATE `users` SET `name` = ?, `surname` = ?, `email` = ?, `username` = ?, `phone_number` = ?, `address` = ?, `location` = ?, `user_level` = ?, `postcode` = ?, `dob` = ?
+                        WHERE `id` = ?";
+                        $stmt = $database->prepareQuery($q);
+                        $stmt->bind_param('sssssssissi', $name, $surname, $email, $username, $telephone, $address, $location, $userLevel, $postcode, $dob, $userId);
+                        $stmt->execute();
+                        header("Location: ../users");
+                    }
+                }
             }
-
-            $q = "SELECT `id` 
-                    FROM `users` 
-                    WHERE `email` = '$email'
-                    AND `id` != $userId";
-
-            $result = $database->executeQuery($q);
-
-
-            if ($result->num_rows > 0) {
-                $emailErr = "Email already in use!";
-            }
-        }
-
-        //First name validation
-        if (empty($_POST["name"])) {
-            $nameErr = "You must input this field!";
         } else {
-            $name = test_input($_POST["name"]);
-        }
-
-        //Surname validation
-        if (empty($_POST["surname"])) {
-            $surnameErr = "You must input this field!";
-        } else {
-            $surname = test_input($_POST["surname"]);
-        }
-
-        //Username validation
-        if (empty($_POST["username"])) {
-            $usernameErr = "You must input this field!";
-        } else {
-            $username = test_input($_POST["username"]);
-
-            $q = "SELECT `id` 
-                    FROM `users` 
-                    WHERE `username` = '$username'
-                    AND `id` != $userId";
-
-            $result = $database->executeQuery($q);
-
-            if ($result->num_rows > 0) {
-                $usernameErr = "Username already in use!";
-            }
-        }
-        //telephone name validation
-        if (empty($_POST["telephone"])) {
-            $telephoneErr = "You must input this field!";
-        } else {
-            $telephone = test_input($_POST["telephone"]);
-        }
-
-        //city name(location) validation
-        if (empty($_POST["location"])) {
-            $locationErr = "You must input this field!";
-        } else {
-            $location = test_input($_POST["location"]);
-        }
-
-        //Postcode name validation
-        if (empty($_POST["postcode"])) {
-            $postcodeErr = "You must input this field!";
-        } else {
-            $postcode = test_input($_POST["postcode"]);
-            if (!is_numeric($postcode))
-                $zipCodeErr = "Invalid Postcode!";
-        }
-
-        //address validation
-        if (empty($_POST["address"])) {
-            $addressErr = "You must input this field!";
-        } else {
-            $address = test_input($_POST["address"]);
-        }
-
-        //dob validation
-        if (empty($_POST["dob"])) {
-            $dobErr = "You must input this field!";
-        } else {
-            $dob = test_input($_POST["dob"]);
-        }
-
-        //userLevel validation
-        if (!isset($_POST["userLevelUser"])) {
-            $userLevelUserErr = "You must input this field!";
-        } elseif ($_POST['userLevelUser'] != 0 && $_POST['userLevelUser'] != 1 && $_POST['userLevelUser'] != 2) {
-            $userLevelUserErr = "Invalid user level!";
-        } else {
-            $userLevelUser = test_input($_POST["userLevelUser"]);
-        }
-
-        if (empty($_POST["userLevel"])) {
-            $userLevelErr = "You must input this field!";
-        } else {
-            $userLevel = test_input($_POST["userLevel"]);
-        }
-
-        if (isset($nameErr) || isset($surnameErr) || isset($emailErr) || isset($locationErr) || isset($telephoneErr) || isset($usernameErr) || isset($addressErr) || isset($postcodeErr) || isset($dobErr) || isset($userLevelUserErr)) {
-
-            $name = isset($_POST['name']) ? $_POST['name'] : "";
-            $surname = isset($_POST['surname']) ? $_POST['surname'] : "";
-            $email = isset($_POST['email']) ? $_POST['email'] : "";
-            $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : "";
-            $username = isset($_POST['username']) ? $_POST['username'] : "";
-            $address = isset($_POST['address']) ? $_POST['address'] : "";
-            $location = isset($_POST['location']) ? $_POST['location'] : "";
-            $postcode = isset($_POST['postcode']) ? $_POST['postcode'] : "";
-            $dob = isset($_POST['dob']) ? $_POST['dob'] : "";
-            $userLevelUser = isset($_POST['userLevelUser']) ? $_POST['userLevelUser'] : "";
-            $password = isset($_POST['password']) ? $_POST['password'] : "";
-            $retypePassword = isset($_POST['retypePassword']) ? $_POST['retypePassword'] : "";
-
-            $addUser = new LoggedUser(0, $name, $surname, $email, $username, $password, $telephone, $address, $location, $userLevelUser, $postcode, $dob);
+            $addUser = new LoggedUser(0, $name, $surname, $email, $username, $password, $telephone, $address, $location, $userLevel, $postcode, $dob);
             include_once('../view/edit-user.php');
-        } else {
-            if (isset($_POST['password']) && isset($_POST['retypePassword'])) {
-                //Password validation
-                if (empty($_POST["password"])) {
-                    $passwordErr = "You must input this field";
-                } else {
-                    $password = test_input($_POST["password"]);
-                    $uppercase = preg_match('@[A-Z]@', $password);
-                    $lowercase = preg_match('@[a-z]@', $password);
-                    $number    = preg_match('@[0-9]@', $password);
-
-                    if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
-                        $passwordErr = 'Password must be longer than 8 characters and it must contain at least 1 uppercase,1 lowercase character and 1 number!';
-                    }
-                }
-
-                //Password  repeat validation
-                if (empty($_POST["retypePassword"])) {
-                } else {
-                    $password = test_input($_POST["password"]);
-                    $retypepassword = test_input($_POST["retypePassword"]);
-
-                    if ($password != $retypepassword) {
-                        $retypePasswordErr = "Passwords don't match!";
-                    }
-                }
-                $password = sha1($password);
-                $q = "UPDATE `users` SET `password` = '$password' 
-                WHERE `id` = $userId";
-                $result = $database->executeQuery($q);
-            }
-
-            $q = "UPDATE `users` SET `name` = '$name', `surname` = '$surname', `email` = '$email', `username` = '$username', `phone_number` = '$telephone', `address` = '$address', `location` = '$location', `user_level` = '$userLevel', `postcode` = '$postcode', `dob` = '$dob'
-            WHERE `id` = $userId";
-            $result = $database->executeQuery($q);
-            header("Location: ../users");
         }
     }
 }

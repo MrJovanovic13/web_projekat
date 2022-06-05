@@ -1,5 +1,4 @@
 <?php
-    require_once "../connection/connection.php";
 
     function textValidation($text) {
         if(empty($text)) {

@@ -15,10 +15,10 @@ require_once "../../connection/connection.php";
         </div>
         <br>
         <div class="container" id="container">
+            <form class="menuForm" action="../add-user/">
+                <input class="menuButton" type="submit" value="Add user" />
+            </form>
             <table>
-                <form class="menuForm" action="../add-user/">
-                    <input class="menuButton" type="submit" value="Return" />
-                </form>
                 <br>
                 <br>
                 <!--First br does nothing for some reason, so i put another one. -->

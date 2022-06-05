@@ -1,8 +1,5 @@
 <?php
 require "../../vendor/autoload.php";
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;

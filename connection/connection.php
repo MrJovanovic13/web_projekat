@@ -24,6 +24,10 @@ class Database
         return $this->mysqli;
     }
 
+    public function prepareQuery($q) {
+        return $this->mysqli->prepare($q);
+    }
+
     public function executeQuery($sql)
     {
         $result = $this->mysqli->query($sql);

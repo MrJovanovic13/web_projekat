@@ -22,7 +22,6 @@ require_once "../template/navbarLogged.php";
             <?= $orderUser->email ?> <br>
             <?= $orderUser->address ?> <br>
             <?= $orderUser->location ?> <br>
-            <hr>
             <table>
                 <tr>
                     <th>ID</th>
@@ -32,21 +31,47 @@ require_once "../template/navbarLogged.php";
                     <th>Total</th>
                 </tr>
                 <?php foreach ($cartProducts as $cartProduct) : ?>
-                    <tr>
+                    <?php if ($highlightCounterItems++ % 2 == 0) : ?>
+                        <tr class="highlighted">
+                        <?php else : ?>
+                        <tr>
+                        <?php endif ?>
                         <td><?= $cartProduct->id ?></td>
                         <td><?= $cartProduct->name ?></td>
                         <td><?= $cartProduct->price ?>$</td>
                         <td><?= $cartProduct->quantity ?></td>
                         <td><?= $cartProduct->quantity *  $cartProduct->price ?>$</td>
-                    </tr>
-                <?php endforeach ?>
+                        </tr>
+                    <?php endforeach ?>
             </table>
+            <br>
             Order:<?= $cartTotal ?>$
-            <hr>
+            <br>
             Shipping:10$
-            <hr>
+            <br>
             Order total:<?= $cartTotal + 10 ?>$
-            <hr>
+            <br>
+            Order status history:
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                <?php foreach ($orderStatusHistory as $statusHistory) : ?>
+                    <?php if ($highlightCounterStatus++ % 2 == 0) : ?>
+                        <tr class="highlighted">
+                        <?php else : ?>
+                        <tr>
+                        <?php endif ?>
+                        <td>
+                            <?= $statusHistory->datetime ?>
+                        </td>
+                        <td>
+                            <?= $statusHistory->name ?>
+                        </td>
+                        </tr>
+                    <?php endforeach; ?>
+            </table>
             Order status:<?= $orderStatus ?>
             <?php
 
@@ -55,7 +80,6 @@ require_once "../template/navbarLogged.php";
                 <form action="../edit-order/controller.php" method="POST">
                     <select id="orderStatus" name="orderStatus">
                         <?php foreach ($orderStatusList as $status) : ?>
-
                             <?php if ($status->name == $orderStatus) : ?>
                                 <option selected value=<?= $status->id ?>><?= $status->name ?></option>
                             <?php else : ?>

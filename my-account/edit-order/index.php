@@ -11,6 +11,16 @@ if (!isset($_SESSION['userObj'])) {
     header("Location: ../../login");
     die();
 } else {
+
+    $orderCart = array();
+    $cartTotal = 0;
+    $cartProducts = array();
+    $orderStatus;
+    $orderStatusList = array();
+    $orderStatusHistory = array();
+    $highlightCounterItems = 0;
+    $highlightCounterStatus = 0;
+
     $q = "SELECT `id`, `name`, `surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`
             FROM `users`
             WHERE `id`=" . $id;
@@ -24,17 +34,12 @@ if (!isset($_SESSION['userObj'])) {
             WHERE `order_id`=" . $orderId;
     $result = $database->executeQuery($q);
 
-    $orderCart = array();
+    
     $i = 0;
     while ($row = $result->fetch_assoc()) {
         $orderCart[] = new CartL($row['product_id'], $row['amount']);
         $i++;
     }
-
-    $cartTotal = 0;
-    $cartProducts = array();
-    $orderStatus;
-    $orderStatusList = array();
 
     for ($i = 0; $i < count($orderCart); $i++) {
         $cartItemId = $orderCart[$i]->id;
@@ -65,6 +70,27 @@ if (!isset($_SESSION['userObj'])) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $orderStatusList[] = new OrderStatus($row['id'], $row['name']);
+        }
+    }
+
+    $q = "SELECT `status`.`name`, `order_status`.`date`, `order_status`.`time`
+    FROM `order_status`
+    LEFT JOIN status
+    ON `order_status`.`status_id` = `status`.`id`
+    WHERE `order_status`.`order_id`=?
+    ORDER BY `date` ASC, `time` ASC";
+
+    $stmt = $database->prepareQuery($q);
+    $stmt->bind_param('i', $orderId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $phpdate = strtotime( $row['date'] . $row['time'] );
+            $datetime = date( 'Y-m-d H:i:s', $phpdate );
+
+            $orderStatusHistory[] = new OrderStatusHistory($row['name'],$datetime);
         }
     }
     include("../view/edit-order.php");

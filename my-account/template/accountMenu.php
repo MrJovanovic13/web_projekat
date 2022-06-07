@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="../../css/account-menu.css">
 
 <?php
-require_once "../../controller/user.php";
 $user = unserialize($_SESSION['userObj']);
 $userLevel = $user->userLevel;
 ?>

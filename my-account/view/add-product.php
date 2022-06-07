@@ -3,6 +3,7 @@ require_once "../template/navbarLogged.php";
 
 ?>
 <link rel="stylesheet" href="../../css/dashboard.css">
+
 <div class="shell">
     <div class="buttons-div">
         <?php

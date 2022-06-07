@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $database = new Database();
+$logController = new LogController();
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
         if ($action == "logOut") {
@@ -38,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $_SESSION['role'] = $row['user_level'];
                 $_SESSION['userId'] = $row['id'];
 
-                $logs = __DIR__ . "/../logs/";
-                $file=fopen($logs.date("Y-m-d").'-'.$_SESSION['userId'].'.log', 'a');
-                fwrite($file,'UserID: '.$row['id'].'| name: '.$row['name']. '| Logged in |'.date("h:i:sa")."\n");
+                $message = 'UserID: '.$row['id'].' | name: '.$row['name']. ' | Logged in | '.date("h:i:sa");
+                $logController->log($message);
+
                 header("Location: ../my-account/");
             }
         } else {

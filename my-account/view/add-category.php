@@ -21,7 +21,7 @@ require_once "../template/navbarLogged.php";
         <form action="../add-category/" method="post">
             <p>
                 Name:
-                <input type="text" name="name" value="<?php if (isset($name)) : ?> <?= $name ?> <?php endif ?>">
+                <input type="text" name="name" value="<?php if (isset($name)) : ?><?=$name?><?php endif ?>">
                 <?php if (isset($nameErr)) : ?><span class="error"><?= $nameErr ?> <?php endif ?></span>
             </p>
             <br>

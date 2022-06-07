@@ -208,6 +208,7 @@ a.qty:hover {
   max-width: 20px;
   max-height: 20px;
   position: relative;
+  cursor: pointer;
 }
 .editIcon {
   max-width: 20px;
@@ -246,11 +247,13 @@ a.qty:hover {
   transition: transform 80ms ease-in;
   display: block;
   float: right;
+  cursor: pointer;
 }
 
 .shell {
   min-height: 66.5vh;
 }
+
 
 @media screen and (max-width: 755px) {
   .container {

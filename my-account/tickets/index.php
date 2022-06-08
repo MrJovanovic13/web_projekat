@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $deleteErr;
 $user = unserialize($_SESSION['userObj']);
@@ -30,7 +31,9 @@ if (isset($_SESSION['userObj'])) {
         include("../view/tickets.php");
     } elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
         $q = "UPDATE `tickets` SET `is_open` = '0'
-        WHERE `id` =" . $_POST['ticketId'];
+        WHERE `id` =" . $_POST['ticketId']; 
+        $message = "Succesfully edited ticket with ID:" . $_POST['ticketId'];
+        $logController->log($message);
         $result = $database->executeQuery($q);
         header("Location: ../tickets/");
     }

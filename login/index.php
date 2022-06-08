@@ -30,16 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $msg = "Incorrect login info!";
                 include_once("../view/login.php");
             } else {
-                session_start();
                 $_SESSION['loggedIn'] = $email;
 
                 $userObj = new LoggedUser($row['id'], $row['name'], $row['surname'], $row['email'], $row['username'], $row['password'],$row['phone_number'], $row['address'], $row['location'], $row['user_level'], $row['postcode'], $row['dob']);
 
                 $_SESSION['userObj'] = serialize($userObj);
-                $_SESSION['role'] = $row['user_level'];
-                $_SESSION['userId'] = $row['id'];
 
-                $message = 'UserID: '.$row['id'].' | name: '.$row['name']. ' | Logged in | '.date("h:i:sa");
+                $message = 'Logged in successfully';
                 $logController->log($message);
 
                 header("Location: ../my-account/");

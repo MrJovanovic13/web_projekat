@@ -4,6 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $database = new Database();
+$logController = new LogController();
+
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $id = isset($_GET['userId']) ? $_GET['userId'] : $_POST['userId'];
 
@@ -82,6 +84,8 @@ if (!isset($_SESSION['userObj'])) {
                         $stmt = $database->prepareQuery($q);
                         $stmt->bind_param('sssssssissi', $name, $surname, $email, $username, $telephone, $address, $location, $userLevel, $postcode, $dob, $userId);
                         $stmt->execute();
+                        $message = "Succesfully edited user:" . $userId;
+                        $logController->log($message);
                         header("Location: ../users");
                     }
                 }

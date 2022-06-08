@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
 
@@ -24,21 +25,24 @@ if ($action == 'checkout') {
         VALUES ('$date', '$user_id')";
 
         $result = $database->executeQuery($q);
-        $order_id = $database->lastInsertedId();
+        $orderId = $database->lastInsertedId();
 
         for ($i = 0; $i < count($_SESSION['cart']); $i++) {
             $product_id = $_SESSION['cart'][$i]->id;
             $quantity = $_SESSION['cart'][$i]->quantity;
 
             $q = "INSERT INTO `items`(`order_id`,`product_id`,`amount`) 
-                VALUES ('$order_id', '$product_id', '$quantity')";
+                VALUES ('$orderId', '$product_id', '$quantity')";
             $result = $database->executeQuery($q);
         }
 
         $time = date('H:i:s', time());
         $q = "INSERT INTO `order_status`(`date`,`time`,`order_id`,`status_id`) 
-        VALUES ('$date', '$time','$order_id',1)";
+        VALUES ('$date', '$time','$orderId',1)";
         $result = $database->executeQuery($q);
+
+        $message = "Succesfully placed order with ID:" . $orderId;
+        $logController->log($message);
 
         unset($_SESSION['cart']);
     

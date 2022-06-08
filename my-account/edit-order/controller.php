@@ -1,6 +1,8 @@
 <?php
 require "../../vendor/autoload.php";
 $database = new Database();
+$logController = new LogController();
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $date_info = getdate();
@@ -18,5 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         VALUES ('$date', '$time', '$orderId', '$orderStatus')";
 
     $result = $database->executeQuery($q);
+    $message = "Succesfully edited order with ID:" . $orderId;
+    $logController->log($message);
     header("Location: ../orders");
 }

@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $deleteErr;
 
@@ -69,6 +70,8 @@ if (isset($_SESSION['userObj'])) {
         } else {
             $q = "INSERT INTO `message`(`user_id`,`message_content`,`date_time`,`ticket_id`) 
             VALUES ('$userId','$messageContent','$date','$ticketId')";
+            $message = "Succesfully edited ticket with ID: " . $ticketId;
+            $logController->log($message);
             $result = $database->executeQuery($q);
         }
         

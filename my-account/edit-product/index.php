@@ -9,6 +9,8 @@ if (!isset($_SESSION['userObj'])) {
 }
 
 $database = new Database();
+$logController = new LogController();
+
 $categories = array();
 $skipFirst = 0;
 
@@ -132,6 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $q = "UPDATE `products` SET `name` = '$name', `description` = '$description', `price` = '$price', `imgUrl` = '$imgUrl', `in_stock` = '$inStock', `category_id` = '$category'
         WHERE `id` =" . $_POST['productId'];
         $result = $database->executeQuery($q1);
+        $message = "Succesfully edited product with ID: " . $_POST['productId'];
+        $logController->log($message);
         header("Location: ../products/");
     }
 } else {

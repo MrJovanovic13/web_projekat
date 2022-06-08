@@ -5,8 +5,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $id = isset($_GET['userId']) ? $_GET['userId'] : "";
+$user = unserialize($_SESSION['userObj']);
+$userLevel = $user->userLevel;
 
 if (!isset($_SESSION['userObj'])) {
     header("Location: ../../login");
@@ -45,8 +48,16 @@ if (!isset($_SESSION['userObj'])) {
                     $q = "UPDATE `users` SET `name` = ?, `surname` = ?, `email` = ?, `username` = ?, `password` = ?, `phone_number` = ?, `address` = ?, `location` = ?, `postcode` = ?, `dob` = ?
                     WHERE `id` =?";
                     $stmt = $database->prepareQuery($q);
+                    var_dump($name);
                     $stmt->bind_param('ssssssssssi', $name, $surname, $email, $username, $password, $telephone, $address, $location, $postcode, $dob,$userId);
                     $stmt->execute();
+
+                    $userObj = new LoggedUser($userId, $name, $surname, $email, $username, $password, $telephone, $address, $location, $userLevel, $postcode, $dob);
+
+                    $_SESSION['userObj'] = serialize($userObj);
+
+                    $message = "Succesfully changed own user data";
+                    $logController->log($message);
                     header("Location: ../orders");
                 }
             }

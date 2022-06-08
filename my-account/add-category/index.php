@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
 if (isset($_SESSION['userObj'])) {
@@ -42,6 +43,8 @@ if (isset($_SESSION['userObj'])) {
             $q = "INSERT INTO `category`(`name`) 
                             VALUES ('$name')";
             $result = $database->executeQuery($q);
+            $message = "Succesfully added category with ID:" . $database->lastInsertedId();
+            $logController->log($message);
             header("Location: ../categories/");
         }
     }

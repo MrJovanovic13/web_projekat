@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -39,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $stmt = $database->prepareQuery($q);
                 $stmt->bind_param('ssssssssiss', $name, $surname, $email, $username, $password, $telephone, $address, $location, $userLevel, $postcode, $dob);
                 $stmt->execute();
+                $message = "Succesfully added user with ID:" . $database->lastInsertedId();
+                $logController->log($message);
                 header("Location: ../users");
             }
         }

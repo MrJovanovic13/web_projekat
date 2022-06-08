@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $categoryId = isset($_GET['categoryId']) ? $_GET['categoryId'] : "";
 $nameCurrent;
@@ -34,7 +35,8 @@ if (isset($_SESSION['userObj'])) {
         $q = "UPDATE `category` SET `name` = '$nameNew'
             WHERE `id` =". $_POST['categoryId'];
             $result = $database->executeQuery($q);
-
+            $message = "Succesfully edited category with ID:" . $_POST['categoryId'];
+            $logController->log($message);
             header("Location: ../categories/");
     }
 } else {

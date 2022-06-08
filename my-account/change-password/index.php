@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $database = new Database();
+$logController = new LogController();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $user = unserialize($_SESSION['userObj']);
 $userId = $user->id;
@@ -33,7 +34,8 @@ if (!isset($_SESSION['userObj'])) {
                     $stmt = $database->prepareQuery($q);
                     $stmt->bind_param('si', $password, $userId);
                     $stmt->execute();
-
+                    $message = "Succesfully changed password.";
+                    $logController->log($message);
                     header("Location: ../orders");
                 }
             }

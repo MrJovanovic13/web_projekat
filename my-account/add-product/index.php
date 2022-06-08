@@ -7,6 +7,8 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_SESSION['userObj'])) {
 
 $database = new Database();
+$logController = new LogController();
+
 $categories = array();
 $skipFirst = 0;
 
@@ -105,6 +107,10 @@ if ($result->num_rows > 0) {
                 $q = "INSERT INTO `products`(`name`,`description`, `price`, `imgUrl`, `in_stock`, `category_id`) 
                 VALUES ('$name', '$description', '$price', '$imgUrl', '$inStock', '$category')";
                 $result = $database->executeQuery($q);
+
+                $message = "Succesfully added product with ID:" . $database->lastInsertedId();
+                $logController->log($message);
+
                 header("Location: ../products/");
         }
     }

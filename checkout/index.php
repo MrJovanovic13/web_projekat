@@ -15,7 +15,7 @@ if(isset($_SESSION['userObj'])){
     for ($i = 0; $i < count($_SESSION['cart']); $i++) {
         if (isset($_SESSION['cart'][$i])) {
             $cartItemId = $_SESSION['cart'][$i]->id;
-            $q = "SELECT `id`, `name`, `price` FROM `products` WHERE ?";
+            $q = "SELECT `id`, `name`, `price` FROM `products` WHERE `id`=?";
             $stmt = $database->prepareQuery($q);
             $stmt->bind_param('i', $cartItemId);
             $stmt->execute();

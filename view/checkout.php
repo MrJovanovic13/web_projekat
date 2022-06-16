@@ -26,24 +26,29 @@ require_once "../template/navbar.php";
         Order details:
         <hr>
         <table>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-            </tr>
-            <tr>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php foreach ($cartProducts as $cartProduct) : ?>
-                    <td>
-                        <?= $cartProduct->name ?>
-                    </td>
-                    <td>
-                        <?= $cartProduct->price ?>$
-                    </td>
-                    <td>
-                        <?= $cartProduct->quantity ?>
-                    </td>
+                    <tr>
+                        <td>
+                            <?= $cartProduct->name ?>
+                        </td>
+                        <td>
+                            <?= $cartProduct->price ?>$
+                        </td>
+                        <td>
+                            <?= $cartProduct->quantity ?>
+                        </td>
+                    </tr>
+
                 <?php endforeach; ?>
-            </tr>
+            </tbody>
         </table>
         VAT:
         <?= $cartTotal ?>

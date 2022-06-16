@@ -207,7 +207,9 @@ a.buy-btn:hover , a.buy-btn:active, a.buy-btn:focus{
   padding-top: 1%;
 }
 
-
+h1 {
+  color: #FF9800 !important;
+}
 
 
 @media screen and (max-width: 991px) {

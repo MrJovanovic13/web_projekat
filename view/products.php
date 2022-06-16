@@ -49,6 +49,9 @@ require_once "../template/navbar.php";
     <div class="container">
 
       <div class="row">
+        <?php if(empty(returnProductsFromPage($currentPageUser, $products))): ?>
+            <h1>There are no products available with the selected category!</h1>
+          <?php endif; ?>
         <?php foreach (returnProductsFromPage($currentPageUser, $products) as $product) : ?>
           <?php if ($counter % 4 == 0 && $counter != 0) : ?>
       </div>

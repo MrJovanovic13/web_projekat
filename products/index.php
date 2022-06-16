@@ -13,6 +13,17 @@ $q = "SELECT `id`, `name` FROM `category`";
 
 $result = $database->executeQuery($q);
 
+function returnProductsFromPage($page,$arrayOfProducts) 
+{
+    $products = array();
+    foreach($arrayOfProducts as $product){
+        if($product->page == $page){
+            $products[] = $product;
+        }
+    }
+    return $products;
+}
+
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
     if (isset($_POST["category"]) && $_POST["category"] == $row["id"]) {

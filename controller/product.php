@@ -77,14 +77,4 @@
             $this->page = $page;
         }
     }
-    function returnProductsFromPage($page,$arrayOfProducts) 
-    {
-        $products = array();
-        foreach($arrayOfProducts as $product){
-            if($product->page == $page){
-                $products[] = $product;
-            }
-        }
-        return $products;
-    }
 ?>

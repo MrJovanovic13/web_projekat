@@ -6,7 +6,6 @@ if (session_status() === PHP_SESSION_NONE) {
 $database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $deleteErr;
-$highlightCounter = 0;
 
 if (isset($_SESSION['userObj'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {

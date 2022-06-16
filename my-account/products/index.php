@@ -18,7 +18,6 @@ if (!isset($_SESSION['userObj']))
         $result = $database->executeQuery($q);
         header("Location: ../products"); 
     } else {
-        $highlightCounter = 0;
         $products = array();
 
         $q = "SELECT `id`, `name`, `category_id`, `price`, `in_stock`

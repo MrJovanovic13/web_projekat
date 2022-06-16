@@ -22,18 +22,16 @@ require_once "../../connection/connection.php";
                 <br>
                 <br>
                 <!--First br does nothing for some reason, so i put another one. -->
+                <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Action</th>
                 </tr>
+                </thead>
                 <?php foreach ($users as $user) : ?>
-                    <?php if ($highlightCounter++ % 2 == 0) : ?>
-                        <tr class="highlighted">
-                        <?php else : ?>
                         <tr>
-                        <?php endif; ?>
                         <td><?= $user->id ?></td>
                         <td><?= $user->name ?></td>
                         <td><?= $user->email ?></td>

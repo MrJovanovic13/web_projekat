@@ -23,6 +23,7 @@ require_once "../template/navbarLogged.php";
         <br>
 
         <table>
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -31,12 +32,9 @@ require_once "../template/navbarLogged.php";
                 <th>In stock</th>
                 <th>Action</th>
             </tr>
+            </thead>
             <?php foreach ($products as $product) : ?>
-                <?php if ($highlightCounter++ % 2 == 0) : ?>
-                    <tr class="highlighted">
-                    <?php else : ?>
                     <tr>
-                    <?php endif; ?>
                     <td><?= $product->id ?></td>
                     <td><?= $product->name ?></td>
                     <td><?= $product->category ?></td>

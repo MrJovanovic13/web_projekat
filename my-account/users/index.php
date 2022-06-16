@@ -21,7 +21,6 @@ if (!isset($_SESSION['userObj']))
         header("Location: ../account-info/");
     } else {
         $users = array();
-        $highlightCounter = 0;
         $q = "SELECT `id`, `name`, `email`
         FROM `users`";
 

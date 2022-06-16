@@ -22,7 +22,7 @@ require_once "../template/navbarLogged.php";
 
     </div><br>
         <div class="container" id="container">
-            <table>
+            <table >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -34,12 +34,7 @@ require_once "../template/navbarLogged.php";
                 </thead>
                 <tbody>
                     <?php foreach ($orders as $order) : ?>
-                        <?php if ($highlightCounter++ % 2 == 0) : ?>
-                            <tr class="highlighted">
-                            <?php else : ?>
                             <tr>
-                            <?php endif; ?>
-
                             <td><?= $order->id ?></td>
                             <td><?= $order->date ?></td>
                             <td><?= $order->price ?>$</td>

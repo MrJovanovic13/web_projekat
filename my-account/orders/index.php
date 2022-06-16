@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $result = $database->executeQuery($q);
     }
 
-    $highlightCounter = 0;
     $orderTotal = 0;
 
     $user = unserialize($_SESSION['userObj']);

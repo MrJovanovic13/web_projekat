@@ -29,12 +29,10 @@ require_once "../template/navbarLogged.php";
                     <th>Name</th>
                     <th>Action</th>
                 </tr>
+                </thead>
+                <tbody>
                 <?php foreach ($categories as $category) : ?>
-                    <?php if ($highlightCounter++ % 2 == 0) : ?>
-                        <tr class="highlighted">
-                        <?php else : ?>
                         <tr>
-                        <?php endif; ?>
                         <td><?= $category->id ?></td>
                         <td><?= $category->name ?></td>
                         <td>
@@ -52,8 +50,6 @@ require_once "../template/navbarLogged.php";
                         </td>
                         </tr>
                     <?php endforeach; ?>
-            </thead>
-            <tbody>
             </tbody>
         </table>
         <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>

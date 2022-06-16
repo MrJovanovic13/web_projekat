@@ -16,7 +16,6 @@ require_once "../template/navbar.php";
           <div class="col">Total</div>
         </div>
         <?php foreach ($cartProducts as $cartProduct) : ?>
-          <form action="../cart/" method="post">
             <div class='layout-inline row'>
               <!-- picture -->
               <div class='col col-pro layout-inline'>
@@ -29,7 +28,9 @@ require_once "../template/navbar.php";
               </div>
               <!-- quantity -->
               <div class='col col-qty layout-inline'>
+              <form action="../cart/" method="post">
                 <input type='number' name='quantity<?= $cartProduct->id ?>' min='0' max='100' value=<?= $cartProduct->quantity ?> onchange="this.form.submit()">
+                </form>
               </div>
               <!-- total -->
               <div class='col col-total col-numeric align-center'>
@@ -44,7 +45,6 @@ require_once "../template/navbar.php";
                 </div>
               </div>
             </div>
-          </form>
         <?php endforeach; ?>
         <?php if ($emptyCart == 1) : ?>
           <div class="row layout-inline">

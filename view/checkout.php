@@ -10,9 +10,7 @@ require_once "../template/navbar.php";
                 <input class="menuButton" type="submit" value="Review cart" />
             </form>
         </div>
-        <br>
-        Delivery information:
-        <hr>
+        <h1>Delivery information:</h1>
         <?= $user->name ?>
         <br>
         <?= $user->surname ?>
@@ -22,9 +20,7 @@ require_once "../template/navbar.php";
         <?= $user->address ?>
         <br>
         <?= $user->location ?>
-        <hr>
-        Order details:
-        <hr>
+        <h1>Order details:</h1>
         <table>
             <thead>
                 <tr>
@@ -51,12 +47,11 @@ require_once "../template/navbar.php";
             </tbody>
         </table>
         VAT:
-        <?= $cartTotal ?>
+        <?= $cartTotal ?>$
         <br>
         Shipping: 10$
         <br>
-        Total: <?= $cartTotal + 10 . "$" ?>
-        <br>
+        <h1>Total: <?= $cartTotal + 10 . "$" ?></h1>
         <br>
         <a href='../my-account/?action=checkout'>
             <p><button id="button-helper">Checkout</button></p>

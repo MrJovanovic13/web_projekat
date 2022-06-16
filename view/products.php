@@ -32,21 +32,22 @@ require_once "../template/navbar.php";
           <?php endforeach; ?>
         </select>
         <?php if (isset($categoryErr)) : ?><span><?= $categoryErr ?> <?php endif ?></span>
+          <div class="pages">
+            <?php while ($i <= $pageCounter) : ?>
+              <?php if ($currentPageUser == $i) : ?>
+                <button type="submit" class="page-current" name = "page" value="<?= $i ?>"><?= $i ?></button>
+              <?php else : ?>
+                <button type="submit" class="page" name = "page" value="<?= $i ?>"><?= $i ?></button>
+              <?php endif; ?>
+              </a>
+              <?php $i++ ?>
+            <?php endwhile; ?>
+          </div>
       </form>
     </div>
 
     <div class="container">
-      <div class="pages">
-      <?php while ($i <= $pageCounter) : ?>
-        <?php if($currentPageUser == $i): ?>
-          <a class="page-current"> <?= $i ?>
-        <?php else: ?>
-          <a class="page" href='../products?page=<?= $i ?>'> <?= $i ?>
-        <?php endif; ?>
-        </a>
-        <?php $i++ ?>
-      <?php endwhile; ?>
-      </div>
+
       <div class="row">
         <?php foreach (returnProductsFromPage($currentPageUser, $products) as $product) : ?>
           <?php if ($counter % 4 == 0 && $counter != 0) : ?>

@@ -8,7 +8,7 @@ $counter = 0;
 $productCounter = 0;
 $pageCounter = 1;
 $i = 1;
-$currentPageUser = isset($_GET['page']) ? $_GET['page'] : "1";
+$currentPageUser = isset($_POST['page']) ? $_POST['page'] : "1";
 $q = "SELECT `id`, `name` FROM `category`";
 
 $result = $database->executeQuery($q);

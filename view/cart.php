@@ -16,33 +16,35 @@ require_once "../template/navbar.php";
           <div class="col">Total</div>
         </div>
         <?php foreach ($cartProducts as $cartProduct) : ?>
-          <div class='layout-inline row'>
-            <!-- picture -->
-            <div class='col col-pro layout-inline'>
-              <img class="productImage" src="../images/<?= $cartProduct->imgUrl ?>">
-              <p><?= $cartProduct->name ?></p>
-            </div>
-            <!-- price -->
-            <div class='col col-price col-numeric align-center '>
-              <p><?= $cartProduct->price ?>$</p>
-            </div>
-            <!-- quantity -->
-            <div class='col col-qty layout-inline'>
-              <input type='number' name='quantity-1' min='0' max='100' value=<?= $cartProduct->quantity ?>>
-            </div>
-            <!-- total -->
-            <div class='col col-total col-numeric align-center'>
-              <p><?= $cartProduct->price * $cartProduct->quantity ?>$</p>
-            </div>
-            <div class='col align-center'>
-              <div class='remove button'>
-                <a href='../controller/cart.php?action=remove&id=<?= $cartProduct->id ?>'>
-                  <button class='iconButton'>
-                    <img class='deleteIcon' src='../images/deleteIcon.png' alt='deleteIcon'>
-                  </button> </a>
+          <form action="../cart/" method="post">
+            <div class='layout-inline row'>
+              <!-- picture -->
+              <div class='col col-pro layout-inline'>
+                <img class="productImage" src="../images/<?= $cartProduct->imgUrl ?>">
+                <p><?= $cartProduct->name ?></p>
+              </div>
+              <!-- price -->
+              <div class='col col-price col-numeric align-center '>
+                <p><?= $cartProduct->price ?>$</p>
+              </div>
+              <!-- quantity -->
+              <div class='col col-qty layout-inline'>
+                <input type='number' name='quantity<?= $cartProduct->id ?>' min='0' max='100' value=<?= $cartProduct->quantity ?> onchange="this.form.submit()">
+              </div>
+              <!-- total -->
+              <div class='col col-total col-numeric align-center'>
+                <p><?= $cartProduct->price * $cartProduct->quantity ?>$</p>
+              </div>
+              <div class='col align-center'>
+                <div class='remove button'>
+                  <a href='../controller/cart.php?action=remove&id=<?= $cartProduct->id ?>'>
+                    <button class='iconButton'>
+                      <img class='deleteIcon' src='../images/deleteIcon.png' alt='deleteIcon'>
+                    </button> </a>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         <?php endforeach; ?>
         <?php if ($emptyCart == 1) : ?>
           <div class="row layout-inline">
@@ -81,7 +83,7 @@ require_once "../template/navbar.php";
     <?php endif; ?>
     </div>
   </div>
-        </div>
+  </div>
   <?php
   include_once "../template/footer.php";
   ?>

@@ -253,6 +253,9 @@ a.qty:hover {
 .shell {
   min-height: 66.5vh;
 }
+button:hover {
+  cursor: pointer;
+}
 
 
 @media screen and (max-width: 755px) {

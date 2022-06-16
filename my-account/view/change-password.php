@@ -12,6 +12,8 @@ require_once "../template/navbarLogged.php";
     </div>
     <br>
     <div class="container" id="container">
+    <h1>Change password</h1>
+    <br>
     <div class="buttons-div-second">
             <form class="menuForm" action="../account-info/">
                 <input class="menuButton" type="submit" value="Return" />

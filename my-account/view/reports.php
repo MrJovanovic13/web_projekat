@@ -8,6 +8,8 @@ require_once "../template/navbarLogged.php";
     </div>
     <br>
     <div class="container" id="container">
+        <h1>Reports</h1>
+        <br>
         <form action="../reports/" method="post">
             <p>
                 <label for="dateStart">Starting date: </label>

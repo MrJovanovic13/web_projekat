@@ -18,8 +18,6 @@ if (!isset($_SESSION['userObj'])) {
     $orderStatus;
     $orderStatusList = array();
     $orderStatusHistory = array();
-    $highlightCounterItems = 0;
-    $highlightCounterStatus = 0;
 
     $q = "SELECT `id`, `name`, `surname`, `email`, `username`, `password`, `phone_number`, `address`, `location`, `user_level`, `postcode`, `dob`
             FROM `users`

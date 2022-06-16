@@ -15,23 +15,25 @@ require_once "../../connection/connection.php";
         </div>
         <br>
         <div class="container" id="container">
-            <form class="menuForm" action="../add-user/">
-                <input class="menuButton" type="submit" value="Add user" />
-            </form>
+            <h1>Users</h1>
+            <br>
+            <?php if ($userLevel == 2) : ?>
+                <form class="menuForm" action="../add-user/">
+                    <input class="menuButton" type="submit" value="Add user" />
+                </form>
+            <?php endif; ?>
             <table>
                 <br>
-                <br>
-                <!--First br does nothing for some reason, so i put another one. -->
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <?php foreach ($users as $user) : ?>
-                        <tr>
+                    <tr>
                         <td><?= $user->id ?></td>
                         <td><?= $user->name ?></td>
                         <td><?= $user->email ?></td>
@@ -49,7 +51,7 @@ require_once "../../connection/connection.php";
 
                         </td>
                     <?php endforeach; ?>
-                        </tr>
+                    </tr>
         </div>
         </table>
     </div>

@@ -11,7 +11,8 @@ require_once "../template/navbarLogged.php";
 
     </div><br>
     <div class="container" id="container">
-
+        <h1>Categories</h1>
+        <br>
         <div class="buttons-div-second">
             <form class="menuForm" action="../add-category/">
                 <input class="menuButton" type="submit" value="Add category" />
@@ -29,10 +30,10 @@ require_once "../template/navbarLogged.php";
                     <th>Name</th>
                     <th>Action</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 <?php foreach ($categories as $category) : ?>
-                        <tr>
+                    <tr>
                         <td><?= $category->id ?></td>
                         <td><?= $category->name ?></td>
                         <td>
@@ -48,8 +49,8 @@ require_once "../template/navbarLogged.php";
                                 </button>
                             </a>
                         </td>
-                        </tr>
-                    <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>

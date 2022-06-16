@@ -11,7 +11,8 @@ require_once "../template/navbarLogged.php";
 
     </div><br>
     <div class="container" id="container">
-
+        <h1>Tickets</h1>
+        <br>
         <div class="buttons-div-second">
             <form class="menuForm" action="../open-ticket/">
                 <input class="menuButton" type="submit" value="Open a ticket" />
@@ -29,21 +30,21 @@ require_once "../template/navbarLogged.php";
             <tbody>
                 <?php foreach ($tickets as $ticket) : ?>
                     <?php if ($ticket->isOpen) : ?>
-                    <tr class="openTicket">
-                    <?php else:?>
-                    <tr class="closedTicket">
-                    <?php endif; ?>
-                    <td><?= $ticket->id ?></td>
-                    <td><?= $ticket->name ?></td>
-                    <td>
-                        <a href='../edit-ticket?action=editTicket&ticketId=<?= $ticket->id ?>'>
-                            <button class='iconButton'>
-                                <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
-                            </button>
-                        </a>
-                    </td>
-                    </tr>
-                <?php endforeach; ?>
+                        <tr class="openTicket">
+                        <?php else : ?>
+                        <tr class="closedTicket">
+                        <?php endif; ?>
+                        <td><?= $ticket->id ?></td>
+                        <td><?= $ticket->name ?></td>
+                        <td>
+                            <a href='../edit-ticket?action=editTicket&ticketId=<?= $ticket->id ?>'>
+                                <button class='iconButton'>
+                                    <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
+                                </button>
+                            </a>
+                        </td>
+                        </tr>
+                    <?php endforeach; ?>
             </tbody>
             <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>
         </table>

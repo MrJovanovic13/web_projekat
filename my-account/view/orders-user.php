@@ -21,6 +21,8 @@ require_once "../template/navbarLogged.php";
             ?>
         </div><br>
         <div class="container" id="container">
+            <h1>Orders</h1>
+            <br>
             <table>
                 <thead>
                     <tr>
@@ -33,7 +35,7 @@ require_once "../template/navbarLogged.php";
                 </thead>
                 <tbody>
                     <?php foreach ($orders as $order) : ?>
-                            <tr>
+                        <tr>
                             <td><?= $order->id ?></td>
                             <td><?= $order->date ?></td>
                             <td><?= $order->price ?>$</td>
@@ -46,8 +48,8 @@ require_once "../template/navbarLogged.php";
                                     </button>
                                 </a>
                             </td>
-                            </tr>
-                        <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

@@ -12,6 +12,8 @@ require_once "../template/navbarLogged.php";
     </div>
     <br>
     <div class="container" id="container">
+        <h1>Open a ticket</h1>
+        <br>
         <div class="buttons-div-second">
             <form class="menuForm" action="../tickets/">
                 <input class="menuButton" type="submit" value="Return" />
@@ -27,9 +29,9 @@ require_once "../template/navbarLogged.php";
             <textarea name="messageContent" placeholder="Write your message here." rows="7" cols="100"></textarea>
             <input type="hidden" name="userId" value="<?= $user->id ?>">
             <?php if (isset($messageErr)) : ?><span class="error"><?= $messageErr ?> <?php endif ?></span>
-            <br>
-            <input id="button-helper" type="submit" value="Submit ticket">
-            </p>
+                <br>
+                <input id="button-helper" type="submit" value="Submit ticket">
+                </p>
         </form>
     </div>
 </div>

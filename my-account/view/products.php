@@ -12,6 +12,8 @@ require_once "../template/navbarLogged.php";
     </div>
     <br>
     <div class="container" id="container">
+        <h1>Products</h1>
+        <br>
         <div class="buttons-div-second">
             <form class="menuForm" action="../add-product/">
                 <input class="menuButton" type="submit" value="Add product" />
@@ -24,17 +26,17 @@ require_once "../template/navbarLogged.php";
 
         <table>
             <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>In stock</th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>In stock</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <?php foreach ($products as $product) : ?>
-                    <tr>
+                <tr>
                     <td><?= $product->id ?></td>
                     <td><?= $product->name ?></td>
                     <td><?= $product->category ?></td>
@@ -48,8 +50,8 @@ require_once "../template/navbarLogged.php";
                                 <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
                             </button> </a>
                     </td>
-                    </tr>
-                <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
         </table>
     </div>
 </div>

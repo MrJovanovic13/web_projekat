@@ -11,16 +11,19 @@ require_once "../template/navbarLogged.php";
 
     </div><br>
     <div class="container" id="container">
-
+    <h1>User activity</h1>
+    <br>
         <div class="buttons-div-second">
             <form class="menuForm" action="../edit-user/?action=editUser">
-            <input type="hidden" id="action" name="action" value="editUser">
+                <input type="hidden" id="action" name="action" value="editUser">
                 <input type="hidden" id="userId" name="userId" value="<?= $userId ?>">
                 <input class="menuButton" type="submit" value="Return" />
             </form>
         </div>
         <br>
-        Orders:
+        <h1>
+            Orders:
+        </h1>
         <table>
             <thead>
                 <tr>
@@ -30,14 +33,16 @@ require_once "../template/navbarLogged.php";
             </thead>
             <tbody>
                 <?php foreach ($activitiesOrders as $activity) : ?>
-                    <td><?= $activity->action?></td>
-                    <td><?= $activity->date?></td>
+                    <td><?= $activity->action ?></td>
+                    <td><?= $activity->date ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
         <br>
-        Tickets:
+        <h1>
+            Tickets:
+        </h1>
         <table>
             <thead>
                 <tr>
@@ -47,8 +52,8 @@ require_once "../template/navbarLogged.php";
             </thead>
             <tbody>
                 <?php foreach ($activitiesTickets as $activity) : ?>
-                    <td><?= $activity->action?></td>
-                    <td><?= $activity->date?></td>
+                    <td><?= $activity->action ?></td>
+                    <td><?= $activity->date ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

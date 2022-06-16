@@ -75,10 +75,6 @@ table {
   border-collapse: collapse;
 }
 
-.highlighted {
-  background-color:gainsboro;
-}
-
 .deleteIcon{
   max-width: 20px;
   max-height: 20px;

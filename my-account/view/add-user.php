@@ -23,6 +23,8 @@ require_once "../template/navbarLogged.php";
 
         </div><br>
         <div class="container" id="container">
+        <h1>Add user</h1>
+        <br>
             <form class="menuForm" action="../users/">
                 <input class="menuButton" type="submit" value="Return" />
             </form>

@@ -31,7 +31,7 @@ input {
   text-align: center;
 }
 
-img {
+.productImage {
   max-width: 9em;
   width: 100%;
   overflow: hidden;

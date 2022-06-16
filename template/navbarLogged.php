@@ -17,7 +17,7 @@
         <div class="left-navbar">
 
             <li><a href="#">
-                    <img class="logo" src="images/logo.png" alt="logo test"></i></a>
+                    <img class="logo" src="images/ITStore.gif" alt="logo"></i></a>
                 </a></li>
         </div>
         <div class="right-navbar">

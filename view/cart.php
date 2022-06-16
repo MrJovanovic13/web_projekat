@@ -19,7 +19,7 @@ require_once "../template/navbar.php";
           <div class='layout-inline row'>
             <!-- picture -->
             <div class='col col-pro layout-inline'>
-              <img src="../images/<?= $cartProduct->imgUrl ?>">
+              <img class="productImage" src="../images/<?= $cartProduct->imgUrl ?>">
               <p><?= $cartProduct->name ?></p>
             </div>
             <!-- price -->

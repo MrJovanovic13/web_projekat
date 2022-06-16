@@ -46,6 +46,9 @@ html {
     transition: ease .25s;
   }
   
+  .footer-distributed p.footer-links a:hover {
+    color: #FF9800;
+  }
   /*.footer-distributed .footer-links a:before {
     content: "·";
     font-size: 20px;

@@ -12,9 +12,13 @@ require_once "../template/navbarLogged.php";
     </div>
     <br>
     <div class="container" id="container">
-    <div class="buttons-div-second">
+        <div class="buttons-div-second">
             <form class="menuForm" action="../users/">
                 <input class="menuButton" type="submit" value="Return" />
+            </form>
+            <form class="menuForm" action="../user-activity">
+                <input type="hidden" id="userId" name="userId" value="<?= $id ?>">
+                <input class="menuButton" type="submit" value="User activity" />
             </form>
         </div>
         <br>
@@ -76,7 +80,7 @@ require_once "../template/navbarLogged.php";
                 <span class="error"> <?= $passwordErrors['password'] ?? '' ?></span>
             </p>
             <p>
-                Retype password: 
+                Retype password:
                 <input type="password" name="retypePassword">
                 <span class="error"> <?= $passwordErrors['retypePassword'] ?? '' ?></span>
             </p>

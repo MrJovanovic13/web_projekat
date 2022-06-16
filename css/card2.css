@@ -2,6 +2,8 @@
 body{
   font-family: 'Muli', sans-serif;
   background:#ddd;
+  line-height: 1;
+  font-size: 16px;
 }
 .shell{
   margin-top: 5%;
@@ -162,7 +164,7 @@ a.buy-btn:hover , a.buy-btn:active, a.buy-btn:focus{
   display:inline-block;
   color:#212121;
   text-align:center;
-  font-size: 18px;
+  font-size: 1.5em;
   transition: all 0.2s ease-in-out;
   border-color: #33383b;
   background: #33383b;
@@ -173,7 +175,7 @@ a.buy-btn:hover , a.buy-btn:active, a.buy-btn:focus{
 .page-current {
   display:inline-block;
   text-align:center;
-  font-size: 18px;
+  font-size: 1.5em;
   transition: all 0.2s ease-in-out;
   padding:8px 30px;
   color: white;
@@ -204,6 +206,7 @@ a.buy-btn:hover , a.buy-btn:active, a.buy-btn:focus{
 .pages {
   padding-top: 1%;
 }
+
 
 
 

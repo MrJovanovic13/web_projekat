@@ -1,20 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i');
-
+@import url("https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i");
 
 * {
-  margin:0;
-  padding:0;
-  }
+  margin: 0;
+  padding: 0;
+}
 
 body {
   height: auto;
   background-size: cover;
-  font-family: 'Muli', sans-serif;
+  font-family: "Muli", sans-serif;
   margin-top: 10%;
   background-color: gainsboro;
 }
 
-.logo{
+.logo {
   width: 100px;
   height: 50px;
 }
@@ -29,7 +28,6 @@ body {
   display: flex;
   align-items: center;
   border-bottom: 2px solid black;
-  
 }
 
 .header * {
@@ -43,18 +41,19 @@ body {
 .header li a {
   color: white;
   text-decoration: none;
-  
+  font-size: 1em;
 }
 
 .header li a:hover {
-  font-weight:bold;
+  color: #ff9800;
+  font-weight: bold;
 }
 
-.right-navbar{
-  float:right;
-  padding-left:60%;
+.right-navbar {
+  float: right;
+  padding-left: 60%;
 }
 
-.left-navbar{
-  padding-left:3%;
+.left-navbar {
+  padding-left: 3%;
 }

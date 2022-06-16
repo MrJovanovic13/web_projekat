@@ -14,8 +14,7 @@ require_once "../template/navbarLogged.php";
         </div><br>
         <div class="container" id="container">
 
-            Delivery information:
-
+            <h1>Delivery information:</h1>
             <br>
             <?= $orderUser->name ?> <br>
             <?= $orderUser->surname ?> <br>
@@ -23,27 +22,28 @@ require_once "../template/navbarLogged.php";
             <?= $orderUser->address ?> <br>
             <?= $orderUser->location ?> <br>
             <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                </tr>
-                <?php foreach ($cartProducts as $cartProduct) : ?>
-                    <?php if ($highlightCounterItems++ % 2 == 0) : ?>
-                        <tr class="highlighted">
-                        <?php else : ?>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($cartProducts as $cartProduct) : ?>
                         <tr>
-                        <?php endif ?>
-                        <td><?= $cartProduct->id ?></td>
-                        <td><?= $cartProduct->name ?></td>
-                        <td><?= $cartProduct->price ?>$</td>
-                        <td><?= $cartProduct->quantity ?></td>
-                        <td><?= $cartProduct->quantity *  $cartProduct->price ?>$</td>
+                            <td><?= $cartProduct->id ?></td>
+                            <td><?= $cartProduct->name ?></td>
+                            <td><?= $cartProduct->price ?>$</td>
+                            <td><?= $cartProduct->quantity ?></td>
+                            <td><?= $cartProduct->quantity *  $cartProduct->price ?>$</td>
                         </tr>
                     <?php endforeach ?>
+                </tbody>
             </table>
+            <h1>Order information:</h1>
             <br>
             Order:<?= $cartTotal ?>$
             <br>
@@ -51,28 +51,28 @@ require_once "../template/navbarLogged.php";
             <br>
             Order total:<?= $cartTotal + 10 ?>$
             <br>
-            Order status history:
+            <h1>Order status history:</h1>
             <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <?php foreach ($orderStatusHistory as $statusHistory) : ?>
-                    <?php if ($highlightCounterStatus++ % 2 == 0) : ?>
-                        <tr class="highlighted">
-                        <?php else : ?>
-                        <tr>
-                        <?php endif ?>
+                    <tr>
                         <td>
                             <?= $statusHistory->datetime ?>
                         </td>
                         <td>
                             <?= $statusHistory->name ?>
                         </td>
-                        </tr>
-                    <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
             </table>
-            Order status:<?= $orderStatus ?>
+            <h1>Order status: <?= $orderStatus ?></h1>
             <?php
 
             ?>

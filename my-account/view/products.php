@@ -38,7 +38,7 @@ require_once "../template/navbarLogged.php";
                     <td><?= $product->id ?></td>
                     <td><?= $product->name ?></td>
                     <td><?= $product->category ?></td>
-                    <td><?= $product->price ?></td>
+                    <td><?= $product->price ?>$</td>
                     <td><?= $product->inStock ?></td>
                     <td>
                         <a href='../products?action=deleteProduct&productId=<?= $product->id ?>'><button class=iconButton>

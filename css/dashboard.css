@@ -276,3 +276,8 @@ tbody tr.active-row {
 .closedTicket {
   background-color: red !important;
 }
+
+h1 {
+  color: #FF9800;
+  border-bottom: thin solid #FF9800;
+}

@@ -24,10 +24,10 @@ body {
   left: 0;
   right: 0;
   top: 0;
-  height: 11%;
   display: flex;
   align-items: center;
   border-bottom: 2px solid black;
+  z-index: 90 !important;
 }
 
 .header * {
@@ -52,6 +52,7 @@ body {
 .right-navbar {
   float: right;
   padding-left: 40%;
+  display: block !important;
 }
 
 .left-navbar {
@@ -70,15 +71,18 @@ body {
   .icon {
     display: block; 
   }
+  .left-navbar{
+    width: 100%;
+  }
   .right-navbar {
     display:none ;
-    float: left;
     padding: 0;
-    margin-top: 25%;
     list-style: none;
+
   }
   .left-navbar{
     padding: 0;
+    float: none;
   }
 
   ul {
@@ -86,7 +90,23 @@ body {
     display: block;
     text-align: center;
     float: left;
-    
   }
+  .header{
+    overflow: visible;
+    display: block;
+    font-size: 1em;
+  }
+  .header li {
+    margin: 0.7em;
+  }
+  .menuBar{
+    margin-top: 15%;
+  }
+  .container {
+    width: 99%;
+  }
+  table {
+  }
+
 }
 

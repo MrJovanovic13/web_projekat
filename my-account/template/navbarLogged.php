@@ -17,30 +17,13 @@ if (!isset($_SESSION['userObj'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/dashboard.css">
     <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../../images/favicon.png">
     <title>IT Store</title>
 </head>
 
 <body>
-
-    <section class="top-nav">
-        <div>
-            Logo Here
-        </div>
-        <input id="menu-toggle" type="checkbox" />
-        <label class='menu-button-container' for="menu-toggle">
-            <div class='menu-button'></div>
-        </label>
-        <ul class="menu">
-            <li>One</li>
-            <li>Two</li>
-            <li>Three</li>
-            <li>Four</li>
-            <li>Five</li>
-        </ul>
-    </section>
-    <!-- <ul class="header">
+    
+    <ul class="header">
         <div class="left-navbar">
             <li><a href="../../home/">
                     <img class="logo" src="../../images/ITStore.gif" alt="logo"></i></a></a></li>
@@ -52,5 +35,4 @@ if (!isset($_SESSION['userObj'])) {
             <li><a href="../../my-account/">My account</a></li>
             <li><a href="../../logout/">Logout</a></li>
         </div>
-    </ul>  -->
-    <script type="text/javascript" src="../../js/navbar.js"></script>
+    </ul>

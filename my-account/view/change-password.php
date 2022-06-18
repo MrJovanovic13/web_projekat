@@ -1,20 +1,13 @@
-<?php
-require_once "../template/navbarLogged.php";
-?>
-<link rel="stylesheet" href="../../css/dashboard.css">
+<?php require_once "../template/navbarLogged.php"; ?>
 <div class="shell">
-
     <div class="buttons-div">
-        <?php
-        require_once "../template/accountMenu.php";
-        ?>
-
+        <?php require_once "../template/accountMenu.php"; ?>
     </div>
     <br>
     <div class="container" id="container">
-    <h1>Change password</h1>
-    <br>
-    <div class="buttons-div-second">
+        <h1>Change password</h1>
+        <br>
+        <div class="buttons-div-second">
             <form class="menuForm" action="../account-info/">
                 <input class="menuButton" type="submit" value="Return" />
             </form>
@@ -27,12 +20,12 @@ require_once "../template/navbarLogged.php";
                 <span class="error"> <?= $errors['password'] ?? '' ?></span>
             </p>
             <p>
-                New password: 
+                New password:
                 <input type="password" name="newPassword">
                 <span class="error"> <?= $errors['newPassword'] ?? '' ?></span>
             </p>
             <p>
-                Retype new password: 
+                Retype new password:
                 <input type="password" name="retypePassword">
                 <span class="error"> <?= $errors['retypePassword'] ?? '' ?></span>
             </p>
@@ -44,8 +37,5 @@ require_once "../template/navbarLogged.php";
         </form>
     </div>
 </div>
-
-<?php
-require_once "../template/footer.php";
-
-?>
+</body>
+<?php require_once "../template/footer.php"; ?>

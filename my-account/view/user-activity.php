@@ -1,18 +1,11 @@
-<?php
-require_once "../template/navbarLogged.php";
-?>
-<link rel="stylesheet" href="../../css/dashboard.css">
+<?php require_once "../template/navbarLogged.php"; ?>
 <div class="shell">
-
     <div class="buttons-div">
-        <?php
-        require_once "../template/accountMenu.php";
-        ?>
-
+        <?php require_once "../template/accountMenu.php"; ?>
     </div><br>
     <div class="container" id="container">
-    <h1>User activity</h1>
-    <br>
+        <h1>User activity</h1>
+        <br>
         <div class="buttons-div-second">
             <form class="menuForm" action="../edit-user/?action=editUser">
                 <input type="hidden" id="action" name="action" value="editUser">
@@ -60,7 +53,6 @@ require_once "../template/navbarLogged.php";
         </table>
     </div>
 </div>
+</body>
 
-<?php
-require_once "../template/footer.php";
-?>
+<?php require_once "../template/footer.php"; ?>

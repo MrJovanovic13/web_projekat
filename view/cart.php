@@ -59,19 +59,19 @@ require_once "../template/navbar.php";
               <div class="col">
                 <p>PRICE</p>
               </div>
-              <div class="col"><?= $cartTotal ?>$</div>
+              <div class="col-total"><?= $cartTotal ?>$</div>
             </div>
             <div class="row layout-inline">
               <div class="col">
                 <p>Shipping</p>
               </div>
-              <div class="col">10$</div>
+              <div class="col-total">10$</div>
             </div>
             <div class="row layout-inline">
               <div class="col">
                 <p>Total</p>
               </div>
-              <div class="col"><?= $cartTotal + 10 ?>$</div>
+              <div class="col-total"><?= $cartTotal + 10 ?>$</div>
             </div>
           </div>
       </div>

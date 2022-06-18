@@ -1,14 +1,7 @@
-<?php
-require_once "../template/navbarLogged.php";
-?>
-<link rel="stylesheet" href="../../css/dashboard.css">
+<?php require_once "../template/navbarLogged.php"; ?>
 <div class="shell">
-
     <div class="buttons-div">
-        <?php
-        require_once "../template/accountMenu.php";
-        ?>
-
+        <?php require_once "../template/accountMenu.php"; ?>
     </div><br>
     <div class="container" id="container">
         <h1>Categories</h1>
@@ -56,7 +49,5 @@ require_once "../template/navbarLogged.php";
         <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>
     </div>
 </div>
-<?php
-require_once "../template/footer.php";
-
-?>
+</body>
+<?php require_once "../template/footer.php"; ?>

@@ -1,18 +1,11 @@
-<?php
-require_once "../template/navbarLogged.php";
-?>
-<link rel="stylesheet" href="../../css/dashboard.css">
+<?php require_once "../template/navbarLogged.php"; ?>
 <div class="shell">
-    <div class="buttons-div">
-        <?php
-        require_once "../template/accountMenu.php";
-        ?>
-
+    <div class="buttons-div"><?php require_once "../template/accountMenu.php"; ?>
     </div><br>
     <div class="container" id="container">
-    <h1>Account info</h1>
-    <br>
-    <div class="buttons-div-second">
+        <h1>Account info</h1>
+        <br>
+        <div class="buttons-div-second">
             <form class="menuForm" action="../change-password/">
                 <input class="menuButton" type="submit" value="Change password" />
             </form>
@@ -83,9 +76,7 @@ require_once "../template/navbarLogged.php";
         </form>
     </div>
     <br>
+</div>
+</body>
 
-
-    <?php
-    require_once "../template/footer.php";
-
-    ?>
+<?php require_once "../template/footer.php"; ?>

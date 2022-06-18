@@ -1,19 +1,12 @@
-<?php
-require_once "../template/navbarLogged.php";
-?>
-<link rel="stylesheet" href="../../css/dashboard.css">
+<?php require_once "../template/navbarLogged.php"; ?>
 <div class="shell">
-
     <div class="buttons-div">
-        <?php
-        require_once "../template/accountMenu.php";
-        ?>
-
+        <?php require_once "../template/accountMenu.php"; ?>
     </div>
     <br>
     <div class="container" id="container">
-    <h1>Add category</h1>
-    <br>
+        <h1>Add category</h1>
+        <br>
         <div class="buttons-div-second">
             <form class="menuForm" action="../categories/">
                 <input class="menuButton" type="submit" value="Return" />
@@ -23,7 +16,7 @@ require_once "../template/navbarLogged.php";
         <form action="../add-category/" method="post">
             <p>
                 Name:
-                <input type="text" name="name" value="<?php if (isset($name)) : ?><?=$name?><?php endif ?>">
+                <input type="text" name="name" value="<?php if (isset($name)) : ?><?= $name ?><?php endif ?>">
                 <?php if (isset($nameErr)) : ?><span class="error"><?= $nameErr ?> <?php endif ?></span>
             </p>
             <br>
@@ -32,7 +25,6 @@ require_once "../template/navbarLogged.php";
         </form>
     </div>
 </div>
+</body>
 
-<?php
-require_once "../template/footer.php";
-?>
+<?php require_once "../template/footer.php"; ?>

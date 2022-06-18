@@ -20,7 +20,6 @@
 			<a class="link-1" href="../../my-account/">My account </a>
 
 		</p>
-
 	</div>
 </footer>
 </html>

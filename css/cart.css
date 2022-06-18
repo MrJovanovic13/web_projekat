@@ -265,7 +265,7 @@ button:hover {
 
 @media screen and (max-width: 755px) {
   .container {
-    margin-top: 20%;
+    margin-top: 40%;
     width: 98%;
     font-size: 0.85em;
   }

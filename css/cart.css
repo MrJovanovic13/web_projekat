@@ -267,7 +267,7 @@ button:hover {
   .container {
     margin-top: 40%;
     width: 98%;
-    font-size: 0.85em;
+    font-size: 0.75em;
   }
 
   .col-pro {
@@ -290,6 +290,9 @@ button:hover {
   .tf .col {
     width: 15%;
     float: left;
+  }
+  .deleteIcon{
+    margin-bottom: 6%;
   }
 }
 

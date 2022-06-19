@@ -17,6 +17,7 @@
                 <?php $i++ ?>
             <?php endwhile; ?>
         </form>
+        <div>
         <table>
             <thead>
                 <tr>
@@ -60,6 +61,7 @@
                 <h2>You haven't placed any orders!</h2>
             </div>
         <?php endif; ?>
+        </div>
     </div>
 </div>
 </body>

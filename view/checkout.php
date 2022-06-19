@@ -1,7 +1,8 @@
 <?php require_once "../template/navbar.php"; ?>
+<link rel="stylesheet" href="../css/dashboard.css">
 
 <div class="shell">
-    <div class="container" id="container">
+    <div class="container checkoutContainer" id="container">
         <div class="buttons-div-second">
             <form class="menuForm" action="../cart/">
                 <input class="menuButton" type="submit" value="Review cart" />

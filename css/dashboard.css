@@ -71,9 +71,7 @@ td {
   border: solid 1px lightgray;
 }
 
-table {
-  border-collapse: collapse;
-}
+
 
 .deleteIcon{
   max-width: 20px;
@@ -246,6 +244,7 @@ table {
   font-size: 0.9em;
   font-family: sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  
 }
 
 thead tr {
@@ -344,5 +343,17 @@ h1 {
     margin-left: 1%;
     margin-top: 20%;
     position: relative;
+  }
+  .menuButton {
+    font-size: 11px;
+  }
+  table {
+    font-size: 13px;
+  }
+  .registrationContainer {
+    margin-top: 35%;
+  }
+  .checkoutContainer {
+    margin-top: 30%;
   }
 }

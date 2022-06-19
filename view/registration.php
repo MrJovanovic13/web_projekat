@@ -3,7 +3,7 @@
 
 <body>
     <div class="shell">
-        <div class="container" id="container">
+        <div class="container registrationContainer" id="container">
             <form action="../registration/" method="post">
 
                 <p>

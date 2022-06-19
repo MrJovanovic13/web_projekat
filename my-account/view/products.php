@@ -39,8 +39,7 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-
-
+                <tbody>
                 <?php if (empty(returnProductsFromPage($currentPageUser, $products))) : ?>
                     <h1>There are no products!</h1>
                 <?php endif; ?>
@@ -61,6 +60,7 @@
                         </td>
                     </tr>
                 <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>

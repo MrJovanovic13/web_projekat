@@ -184,3 +184,13 @@ input {
 .error {
   color: red !important;
 }
+@media screen and (max-width: 755px) {
+  .container {
+    width: 375px;
+    max-width: 100%;
+    min-height: 400px;
+    margin-top: 30%;
+    margin-bottom: 30%;
+  }
+}
+

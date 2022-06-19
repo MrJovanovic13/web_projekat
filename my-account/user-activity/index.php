@@ -30,17 +30,17 @@ if (isset($_SESSION['userObj'])) {
             $activitiesOrders[] = $activityObj;
         }
 
-        $q = "SELECT `tickets`.`id`, `name`, `is_open`, `message`.`date_time`
+        $q = "SELECT `tickets`.`id`, MIN(`message`.`date_time`) as test1
         FROM `tickets`
         LEFT JOIN message ON `tickets`.`id` = `message`.`ticket_id`
-        WHERE `user_sender`=? GROUP BY `tickets`.`id` ORDER BY `date_time` ASC ";
+        WHERE `user_sender`=? GROUP BY `tickets`.`id`";
         $stmt = $database->prepareQuery($q);
         $stmt->bind_param('i', $userId);
         $stmt->execute();
         $result = $stmt->get_result();
 
         while ($row = $result->fetch_assoc()) {
-            $activityObj = new Activity("User opened ticket with ID:" . $row['id'], $row['date_time']);
+            $activityObj = new Activity("User opened ticket with ID:" . $row['id'], $row['test1']);
             $activitiesTickets[] = $activityObj;
         }
 

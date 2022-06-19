@@ -80,10 +80,12 @@
                 <span class="error"> <?= $passwordErrors['retypePassword'] ?? '' ?></span>
             </p>
             <br>
+            <?php if ($userLevel == 2) : ?>
             <p>
                 <input id="button-helper" type="submit" name="submit" value="Edit user">
                 <input type="hidden" id="userId" name="userId" value="<?= $id ?>">
             </p>
+            <?php endif; ?>
         </form>
     </div>
 </div>

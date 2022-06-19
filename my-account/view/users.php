@@ -28,11 +28,13 @@
                     <td><?= $user->name ?></td>
                     <td><?= $user->email ?></td>
                     <td>
+                        <?php if ($userLevel == 2) : ?>
                         <a href='../users/?action=deleteUser&userId=<?= $user->id ?>'>
                             <button class='iconButton'>
                                 <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
                             </button>
                         </a>
+                        <?php endif; ?>
                         <a href='../edit-user/?action=editUser&userId=<?= $user->id ?>'>
                             <button class='iconButton'>
                                 <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>

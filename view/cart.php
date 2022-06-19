@@ -1,91 +1,86 @@
-<?php
-require_once "../template/navbar.php";
-?>
+<?php require_once "../template/navbar.php"; ?>
 <link rel="stylesheet" href="../css/cart.css">
 
-<body>
-  <div class="shell">
-    <div class="container">
-      <div class="table">
-        <div class="layout-inline row th">
-          <div class="col col-pro">Product</div>
-          <div class="col col-price align-center ">
-            Price
-          </div>
-          <div class="col col-qty align-center">QTY</div>
-          <div class="col">Total</div>
+<div class="shell">
+  <div class="container">
+    <div class="table">
+      <div class="layout-inline row th">
+        <div class="col col-pro">Product</div>
+        <div class="col col-price align-center ">
+          Price
         </div>
-        <?php foreach ($cartProducts as $cartProduct) : ?>
-          <div class='layout-inline row'>
-            <!-- picture -->
-            <div class='col col-pro layout-inline'>
-              <img class="productImage" src="../images/<?= $cartProduct->imgUrl ?>">
-              <p><?= $cartProduct->name ?></p>
-            </div>
-            <!-- price -->
-            <div class='col col-price col-numeric align-center '>
-              <p><?= $cartProduct->price ?>$</p>
-            </div>
-            <!-- quantity -->
-            <div class='col col-qty layout-inline'>
-              <form action="../cart/" method="post">
-                <input type='number' name='quantity<?= $cartProduct->id ?>' min='0' max='100' value=<?= $cartProduct->quantity ?> onchange="this.form.submit()">
-              </form>
-            </div>
-            <!-- total -->
-            <div class='col col-total col-numeric align-center'>
-              <p><?= $cartProduct->price * $cartProduct->quantity ?>$</p>
-            </div>
-            <div class='col align-center'>
-              <div class='remove button'>
+        <div class="col col-qty align-center">QTY</div>
+        <div class="col">Total</div>
+      </div>
+      <?php foreach ($cartProducts as $cartProduct) : ?>
+        <div class='layout-inline row'>
+          <!-- picture -->
+          <div class='col col-pro layout-inline'>
+            <img class="productImage" src="../images/<?= $cartProduct->imgUrl ?>">
+            <p><?= $cartProduct->name ?></p>
+          </div>
+          <!-- price -->
+          <div class='col col-price col-numeric align-center '>
+            <p><?= $cartProduct->price ?>$</p>
+          </div>
+          <!-- quantity -->
+          <div class='col col-qty layout-inline'>
+            <form action="../cart/" method="post">
+              <input type='number' name='quantity<?= $cartProduct->id ?>' min='0' max='100' value=<?= $cartProduct->quantity ?> onchange="this.form.submit()">
+            </form>
+          </div>
+          <!-- total -->
+          <div class='col col-total col-numeric align-center'>
+            <p><?= $cartProduct->price * $cartProduct->quantity ?>$</p>
+          </div>
+          <div class='col align-center'>
+            <div class='remove button'>
               <a href='../controller/cart.php?action=remove&id=<?= $cartProduct->id ?>'>
                 <button class='iconButton'>
                   <img class='deleteIcon' src='../images/deleteIcon.png' alt='deleteIcon'>
                 </button>
-                </a>
-              </div>
+              </a>
             </div>
           </div>
-        <?php endforeach; ?>
-        <?php if ($emptyCart == 1) : ?>
+        </div>
+      <?php endforeach; ?>
+      <?php if ($emptyCart == 1) : ?>
+        <div class="row layout-inline">
+          <div>
+            <p>You have no products in your cart!</p>
+          </div>
+        </div>
+      <?php else : ?>
+        <div class=" tf">
           <div class="row layout-inline">
-            <div>
-              <p>You have no products in your cart!</p>
+            <div class="col">
+              <p>PRICE</p>
             </div>
+            <div class="col-total"><?= $cartTotal ?>$</div>
           </div>
-        <?php else : ?>
-          <div class=" tf">
-            <div class="row layout-inline">
-              <div class="col">
-                <p>PRICE</p>
-              </div>
-              <div class="col-total"><?= $cartTotal ?>$</div>
+          <div class="row layout-inline">
+            <div class="col">
+              <p>Shipping</p>
             </div>
-            <div class="row layout-inline">
-              <div class="col">
-                <p>Shipping</p>
-              </div>
-              <div class="col-total">10$</div>
-            </div>
-            <div class="row layout-inline">
-              <div class="col">
-                <p>Total</p>
-              </div>
-              <div class="col-total"><?= $cartTotal + 10 ?>$</div>
-            </div>
+            <div class="col-total">10$</div>
           </div>
-      </div>
-      <a href='../checkout/'>
-        <p><button id='button-helper'>Checkout</button></p>
-      </a>
-      <br>
-      <br>
-      <br>
-    <?php endif; ?>
+          <div class="row layout-inline">
+            <div class="col">
+              <p>Total</p>
+            </div>
+            <div class="col-total"><?= $cartTotal + 10 ?>$</div>
+          </div>
+        </div>
     </div>
+    <a href='../checkout/'>
+      <p><button id='button-helper'>Checkout</button></p>
+    </a>
+    <br>
+    <br>
+    <br>
+  <?php endif; ?>
   </div>
-  </div>
-  <?php
-  include_once "../template/footer.php";
-  ?>
+</div>
+</div>
 </body>
+<?php include_once "../template/footer.php"; ?>

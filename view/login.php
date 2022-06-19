@@ -1,7 +1,4 @@
-<?php
-require_once "../template/navbar.php";
-
-?>
+<?php require_once "../template/navbar.php";?>
 <link rel="stylesheet" href="../css/login.css">
 <div class="shell">
   <div class="container" id="container">
@@ -58,6 +55,4 @@ require_once "../template/navbar.php";
 </div>
 <script src="../js/login.js"></script>
 
-<?php
-require_once "../template/footer.php";
-?>
+<?php require_once "../template/footer.php";?>

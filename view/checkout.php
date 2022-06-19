@@ -1,8 +1,5 @@
-<?php
-require_once "../template/navbar.php";
-?>
+<?php require_once "../template/navbar.php"; ?>
 
-<link rel="stylesheet" href="../css/dashboard.css">
 <div class="shell">
     <div class="container" id="container">
         <div class="buttons-div-second">
@@ -58,7 +55,6 @@ require_once "../template/navbar.php";
         </a>
     </div>
 </div>
+</body>
 
-<?php
-require_once "../template/footer.php";
-?>
+<?php require_once "../template/footer.php"; ?>

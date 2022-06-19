@@ -1,5 +1,7 @@
 <?php
-require_once "../template/navbar.php";
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 ?>
 
 <!DOCTYPE html>
@@ -7,15 +9,33 @@ require_once "../template/navbar.php";
 
 <head>
   <meta charset="UTF-8">
-  <title>Products</title>
-  >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/navbar.css">
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'>
   <link rel="stylesheet" href="../css/card2.css">
-
+  <link rel="icon" type="image/x-icon" href="../images/favicon.png">
+  <title>IT Store</title>
 </head>
 
 <body>
+
+  <ul class="header">
+    <div class="left-navbar">
+      <li><a href="../../home/">
+          <img class="logo" src="../images/ITStore.gif" alt="logo"></i></a></a></li>
+    </div>
+    <div class="right-navbar" id="right-navbar">
+      <li><a href="../products/">Home </a></li>
+      <li><a href="../products/">Products</a></li>
+      <li><a href="../cart/">Cart</a></li>
+      <li><a href="../my-account/">My account</a></li>
+      <?php if (isset($_SESSION['userObj'])) : ?>
+        <li><a href="../logout/">Logout</a></li>
+      <?php endif; ?>
+    </div>
+  </ul>
 
   <div class="shell">
 
@@ -35,9 +55,9 @@ require_once "../template/navbar.php";
           <div class="pages">
             <?php while ($i <= $pageCounter) : ?>
               <?php if ($currentPageUser == $i) : ?>
-                <button type="submit" class="page-current" name = "page" value="<?= $i ?>"><?= $i ?></button>
+                <button type="submit" class="page-current" name="page" value="<?= $i ?>"><?= $i ?></button>
               <?php else : ?>
-                <button type="submit" class="page" name = "page" value="<?= $i ?>"><?= $i ?></button>
+                <button type="submit" class="page" name="page" value="<?= $i ?>"><?= $i ?></button>
               <?php endif; ?>
               </a>
               <?php $i++ ?>
@@ -49,9 +69,9 @@ require_once "../template/navbar.php";
     <div class="container">
 
       <div class="row">
-        <?php if(empty(returnProductsFromPage($currentPageUser, $products))): ?>
-            <h1>There are no products available with the selected category!</h1>
-          <?php endif; ?>
+        <?php if (empty(returnProductsFromPage($currentPageUser, $products))) : ?>
+          <h1>There are no products available with the selected category!</h1>
+        <?php endif; ?>
         <?php foreach (returnProductsFromPage($currentPageUser, $products) as $product) : ?>
           <?php if ($counter % 4 == 0 && $counter != 0) : ?>
       </div>
@@ -82,8 +102,4 @@ require_once "../template/navbar.php";
     </div>
   </div>
 </body>
-<?php
-require_once "../template/footer.php";
-?>
-
-</html>
+<?php require_once "../template/footer.php"; ?>

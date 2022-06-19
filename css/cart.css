@@ -257,10 +257,17 @@ button:hover {
   cursor: pointer;
 }
 
+.col-total {
+  color: white;
+  padding: 1em;
+  width: 12%;
+}
 
 @media screen and (max-width: 755px) {
   .container {
+    margin-top: 40%;
     width: 98%;
+    font-size: 0.85em;
   }
 
   .col-pro {
@@ -270,10 +277,19 @@ button:hover {
   .col-qty {
     width: 22%;
   }
-
+  p {
+    font-size: 1em;
+  }
   img {
     max-width: 100%;
     margin-bottom: 1em;
+  }
+  .col-total {
+    font-size: 1em;
+  }
+  .tf .col {
+    width: 15%;
+    float: left;
   }
 }
 

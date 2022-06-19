@@ -117,6 +117,7 @@ a:hover {
 .shell {
   margin-bottom: 3%;
   min-height: 66.5vh;
+  position: relative;
 }
 
 textarea {
@@ -238,7 +239,6 @@ table {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -266,14 +266,29 @@ tbody tr.active-row {
 }
 
 .openTicket {
-  background-color: green !important;
+  color: green !important;
 }
 
 .closedTicket {
-  background-color: red !important;
+  color: red !important;
 }
 
 h1 {
   color: #FF9800;
   border-bottom: thin solid #FF9800;
+}
+
+@media screen and (max-width: 755px) {
+  li a {
+    font-size: 0.9em !important;
+  }
+  .menuBar{
+    margin-left:0%;
+    margin-top: 10%;
+  }
+  .buttons-div{
+    margin-left: 1%;
+    margin-top: 20%;
+    position: relative;
+  }
 }

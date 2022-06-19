@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 $stmt = $database->prepareQuery($q);
                 $stmt->bind_param('ssssssssss', $name, $surname, $email, $username, $password, $telephone, $address, $location, $postcode, $dob);
                 $stmt->execute();
-                header("Location: ../login");
+                header("Location: ../login/");
             }
         }
     } else {

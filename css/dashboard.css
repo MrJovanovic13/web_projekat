@@ -107,9 +107,7 @@ a:hover {
   cursor:pointer;
  }
 
-.menuButton:hover{
-    cursor:pointer;
-}
+
 .error {
   color:red;
 }
@@ -160,11 +158,19 @@ textarea {
 .menuButton {
   box-sizing: border-box;
   border-radius: 3px;
-  border: 1px solid #33383b;
+  border: none;
   background-color: #33383b;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 1em;
+  font-weight: bold;
   padding: 12px 45px;
+  text-transform:uppercase;
+}
+.menuButton:hover{
+  cursor:pointer;
+  color: black;
+  background-color: #FF9800;
+  transition: all 0.2s ease-in-out;
 }
 
 .menuForm {
@@ -277,6 +283,9 @@ h1 {
   color: #FF9800;
   border-bottom: thin solid #FF9800;
 }
+
+
+
 
 @media screen and (max-width: 755px) {
   li a {

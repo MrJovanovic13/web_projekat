@@ -12,16 +12,9 @@
 
 	</div>
 
-	<div class="footer-left">
-
-		<p class="footer-links">
-			<a class="link-1" href="../home/">Home </a>
-			<a class="link-1" href="../products/">Products </a>
-			<a class="link-1" href="../my-account/">My account </a>
-
+		<p class="madeBy">
+			Made by MrJovanovic &copy; 2022
 		</p>
-
-	</div>
 </footer>
 
 </html>

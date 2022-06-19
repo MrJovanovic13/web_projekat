@@ -15,7 +15,7 @@
             </form>
         </div>
         <br>
-        <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>
+        <span class="error"> <?= $deleteErr ?? '' ?></span>
         <table>
             <thead>
                 <tr>

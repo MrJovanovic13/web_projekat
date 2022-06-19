@@ -284,7 +284,52 @@ h1 {
   border-bottom: thin solid #FF9800;
 }
 
+.page {
+  display:inline-block;
+  color:#212121;
+  text-align:center;
+  font-size: 1.5em;
+  transition: all 0.2s ease-in-out;
+  border-color: #33383b;
+  background: #33383b;
+  padding:8px 30px;
+  color: white;
+}
 
+.page-current {
+  display:inline-block;
+  text-align:center;
+  font-size: 1.5em;
+  transition: all 0.2s ease-in-out;
+  padding:8px 30px;
+  color: white;
+  border-color: #0067ff;
+  background: #0067ff;
+  text-decoration:none;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  cursor:pointer;
+}
+
+.page-current:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.page:hover {
+  border-color: #0067ff;
+  background: #0067ff;
+  color: #fff;
+  text-decoration:none;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  transition: all 0.2s ease-in-out;
+  cursor:pointer;
+}
+
+.pages {
+  padding-top: 1%;
+}
 
 
 @media screen and (max-width: 755px) {

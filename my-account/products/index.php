@@ -8,15 +8,32 @@ $database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 $id = isset($_GET['productId']) ? $_GET['productId'] : "";
 
-if (!isset($_SESSION['userObj']))
+$products = array();
+$counter = 0;
+$productCounter = 0;
+$pageCounter = 1;
+$i = 1;
+$currentPageUser = isset($_POST['page']) ? $_POST['page'] : "1";
+
+function returnProductsFromPage($page,$arrayOfProducts) 
 {
-    header("Location: ../../login"); 
+    $products = array();
+    foreach($arrayOfProducts as $product){
+        if($product->page == $page){
+            $products[] = $product;
+        }
+    }
+    return $products;
+}
+
+if (!isset($_SESSION['userObj'])) {
+    header("Location: ../../login");
     die();
 } else {
-    if($action=='deleteProduct'){
-        $q = "DELETE FROM `products` WHERE `id`=".$id;
+    if ($action == 'deleteProduct') {
+        $q = "DELETE FROM `products` WHERE `id`=" . $id;
         $result = $database->executeQuery($q);
-        header("Location: ../products"); 
+        header("Location: ../products");
     } else {
         $products = array();
 
@@ -24,19 +41,22 @@ if (!isset($_SESSION['userObj']))
         FROM `products`";
         $result = $database->executeQuery($q);
 
-        while ($row = $result->fetch_assoc()) {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $inStock = ($row['in_stock']) ? ("Yes") : ("no");
 
-            $inStock = ($row['in_stock']) ? ("Yes") : ("no");
+                $q1 = "SELECT `name`
+                FROM `category` WHERE `id`=" . $row['category_id'];
+                $result1 = $database->executeQuery($q1);
+                $row1 = $result1->fetch_assoc();
 
-            $q1 = "SELECT `name` FROM `category` WHERE `id`=" . $row['category_id'];
-            $result1 = $database->executeQuery($q1);
-            $row1 = $result1->fetch_assoc();
-    
-            $productObj = new AccountMenuProduct($row['id'], $row['name'], $row['price'], $inStock,$row1['name']);
-            $products[] = $productObj;
+                $productObj = new AdminPageProduct($row['id'], $row['name'], $row['price'], $inStock, $row1['name'], $pageCounter);
+                $products[] = $productObj;
+                if (!$productCounter++ == 0 && $productCounter % 8 == 0) {
+                    $pageCounter++;
+                }
+            }
         }
-
         include("../view/products.php");
     }
 }
-?>

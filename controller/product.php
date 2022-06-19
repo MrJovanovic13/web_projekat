@@ -51,18 +51,6 @@
             $this->imgUrl = $imgUrl;
         }
     }
-    class AccountMenuProduct extends Product {
-
-        var $inStock;
-        var $category;
-
-        function __construct($id,$name,$price,$inStock,$category)
-        {
-            parent::__construct($id,$name,$price);
-            $this->inStock = $inStock;
-            $this->category = $category;
-        }
-    }
     class PageProduct extends Product{
 
         var $imgUrl;
@@ -74,6 +62,19 @@
             parent::__construct($id,$name,$price);
             $this->imgUrl = $imgUrl;
             $this->description = $description;
+            $this->page = $page;
+        }
+    }
+    class AdminPageProduct extends Product {
+        var $inStock;
+        var $category;
+        var $page;
+
+        function __construct($id,$name,$price,$inStock,$category,$page)
+        {
+            parent::__construct($id,$name,$price);
+            $this->inStock = $inStock;
+            $this->category = $category;
             $this->page = $page;
         }
     }

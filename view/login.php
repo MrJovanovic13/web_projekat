@@ -17,6 +17,7 @@ require_once "../template/navbar.php";
           <label for="password">Password: </label>
           <input type="password" class="form__input" name="password" id="password" maxlength="20" required>
         </div>
+        <span class="error"> <?= $loginError ?? '' ?></span>
         <div class="form__input-group">
           <button type="submit" class="form__button">Submit</button>
         </div>

@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $row = $result->fetch_assoc();
             $dbPass = $row['password'];
             if ($dbPass != sha1($password)) {
-                $msg = "Incorrect login info!";
+                $loginError = "Incorrect login info!";
                 include_once("../view/login.php");
             } else {
                 $_SESSION['loggedIn'] = $email;
@@ -42,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 header("Location: ../my-account/");
             }
         } else {
-            $msg = "Incorrect login info!";
+            $loginError = "Incorrect login info!";
             include_once("../view/login.php");
         }
     } else {
-        $msg = "Fields must not be empty!";
+        $loginError = "Fields must not be empty!";
         include_once("../view/login.php");
     }
 } else {

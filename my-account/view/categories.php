@@ -15,7 +15,7 @@
             </form>
         </div>
         <br>
-
+        <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>
         <table>
             <thead>
                 <tr>
@@ -46,7 +46,6 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>
     </div>
 </div>
 </body>

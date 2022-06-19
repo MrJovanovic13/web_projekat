@@ -6,6 +6,17 @@
     <div class="container" id="container">
         <h1>Orders</h1>
         <br>
+        <form action="../orders/" method="post">
+            <?php while ($i <= $pageCounter) : ?>
+                <?php if ($currentPageUser == $i) : ?>
+                    <button type="submit" class="page-current" name="page" value="<?= $i ?>"><?= $i ?></button>
+                <?php else : ?>
+                    <button type="submit" class="page" name="page" value="<?= $i ?>"><?= $i ?></button>
+                <?php endif; ?>
+                </a>
+                <?php $i++ ?>
+            <?php endwhile; ?>
+        </form>
         <table>
             <thead>
                 <tr>
@@ -17,7 +28,10 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($orders as $order) : ?>
+                <?php if (empty(returnOrdersFromPage($currentPageUser, $orders))) : ?>
+                    <h1>There are no products!</h1>
+                <?php endif; ?>
+                <?php foreach (returnOrdersFromPage($currentPageUser, $orders) as $order) : ?>
                     <tr>
                         <td><?= $order->id ?></td>
                         <td><?= $order->date ?></td>
@@ -41,10 +55,10 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?php if(empty($orders)): ?>
-        <div>
-            <h2>You haven't placed any orders!</h2>
-        </div>
+        <?php if (empty($orders)) : ?>
+            <div>
+                <h2>You haven't placed any orders!</h2>
+            </div>
         <?php endif; ?>
     </div>
 </div>

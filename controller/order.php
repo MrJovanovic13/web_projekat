@@ -16,4 +16,14 @@
             $this->userId = $userId;
         }
     }
+    class AdminMenuOrder extends Order{
+
+        var $page;
+
+        function __construct($id,$date,$price,$status,$userId,$page)
+        {
+            parent::__construct($id,$date,$price,$status,$userId);
+            $this->page = $page;
+        }
+    }
 ?>

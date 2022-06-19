@@ -3,7 +3,7 @@ require "../../vendor/autoload.php";
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+$orders = array();
 $database = new Database();
 $action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $q = "DELETE FROM `orders` WHERE `id`=" . $_GET['orderId'];
         $result = $database->executeQuery($q);
     }
-
+    
     $orderTotal = 0;
 
     $user = unserialize($_SESSION['userObj']);
@@ -65,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         FROM `orders`";
 
         $result = $database->executeQuery($q);
-        $orders = array();
 
         while ($row = $result->fetch_assoc()) {
 

@@ -41,6 +41,11 @@
             </tbody>
             <?php if (isset($deleteErr)) : ?><span><?= $deleteErr ?> <?php endif ?>
         </table>
+        <?php if(empty($tickets)): ?>
+        <div>
+            <h2>You haven't opened any tickets!</h2>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 </body>

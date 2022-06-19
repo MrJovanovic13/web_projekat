@@ -36,6 +36,11 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?php if(empty($orders)): ?>
+        <div>
+            <h2>You haven't placed any orders!</h2>
+        </div>
+        <?php endif; ?>
     </div>
 </div>
 </body>

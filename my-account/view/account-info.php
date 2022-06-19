@@ -58,6 +58,16 @@
                 <input type="date" name="dob" value="<?= $user->dob; ?>">
                 <span class="error"> <?= $errors['dob'] ?? '' ?></span>
             </p>
+            <p>
+                Password:
+                <input type="password" name="password" value="">
+                <span class="error"> <?= $errors['password'] ?? '' ?></span>
+            </p>
+            <p>
+                Retype password:
+                <input type="password" name="retypePassword" value="">
+                <span class="error"> <?= $errors['retypePassword'] ?? '' ?></span>
+            </p>
             <br>
             <p>
                 <input id="button-helper" type="submit" name="submit" value="Edit user">

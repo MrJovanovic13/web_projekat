@@ -178,7 +178,9 @@ input {
 }
 
 .shell {
+  margin-bottom: 3%;
   min-height: 66.5vh;
+  position: relative;
 }
 
 .error {
@@ -190,7 +192,7 @@ input {
     max-width: 100%;
     min-height: 400px;
     margin-top: 30%;
-    margin-bottom: 30%;
+    margin-bottom: 55%;
   }
 }
 

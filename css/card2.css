@@ -7,8 +7,7 @@ body{
 }
 .shell{
   margin-top: 5%;
-  min-height: 74.4vh;
-  /* min-height: 66.5vh; */
+  min-height: 66.5vh
 }
 .wsk-cp-product{
   background:#fff;
@@ -211,6 +210,14 @@ h1 {
   color: #FF9800 !important;
 }
 
+.footer-distributed {
+  margin-top: 6%;
+}
+
+#category {
+  background-color: #FF9800;
+  color: white;
+}
 
 @media screen and (max-width: 991px) {
   .wsk-cp-product{

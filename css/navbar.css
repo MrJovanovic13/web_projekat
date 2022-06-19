@@ -28,6 +28,7 @@ body {
   align-items: center;
   border-bottom: 2px solid black;
   z-index: 90 !important;
+  height: 9%;
 }
 
 .header * {
@@ -61,6 +62,10 @@ body {
 
 .icon {
   display: none; 
+}
+
+.logo {
+  vertical-align:middle;
 }
 
 @media screen and (max-width: 755px) {

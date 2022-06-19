@@ -12,9 +12,9 @@
 
 	</div>
 
-		<p class="madeBy">
-			Made by MrJovanovic &copy; 2022
-		</p>
+	<p class="madeBy">
+		Made by MrJovanovic &copy; 2022
+	</p>
 </footer>
 
 </html>

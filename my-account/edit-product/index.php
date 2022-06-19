@@ -14,32 +14,7 @@ $logController = new LogController();
 $categories = array();
 $skipFirst = 0;
 
-
-
-
-$action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
-$id = isset($_GET['productId']) ? $_GET['productId'] : $_POST['productId'];
-
-if ($_SERVER['REQUEST_METHOD'] == "GET") {
-    $q = "SELECT `id`, `name`,`description`,`imgUrl`, `category_id`, `price`, `in_stock`
-    FROM `products` WHERE `id`=" . $id;
-
-    $result = $database->executeQuery($q);
-    $row = $result->fetch_assoc();
-    $inStock = $row['in_stock'];
-
-    $q1 = "SELECT `name` FROM `category` WHERE `id`=" . $row['category_id'];
-    $result1 = $database->executeQuery($q1);
-    $row1 = $result1->fetch_assoc();
-
-    $editProduct = new EditProduct($row['id'], $row['name'], $row['price'], $row['imgUrl'], $row['description'], $row['in_stock']);
-
-    var_dump($categories);
-
-    //include("../view/edit-product.php");
-} elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-    $q = "SELECT `id`, `name` FROM `category`";
+$q = "SELECT `id`, `name` FROM `category`";
 
     $result = $database->executeQuery($q);
 
@@ -59,6 +34,31 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     } else {
         $categoryErr = "No categories";
     }
+
+
+$action = isset($_REQUEST["action"]) ? $_REQUEST["action"] : "";
+$id = isset($_GET['productId']) ? $_GET['productId'] : $_POST['productId'];
+
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    $q = "SELECT `id`, `name`,`description`,`imgUrl`, `category_id`, `price`, `in_stock`
+    FROM `products` WHERE `id`=" . $id;
+
+    $result = $database->executeQuery($q);
+    $row = $result->fetch_assoc();
+    $inStock = $row['in_stock'];
+
+    $q1 = "SELECT `name` FROM `category` WHERE `id`=" . $row['category_id'];
+    $result1 = $database->executeQuery($q1);
+    $row1 = $result1->fetch_assoc();
+
+    $editProduct = new EditProduct($row['id'], $row['name'], $row['price'], $row['imgUrl'], $row['description'], $row['in_stock']);
+
+    //var_dump($categories);
+
+    include("../view/edit-product.php");
+} elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    
 
     function test_input($data)
     {

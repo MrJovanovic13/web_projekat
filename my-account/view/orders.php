@@ -29,9 +29,6 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (empty(returnOrdersFromPage($currentPageUser, $orders))) : ?>
-                    <h1>There are no products!</h1>
-                <?php endif; ?>
                 <?php foreach (returnOrdersFromPage($currentPageUser, $orders) as $order) : ?>
                     <tr>
                         <td><?= $order->id ?></td>

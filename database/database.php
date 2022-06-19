@@ -53,14 +53,7 @@ $sql .= "CREATE TABLE IF NOT EXISTS `status` (
     `name` varchar(255) NOT NULL,
     PRIMARY KEY(id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-/*
-INSERT INTO `status` (`id`, `name`) VALUES
-(1, 'Processing'),
-(2, 'On hold'),
-(3, 'Completed'),
-(4, 'Sent'),
-(5, 'Cancelled');
-*/
+
 $sql .= "CREATE TABLE IF NOT EXISTS `order_status` (
   `date` date NOT NULL,
   `time` time NOT NULL,
@@ -79,14 +72,6 @@ $sql .= "CREATE TABLE IF NOT EXISTS `items` (
     PRIMARY KEY(order_id, product_id),
     FOREIGN KEY(order_id) REFERENCES orders(id),
     FOREIGN KEY(product_id) REFERENCES products(id)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
-
-$sql .= "CREATE TABLE IF NOT EXISTS `wishlist` (
-    `user_id` int(11) NOT NULL,
-    `product_id` int(11) NOT NULL,
-    PRIMARY KEY(`user_id`, product_id),
-    FOREIGN KEY(`user_id`) REFERENCES users(id),
-    FOREIGN KEY(`product_id`) REFERENCES products(id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
 $sql .= "CREATE TABLE IF NOT EXISTS `message` (

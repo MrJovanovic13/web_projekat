@@ -30,13 +30,13 @@
                         <td><?= $category->id ?></td>
                         <td><?= $category->name ?></td>
                         <td>
-                            <a href='../categories?action=removeCategory&categoryId=<?= $category->id ?>'>
+                            <a href='../categories/?action=removeCategory&categoryId=<?= $category->id ?>'>
                                 <button class='iconButton'>
                                     <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
                                 </button>
                             </a>
 
-                            <a href='../edit-category?action=editCategory&categoryId=<?= $category->id ?>'>
+                            <a href='../edit-category/?action=editCategory&categoryId=<?= $category->id ?>'>
                                 <button class='iconButton'>
                                     <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
                                 </button>

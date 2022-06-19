@@ -28,12 +28,12 @@
                     <td><?= $user->name ?></td>
                     <td><?= $user->email ?></td>
                     <td>
-                        <a href='../users?action=deleteUser&userId=<?= $user->id ?>'>
+                        <a href='../users/?action=deleteUser&userId=<?= $user->id ?>'>
                             <button class='iconButton'>
                                 <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
                             </button>
                         </a>
-                        <a href='../edit-user?action=editUser&userId=<?= $user->id ?>'>
+                        <a href='../edit-user/?action=editUser&userId=<?= $user->id ?>'>
                             <button class='iconButton'>
                                 <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
                             </button>

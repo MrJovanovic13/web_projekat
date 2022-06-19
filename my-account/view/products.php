@@ -36,10 +36,10 @@
                     <td><?= $product->price ?>$</td>
                     <td><?= $product->inStock ?></td>
                     <td>
-                        <a href='../products?action=deleteProduct&productId=<?= $product->id ?>'><button class=iconButton>
+                        <a href='../products/?action=deleteProduct&productId=<?= $product->id ?>'><button class=iconButton>
                                 <img class='deleteIcon' src='../../images/deleteIcon.png' alt='deleteIcon'>
                             </button> </a>
-                        <a href='../edit-product?action=editProduct&productId=<?= $product->id ?>'><button class=iconButton>
+                        <a href='../edit-product/?action=editProduct&productId=<?= $product->id ?>'><button class=iconButton>
                                 <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
                             </button> </a>
                     </td>

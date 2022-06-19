@@ -30,7 +30,7 @@
                         <td><?= $ticket->id ?></td>
                         <td><?= $ticket->name ?></td>
                         <td>
-                            <a href='../edit-ticket?action=editTicket&ticketId=<?= $ticket->id ?>'>
+                            <a href='../edit-ticket/?action=editTicket&ticketId=<?= $ticket->id ?>'>
                                 <button class='iconButton'>
                                     <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
                                 </button>

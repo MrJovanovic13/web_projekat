@@ -4,7 +4,6 @@ html {
   }
   body {
     /* Margin bottom by footer height */
-    margin-bottom: 30px;
   }
   .fb {
     width: 35px;
@@ -88,7 +87,7 @@ html {
   
   /* Media Queries */
   
-  @media (max-width: 600px) {
+  @media screen and (max-width: 755px) {
     .footer-distributed .footer-left, .footer-distributed .footer-right {
       text-align: center;
     }

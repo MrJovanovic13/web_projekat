@@ -15,9 +15,9 @@ class Database
 
     private function db_connect()
     {
-        $this->host = 'localhost';
-        $this->user = 'root';
-        $this->pass = '';
+        $this->host = 'prodajahardvera.mysql.database.azure.com';
+        $this->user = 'prodajahardvera';
+        $this->pass = 'Mrjovanovic$';
         $this->db = 'prodajahardvera';
 
         $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->db);

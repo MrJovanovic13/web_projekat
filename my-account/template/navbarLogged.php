@@ -22,13 +22,13 @@ if (!isset($_SESSION['userObj'])) {
 </head>
 
 <body>
+    
     <ul class="header">
         <div class="left-navbar">
-
             <li><a href="../../home/">
-            <img class="logo" src="../../images/ITStore.gif" alt="logo"></i></a></a></li>
+                    <img class="logo" src="../../images/ITStore.gif" alt="logo"></i></a></a></li>
         </div>
-        <div class="right-navbar">
+        <div class="right-navbar" id="right-navbar">
             <li><a href="../../products/">Home </a></li>
             <li><a href="../../products/">Products</a></li>
             <li><a href="../../cart/">Cart</a></li>

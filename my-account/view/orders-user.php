@@ -26,7 +26,7 @@
                         <td><?= $order->status ?></td>
 
                         <td>
-                            <a href='../edit-order?action=editOrder&userId=<?= $order->userId ?>&orderId=<?= $order->id ?>'>
+                            <a href='../edit-order/?action=editOrder&userId=<?= $order->userId ?>&orderId=<?= $order->id ?>'>
                                 <button class='iconButton'>
                                     <img class='editIcon' src='../../images/editIcon.png' alt='editIcon'>
                                 </button>

@@ -48,7 +48,6 @@ if (!isset($_SESSION['userObj'])) {
                     $q = "UPDATE `users` SET `name` = ?, `surname` = ?, `email` = ?, `username` = ?, `password` = ?, `phone_number` = ?, `address` = ?, `location` = ?, `postcode` = ?, `dob` = ?
                     WHERE `id` =?";
                     $stmt = $database->prepareQuery($q);
-                    var_dump($name);
                     $stmt->bind_param('ssssssssssi', $name, $surname, $email, $username, $password, $telephone, $address, $location, $postcode, $dob,$userId);
                     $stmt->execute();
 

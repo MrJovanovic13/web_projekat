@@ -57,7 +57,7 @@ if (!isset($_SESSION['userObj'])) {
 
                     $message = "Succesfully changed own user data";
                     $logController->log($message);
-                    header("Location: ../orders");
+                    header("Location: ../orders/");
                 }
             }
         } else {

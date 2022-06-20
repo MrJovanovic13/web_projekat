@@ -28,7 +28,6 @@ body {
   align-items: center;
   border-bottom: 2px solid black;
   z-index: 90 !important;
-  height: 9%;
 }
 
 .header * {

@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     } else {
         $q = "UPDATE `products` SET `name` = '$name', `description` = '$description', `price` = '$price', `imgUrl` = '$imgUrl', `in_stock` = '$inStock', `category_id` = '$category'
         WHERE `id` =" . $_POST['productId'];
-        $result = $database->executeQuery($q1);
+        $result = $database->executeQuery($q);
         $message = "Succesfully edited product with ID: " . $_POST['productId'];
         $logController->log($message);
         header("Location: ../products/");

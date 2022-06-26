@@ -111,8 +111,7 @@ a:hover {
 }
 
 .shell {
-  margin-bottom: 3%;
-  min-height: 66.5vh;
+  min-height: calc(100vh - 167.27px);
   position: relative;
 }
 

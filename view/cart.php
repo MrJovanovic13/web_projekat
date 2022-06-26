@@ -81,6 +81,5 @@
   <?php endif; ?>
   </div>
 </div>
-</div>
 </body>
 <?php include_once "../template/footer.php"; ?>

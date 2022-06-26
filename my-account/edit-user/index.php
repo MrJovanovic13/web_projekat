@@ -76,7 +76,7 @@ if (!isset($_SESSION['userObj'])) {
                             $stmt = $database->prepareQuery($q);
                             $stmt->bind_param('sssssssissi', $name, $surname, $email, $username, $telephone, $address, $location, $userLevel, $postcode, $dob, $userId);
                             $stmt->execute();
-                            header("Location: ../users");
+                            header("Location: ../users/");
                         }
                     } else {
                         $q = "UPDATE `users` SET `name` = ?, `surname` = ?, `email` = ?, `username` = ?, `phone_number` = ?, `address` = ?, `location` = ?, `user_level` = ?, `postcode` = ?, `dob` = ?
@@ -86,7 +86,7 @@ if (!isset($_SESSION['userObj'])) {
                         $stmt->execute();
                         $message = "Succesfully edited user:" . $userId;
                         $logController->log($message);
-                        header("Location: ../users");
+                        header("Location: ../users/");
                     }
                 }
             }

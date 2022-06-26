@@ -11,7 +11,7 @@
             <form class="menuForm" action="../users/">
                 <input class="menuButton" type="submit" value="Return" />
             </form>
-            <form class="menuForm" action="../user-activity">
+            <form class="menuForm" action="../user-activity/">
                 <input type="hidden" id="userId" name="userId" value="<?= $id ?>">
                 <input class="menuButton" type="submit" value="User activity" />
             </form>

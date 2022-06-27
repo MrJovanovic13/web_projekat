@@ -7,7 +7,7 @@ body{
 }
 .shell{
   margin-top: 5%;
-  min-height: 66.5vh
+  min-height: calc(100vh - 179px);
 }
 .wsk-cp-product{
   background:#fff;
